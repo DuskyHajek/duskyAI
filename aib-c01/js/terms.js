@@ -14,6 +14,17 @@
     });
   }
 
+  function filterMixups(items, query, domain) {
+    const q = String(query || "").trim().toLowerCase();
+    const d = String(domain || "").trim();
+    return items.filter((item) => {
+      const hay = (item.search + " " + item.text).toLowerCase();
+      if (q && !hay.includes(q)) return false;
+      if (d && d !== "all" && item.domain !== d) return false;
+      return true;
+    });
+  }
+
   function visibleGroups(groups, query, domain) {
     return groups
       .map((group) => ({ letter: group.letter, items: filterTerms(group.items, query, domain) }))
@@ -55,9 +66,19 @@
     addRelated(doc);
     const domains = doc.querySelector(".term-domains");
     const selfBtn = doc.getElementById("term-selftest");
-    const mix = doc.getElementById("dont-mix-up");
+    const mixSection = doc.getElementById("dont-mix-up");
+    const mixEmpty = doc.getElementById("mixups-empty");
     const hint = doc.getElementById("term-hint");
     const list = doc.getElementById("term-list");
+
+    const mixups = mixSection
+      ? Array.prototype.slice.call(mixSection.querySelectorAll(".mixup")).map((el) => ({
+          el: el,
+          domain: el.getAttribute("data-domain") || "",
+          search: el.getAttribute("data-search") || "",
+          text: el.textContent || "",
+        }))
+      : [];
 
     const groups = Array.prototype.slice.call(doc.querySelectorAll(".letter")).map((section) => {
       const cards = Array.prototype.slice.call(section.querySelectorAll(".term"));
@@ -85,7 +106,11 @@
     }
 
     function apply() {
-      const shown = visibleGroups(groups, input.value, domain());
+      const d = domain();
+      const q = input.value;
+      const testing = main.classList.contains("is-testing");
+
+      const shown = visibleGroups(groups, q, d);
       const letters = new Set(shown.map((group) => group.letter));
       const visible = new Set();
       shown.forEach((group) => group.items.forEach((item) => visible.add(item.el)));
@@ -102,9 +127,19 @@
       const n = visible.size;
       count.textContent = n === total ? total + " terms" : n + " of " + total;
       empty.hidden = n !== 0;
-      const filtering = String(input.value || "").trim() !== "" || domain() !== "all";
-      const testing = main.classList.contains("is-testing");
-      if (mix) mix.hidden = filtering || testing;
+
+      if (mixSection && !testing) {
+        const visibleMix = filterMixups(mixups, q, d);
+        const mixSet = new Set(visibleMix.map((item) => item.el));
+        mixups.forEach((item) => { item.el.hidden = !mixSet.has(item.el); });
+        const anyMix = visibleMix.length > 0;
+        mixSection.hidden = !anyMix;
+        if (mixEmpty) mixEmpty.hidden = anyMix;
+      } else if (mixSection) {
+        mixSection.hidden = true;
+        if (mixEmpty) mixEmpty.hidden = true;
+      }
+
       if (hint) hint.hidden = !testing;
     }
 
@@ -166,7 +201,7 @@
     apply();
   }
 
-  const api = { filterTerms: filterTerms, visibleGroups: visibleGroups, bind: bind };
+  const api = { filterTerms: filterTerms, filterMixups: filterMixups, visibleGroups: visibleGroups, bind: bind };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else bind(root.document);
 })(typeof globalThis !== "undefined" ? globalThis : this);

@@ -72,44 +72,82 @@ try {
           <button type="button" class="term-chip" data-domain="4" aria-pressed="false">Readiness <span>24%</span></button>
         </div>
       </div>
+      <section class="concepts-block mixups" id="dont-mix-up" aria-labelledby="mixups-heading">
+        <p class="kicker">Concepts</p>
+        <h2 id="mixups-heading">Don’t mix up</h2>
+        <p class="mixups-lead">The exam often asks which of two or three similar ideas fits the scenario.</p>
+        <div class="mixup" data-domain="1" data-search="prompt engineering retrieval augmented generation fine-tuning rag">
+          <h3><a href="#prompt-engineering">Prompt engineering</a> vs <a href="#retrieval-augmented-generation">retrieval augmented generation</a> vs <a href="#fine-tuning">fine-tuning</a></h3>
+          <p>Prompt engineering improves the instruction, context, and examples you give the model. Retrieval augmented generation fetches current company content at question time. Fine-tuning retrains the model on your examples so its behavior changes.</p>
+          <p class="term-exam">On the exam, start with the cheapest change that fixes the problem. Unclear output points to the prompt, missing or weekly-changing facts point to retrieval, and a consistent style or behavior the prompt cannot reach points to fine-tuning.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="artificial intelligence machine learning generative ai">
+          <h3><a href="#artificial-intelligence">Artificial intelligence</a> vs <a href="#machine-learning">machine learning</a> vs <a href="#generative-ai">generative AI</a></h3>
+          <p>Artificial intelligence is the umbrella term. Machine learning learns patterns from historical data to predict or classify. Generative AI creates new text, images, audio, or code from a prompt.</p>
+          <p class="term-exam">On the exam, scoring or predicting from past data is machine learning, creating new content is generative AI, and fixed if-then logic is neither.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="rule-based automation artificial intelligence ai">
+          <h3><a href="#rule-based-automation">Rule-based automation</a> vs <a href="#artificial-intelligence">AI</a></h3>
+          <p>Rule-based automation follows fixed logic written by people and never learns. AI handles cases too varied or unstructured to write rules for.</p>
+          <p class="term-exam">On the exam, if the logic is simple, stable, and must be auditable, rules beat AI. If the inputs are messy or the patterns change, AI earns its cost.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="aws quick amazon bedrock sagemaker ai">
+          <h3><a href="#aws-quick">AWS Quick</a> vs <a href="#amazon-bedrock">Bedrock</a> vs <a href="#amazon-sagemaker-ai">SageMaker AI</a></h3>
+          <p>AWS Quick, which the exam guide still calls Amazon Quick, is the ready-made workspace for business users. Amazon Bedrock is the managed platform for building a generative AI application on a foundation model, including retrieval and guardrails. Amazon SageMaker AI is where a team builds and trains a custom model when a ready-made one will not fit.</p>
+          <p class="term-exam">On the exam, business users with no builders point to Quick. A developer building a generative AI app points to Bedrock. A team that needs its own model points to SageMaker AI.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="ai agent chatbot assistant">
+          <h3><a href="#ai-agent">AI agent</a> vs <a href="#ai-agent">chatbot</a></h3>
+          <p>A chatbot replies. An AI agent plans steps, uses business tools, checks the result, and acts or escalates.</p>
+          <p class="term-exam">On the exam, a system that must take actions across tools is an agent. One that only answers questions is an assistant.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="augmentation automation human-in-the-loop">
+          <h3><a href="#augmentation">Augmentation</a> vs <a href="#automation">automation</a></h3>
+          <p>Augmentation keeps a person doing the job, with AI as the draft or recommendation. Automation lets the system carry out the job.</p>
+          <p class="term-exam">On the exam, a person still producing the outcome is augmentation. Whether each case must be approved is a separate <a href="#human-in-the-loop">human-in-the-loop</a> question.</p>
+        </div>
+        <div class="mixup" data-domain="2" data-search="kpi roi baseline total cost of ownership tco">
+          <h3><a href="#kpi">KPI</a> vs <a href="#roi">ROI</a> vs <a href="#baseline">baseline</a></h3>
+          <p>A KPI is the metric the initiative exists to move. ROI is benefits minus costs, divided by costs. A baseline is the measurement taken before AI, so the later change can be credited to it. <a href="#total-cost-of-ownership">Total cost of ownership</a> is the cost side of that ROI, not a third name for the KPI.</p>
+          <p class="term-exam">On the exam, a number with no before-measurement is not yet a result.</p>
+        </div>
+        <div class="mixup" data-domain="2" data-search="impact feasibility use-case prioritization">
+          <h3><a href="#use-case-prioritization">Impact</a> vs <a href="#use-case-prioritization">feasibility</a></h3>
+          <p>Business impact is the value if the use case works. Feasibility is whether the data, skills, risk, and time allow it to work.</p>
+          <p class="term-exam">On the exam, the first use case scores high on both. High impact with weak data is a data project first, not a pilot.</p>
+        </div>
+        <div class="mixup" data-domain="3" data-search="human-in-the-loop human-on-the-loop escalation">
+          <h3><a href="#human-in-the-loop">Human-in-the-loop</a> vs <a href="#human-on-the-loop">human-on-the-loop</a></h3>
+          <p>Human-in-the-loop means a person approves each decision before it counts. Human-on-the-loop means the system acts and a person can override it.</p>
+          <p class="term-exam">On the exam, a high-harm or low-confidence case is escalated to a person. A high-harm decision that must not go out unreviewed is human-in-the-loop. A system that acts, with someone able to stop it, is human-on-the-loop.</p>
+        </div>
+        <div class="mixup" data-domain="3" data-search="explainability transparency">
+          <h3><a href="#explainability">Explainability</a> vs <a href="#transparency">transparency</a></h3>
+          <p>Explainability is being able to say why the system produced an output. Transparency is telling people that AI is involved and what it can and cannot do.</p>
+          <p class="term-exam">On the exam, a regulator asking why a decision was made is explainability. A customer who should know they are talking to AI is transparency.</p>
+        </div>
+        <div class="mixup" data-domain="3" data-search="iso iec 22989 23053 42001">
+          <h3><a href="#iso-iec-22989">ISO/IEC 22989</a> vs <a href="#iso-iec-23053">23053</a> vs <a href="#iso-iec-42001">42001</a></h3>
+          <p>ISO/IEC 22989 is the shared vocabulary. ISO/IEC 23053 describes the parts of a machine-learning system and does not certify the company. ISO/IEC 42001 is the certifiable management system for how an organization runs AI.</p>
+          <p class="term-exam">On the exam, a vendor’s 42001 certificate does not certify its customers, and 23053 is not a certificate at all.</p>
+        </div>
+        <div class="mixup" data-domain="4" data-search="proof of concept pilot scale phased rollout pilot purgatory">
+          <h3><a href="#proof-of-concept">Proof of concept</a> vs pilot vs <a href="#phased-rollout">scale</a></h3>
+          <p>A proof of concept tests whether an approach can work at all. A pilot tests it with real users and real conditions. Scaling builds the ownership, support, and operations that production needs.</p>
+          <p class="term-exam">On the exam, a successful demo is not production readiness. Many pilots with no owner or operating plan is <a href="#pilot-purgatory">pilot purgatory</a>.</p>
+        </div>
+        <div class="mixup" data-domain="4" data-search="accountable owner center of excellence coe">
+          <h3><a href="#accountable-owner">Accountable owner</a> vs <a href="#ai-center-of-excellence">center of excellence</a></h3>
+          <p>The accountable owner answers for one AI system’s outcomes and risks. The AI center of excellence provides standards, reusable assets, and enablement across the company.</p>
+          <p class="term-exam">On the exam, who answers for a failure is the owner. Who helps every team do it well is the center of excellence.</p>
+        </div>
+      </section>
+      <p class="mixups-empty" id="mixups-empty" hidden>No matching comparison.</p>
       <div class="glossary">
         <nav class="term-index" id="term-index" aria-label="Letters"></nav>
         <div class="glossary-main">
           <p class="term-hint" id="term-hint" hidden>Select a term to show its definition.</p>
-          <section class="mixups" id="dont-mix-up" aria-labelledby="mixups-heading">
-            <h2 id="mixups-heading">Don’t mix up</h2>
-            <p class="mixups-lead">The exam often asks which of two similar ideas fits the scenario.</p>
-            <div class="mixup">
-              <h3><a href="#retrieval-augmented-generation">Retrieval augmented generation</a> vs <a href="#fine-tuning">fine-tuning</a></h3>
-              <p>Retrieval augmented generation fetches current company content at question time. Fine-tuning retrains the model on your examples so its behavior changes.</p>
-              <p class="term-exam">On the exam, data that changes weekly is a retrieval problem, not a retraining problem.</p>
-            </div>
-            <div class="mixup">
-              <h3><a href="#human-in-the-loop">Human-in-the-loop</a> vs <a href="#human-on-the-loop">human-on-the-loop</a></h3>
-              <p>Human-in-the-loop means a person approves each decision before it counts. Human-on-the-loop means the system acts and a person can override it.</p>
-              <p class="term-exam">On the exam, a high-harm decision that must not go out unreviewed is human-in-the-loop. A system that acts, with someone able to stop it, is human-on-the-loop.</p>
-            </div>
-            <div class="mixup">
-              <h3><a href="#kpi">KPI</a> vs <a href="#roi">ROI</a> vs <a href="#baseline">baseline</a></h3>
-              <p>A KPI is the metric the initiative exists to move. ROI is benefits minus costs, divided by costs. A baseline is the measurement taken before AI, so the later change can be credited to it. <a href="#total-cost-of-ownership">Total cost of ownership</a> is the cost side of that ROI, not a third name for the KPI.</p>
-              <p class="term-exam">On the exam, a number with no before-measurement is not yet a result.</p>
-            </div>
-            <div class="mixup">
-              <h3><a href="#aws-quick">AWS Quick</a> vs <a href="#amazon-bedrock">Bedrock</a> vs <a href="#amazon-sagemaker-ai">SageMaker AI</a></h3>
-              <p>AWS Quick, which the exam guide still calls Amazon Quick, is the ready workspace for business users. Amazon Bedrock is where you build on a foundation model, including retrieval and guardrails. Amazon SageMaker AI is where the team builds and trains its own model because a ready-made one will not fit.</p>
-              <p class="term-exam">On the exam, analysts who need answers this quarter point to Quick. Company documents behind a generative assistant point to Bedrock. A new model on your own historical data points to SageMaker AI.</p>
-            </div>
-            <div class="mixup">
-              <h3><a href="#augmentation">Augmentation</a> vs <a href="#automation">automation</a></h3>
-              <p>Augmentation is AI recommending or drafting while a person decides. Automation is the system acting.</p>
-              <p class="term-exam">On the exam, if a person must still approve the outcome, the answer is augmentation.</p>
-            </div>
-            <div class="mixup">
-              <h3><a href="#iso-iec-22989">ISO/IEC 22989</a> vs <a href="#iso-iec-23053">23053</a> vs <a href="#iso-iec-42001">42001</a></h3>
-              <p>ISO/IEC 22989 is the shared vocabulary. ISO/IEC 23053 describes the parts of a machine-learning system and does not certify the company. ISO/IEC 42001 is the certifiable management system for how an organization runs AI.</p>
-              <p class="term-exam">On the exam, a vendor’s 42001 certificate does not certify its customers, and 23053 is not a certificate at all.</p>
-            </div>
-          </section>
+          <p class="kicker terms-kicker">Terms</p>
           <p class="term-empty" id="term-empty" hidden>No matching term.</p>
           <div id="term-list">
             <section class="letter" id="letter-a" data-letter="A">

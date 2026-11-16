@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { filterTerms, visibleGroups } = require("../js/terms.js");
+const { filterTerms, filterMixups, visibleGroups } = require("../js/terms.js");
 
 const items = [
   { term: "Bias", text: "A systematic difference in how the system treats similar people." },
@@ -46,6 +46,16 @@ test("a letter is hidden when its domain does not match", () => {
   assert.deepEqual(visibleGroups(groups, "", "2").map((group) => group.letter), ["R"]);
 });
 
+test("mixup filter matches domain and search", () => {
+  const mixups = [
+    { domain: "1", search: "rag fine-tuning", text: "Retrieval augmented generation fetches current company content." },
+    { domain: "2", search: "kpi roi", text: "A KPI is the metric the initiative exists to move." },
+  ];
+  assert.equal(filterMixups(mixups, "", "1").length, 1);
+  assert.equal(filterMixups(mixups, "kpi", "all").length, 1);
+  assert.equal(filterMixups(mixups, "kpi", "1").length, 0);
+});
+
 const fs = require("node:fs");
 const path = require("node:path");
 const html = fs.readFileSync(path.join(__dirname, "../terms/index.html"), "utf8");
@@ -54,6 +64,9 @@ const practice = fs.readFileSync(path.join(__dirname, "../index.html"), "utf8");
 test("the glossary page has the study pieces and no competitor link", () => {
   assert.equal(html.toLowerCase().includes("mindmesh"), false);
   assert.match(html, /id="dont-mix-up"/);
+  assert.match(html, /two or three similar ideas/);
+  assert.match(html, /class="kicker">Concepts</);
+  assert.match(html, /class="kicker terms-kicker">Terms</);
   assert.match(html, /id="aws-quick"/);
   assert.match(html, /id="amazon-quick"/);
   assert.match(html, /AIB-C01 glossary/);
@@ -62,6 +75,19 @@ test("the glossary page has the study pieces and no competitor link", () => {
   assert.match(html, /Last reviewed November 2026/);
   assert.match(html, /href="\/aib-c01\/"/);
   assert.match(practice, /href="\/aib-c01\/terms\/"/);
+  const quickMix = html.match(/data-search="aws quick[\s\S]*?<\/div>\s*<div class="mixup"/);
+  assert.ok(quickMix);
+  assert.doesNotMatch(quickMix[0], /seat-based|consumption-based|instance-based/i);
+  assert.match(html, /business users with no builders point to Quick/);
+});
+
+test("every comparison has a domain tag", () => {
+  const mixups = html.match(/<div class="mixup" /g) || [];
+  assert.equal(mixups.length, 13);
+  const section = html.match(/id="dont-mix-up"[\s\S]*?<\/section>/);
+  assert.ok(section);
+  assert.equal((section[0].match(/data-domain="[1-4]"/g) || []).length, 13);
+  assert.equal((section[0].match(/class="term-exam"/g) || []).length, 13);
 });
 
 test("every term is a sentence tagged with a domain, and related ids exist", () => {
