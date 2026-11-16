@@ -143,7 +143,7 @@
   function html() {
     const state = A.ctx.state;
     return '<div class="home">'
-      + '<header class="home-head">' + heroCtaHtml(state) + '<div class="head-tools">' + menuHtml() + "</div></header>"
+      + '<header class="home-head">' + heroCtaHtml(state) + '<div class="head-tools"><a class="btn quiet sm" href="/aib-c01/terms/">Terms</a>' + menuHtml() + "</div></header>"
       + '<div class="home-grid">' + tilesHtml(state) + domainsHtml(state) + "</div></div>";
   }
 

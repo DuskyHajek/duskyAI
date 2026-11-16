@@ -65,9 +65,10 @@ h3 { font-size: 16px; letter-spacing: -0.01em; }
 #app { flex: 1; }
 .site-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 0 8px; border-bottom: 1px solid var(--line); }
 .site-logo { display: inline-flex; align-items: center; height: 36px; text-decoration: none; }
+.site-links { display: flex; align-items: center; gap: 14px; }
+.site-links a { color: var(--muted); font-family: var(--display); font-size: 14px; font-weight: 600; text-decoration: none; }
+.site-links a:hover, .site-links a[aria-current="page"] { color: var(--ink); }
 .site-logo-img { width: 140px; height: 36px; object-fit: cover; object-position: center; mix-blend-mode: multiply; }
-.site-back { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .15s; }
-.site-back:hover { color: var(--ink); }
 footer.note { color: var(--muted); font-size: 12px; padding: 10px 0 12px; }
 
 /* Buttons: primary (solid), secondary (outline), quiet (text), danger. */
