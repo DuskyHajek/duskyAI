@@ -37,7 +37,7 @@
     return ui.qbar({
       pills: quizPills(set, set.cursor, q),
       progress: { value: set.cursor + 1, max: set.ids.length, label: "Question " + (set.cursor + 1) + " of " + set.ids.length },
-      right: '<a class="btn quiet sm" href="/aib-c01/terms/" target="_blank" rel="noopener noreferrer">Terms</a>',
+      right: '<a class="btn quiet sm" href="/aib-c01/terms/" target="_blank" rel="noopener noreferrer">Terms and concepts</a>',
       homeTitle: "Home",
     })
       + ui.dotMap(set, set.cursor, { graded: set.ok, answered: set.picks, jumpAct: "jump-learn" })

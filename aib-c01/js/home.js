@@ -39,7 +39,8 @@
     const secondary = activeExam
       ? ui.btn("Continue mock", "exam-continue", { cls: "lg", icon: "clock" })
       : ui.btn("Timed mock", "exam-intro", { cls: "lg", icon: "clock" });
-    return '<div class="hero-cta">' + primary + secondary + "</div>";
+    const terms = '<a class="btn lg" href="/aib-c01/terms/">' + ui.icon("book") + '<span class="btn-label">Terms and concepts</span></a>';
+    return '<div class="hero-cta">' + primary + secondary + terms + "</div>";
   }
 
   function scoreMeter(correct, total) {
@@ -143,7 +144,7 @@
   function html() {
     const state = A.ctx.state;
     return '<div class="home">'
-      + '<header class="home-head">' + heroCtaHtml(state) + '<div class="head-tools"><a class="btn quiet sm" href="/aib-c01/terms/">Terms</a>' + menuHtml() + "</div></header>"
+      + '<header class="home-head">' + heroCtaHtml(state) + '<div class="head-tools">' + menuHtml() + "</div></header>"
       + '<div class="home-grid">' + tilesHtml(state) + domainsHtml(state) + "</div></div>";
   }
 

@@ -42,128 +42,157 @@ try {
 <link rel="stylesheet" href="../css/seo.css">
 <link rel="stylesheet" href="../css/polish.css">
 <link rel="stylesheet" href="../css/terms.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "DefinedTermSet",
-  "@id": "https://www.duskyai.com/aib-c01/terms/#set",
-  "name": "AIB-C01 terms and concepts",
-  "description": "Unofficial short definitions for the AWS Certified AI Business Strategist (AIB-C01) exam.",
-  "url": "https://www.duskyai.com/aib-c01/terms/",
-  "isPartOf": { "@id": "https://www.duskyai.com/#website" },
-  "hasDefinedTerm": [
-    {"@type": "DefinedTerm", "name": "A/B testing", "description": "Run the AI process and the current process on similar cases, then compare. That is how a later result can be attributed to the AI rather than to other changes."},
-    {"@type": "DefinedTerm", "name": "Accountable owner", "description": "The one business leader answerable for an AI system’s outcomes, risks, and decisions."},
-    {"@type": "DefinedTerm", "name": "AI agent", "description": "A system that plans steps, uses business tools, checks the result, and acts or escalates. A chatbot only replies."},
-    {"@type": "DefinedTerm", "name": "AI center of excellence", "description": "The team that holds AI standards, reusable assets, and enablement so the company can scale."},
-    {"@type": "DefinedTerm", "name": "AI literacy", "description": "The skill to use, question, and govern AI in one’s own role."},
-    {"@type": "DefinedTerm", "name": "Amazon Bedrock", "description": "The managed way to build on foundation models, including Knowledge Bases, Guardrails, and agents."},
-    {"@type": "DefinedTerm", "name": "Amazon Quick", "description": "The AI workspace for business users: analysis, research, and automation."},
-    {"@type": "DefinedTerm", "name": "Amazon SageMaker AI", "description": "Where a team builds, trains, deploys, and monitors its own model when a ready-made one will not fit."},
-    {"@type": "DefinedTerm", "name": "Artificial intelligence", "description": "The umbrella term for machines performing tasks that normally need human intelligence. Machine learning, generative AI, and rule-based automation are more specific."},
-    {"@type": "DefinedTerm", "name": "Augmentation", "description": "AI recommends or drafts, and a person decides. Automation is when the system acts."},
-    {"@type": "DefinedTerm", "name": "Baseline", "description": "The measurement taken before AI, so later change can be credited to the initiative."},
-    {"@type": "DefinedTerm", "name": "Bias", "description": "A systematic difference in how the system treats similar people or cases. It can enter at any stage, and bias drift is that unfairness changing over time."},
-    {"@type": "DefinedTerm", "name": "Build-buy-partner", "description": "The sourcing choice: build it, buy it, or work with a partner, judged on time, skill, cost, and regulation."},
-    {"@type": "DefinedTerm", "name": "Context window", "description": "How much text the model can consider at once: instructions, history, retrieved documents, and the answer."},
-    {"@type": "DefinedTerm", "name": "Drift", "description": "The world moves and the model gets worse. Data drift is a change in the inputs. Concept drift is a change in what the right answer is. Model drift is the drop in performance."},
-    {"@type": "DefinedTerm", "name": "EU AI Act", "description": "EU law that sorts AI by risk and scales the obligations to that tier."},
-    {"@type": "DefinedTerm", "name": "Explainability", "description": "Being able to tell why the system produced an output."},
-    {"@type": "DefinedTerm", "name": "Fine-tuning", "description": "Further training of a foundation model on your examples so its behavior changes."},
-    {"@type": "DefinedTerm", "name": "Foundation model", "description": "A large model pretrained on broad data and then adapted to many tasks."},
-    {"@type": "DefinedTerm", "name": "Generative AI", "description": "Models that create new text, images, audio, or code from a prompt. Example: summarizing support calls for agents."},
-    {"@type": "DefinedTerm", "name": "Guardrails", "description": "Controls on inputs and outputs: blocked topics, sensitive-data filters, and checks that the answer stays on the source."},
-    {"@type": "DefinedTerm", "name": "Hallucination", "description": "Fluent output that is false or not supported by the source."},
-    {"@type": "DefinedTerm", "name": "Human-in-the-loop", "description": "A person approves each decision before it counts. Human-on-the-loop means the system acts and a person can override it."},
-    {"@type": "DefinedTerm", "name": "Inference", "description": "Using a trained model on a new case. Example: scoring this month’s loan applications with a model trained on past ones."},
-    {"@type": "DefinedTerm", "name": "ISO/IEC 22989", "description": "The shared dictionary for AI terms, so teams and vendors mean the same thing."},
-    {"@type": "DefinedTerm", "name": "ISO/IEC 23053", "description": "A description of the parts of a machine-learning system and how they fit together. It does not certify the company."},
-    {"@type": "DefinedTerm", "name": "ISO/IEC 42001", "description": "The certifiable standard for how an organization manages AI: policy, roles, risk, controls, and improvement. A vendor’s certificate does not certify its customers."},
-    {"@type": "DefinedTerm", "name": "Knowledge Bases", "description": "Bedrock’s way of retrieving company documents at question time so answers can be grounded and cited."},
-    {"@type": "DefinedTerm", "name": "KPI", "description": "The metric for the outcome the initiative exists to change. KPI means key performance indicator."},
-    {"@type": "DefinedTerm", "name": "Leading and lagging indicators", "description": "A leading indicator is an early signal, such as adoption or usage, visible before the business result. A lagging indicator is the result after the project is underway, such as revenue, cost saved, or ROI."},
-    {"@type": "DefinedTerm", "name": "Machine learning", "description": "Models that learn patterns from historical data to predict or classify. Example: predicting which customers will cancel next month."},
-    {"@type": "DefinedTerm", "name": "NIST AI RMF", "description": "The US framework for AI risk: Govern, Map, Measure, Manage. NIST AI RMF is the AI Risk Management Framework."},
-    {"@type": "DefinedTerm", "name": "Pilot purgatory", "description": "Many pilots that never reach production, because the operational pieces a real deployment needs were never built."},
-    {"@type": "DefinedTerm", "name": "Prompt engineering", "description": "Writing the instruction, context, constraints, and examples so the output is usable."},
-    {"@type": "DefinedTerm", "name": "Proof of concept", "description": "A small, time-boxed test of whether an approach can work at all, before a pilot or a rollout."},
-    {"@type": "DefinedTerm", "name": "Retrieval augmented generation (RAG)", "description": "Fetch the relevant company content, then give it to the model with the question."},
-    {"@type": "DefinedTerm", "name": "Risk classification", "description": "Sorting use cases by possible harm and applying controls that match the tier."},
-    {"@type": "DefinedTerm", "name": "ROI", "description": "Return on investment: benefits minus costs, divided by costs."},
-    {"@type": "DefinedTerm", "name": "Rule-based automation", "description": "Fixed logic written by people, with no learning. Example: routing invoices over a set amount to a manager."},
-    {"@type": "DefinedTerm", "name": "Shadow AI", "description": "People using AI tools the organization has not approved."},
-    {"@type": "DefinedTerm", "name": "Structured and unstructured data", "description": "Rows and fields, versus documents, email, and images with no fixed schema."},
-    {"@type": "DefinedTerm", "name": "Token", "description": "The small piece of text a model reads or writes. Tokens are also how usage and the context window are counted."},
-    {"@type": "DefinedTerm", "name": "Training", "description": "Building a model from historical data. Inference is the separate step of using that model on a new case."}
-  ]
-}
-</script>
 </head>
 <body>
   <div class="wrap">
-    <nav class="site-nav" aria-label="Site">
+    <nav class="site-nav terms-nav" aria-label="Site">
       <a class="site-logo" href="https://www.duskyai.com/" target="_blank" rel="noopener noreferrer" aria-label="duskyAI, opens in a new tab"><span class="wordmark" aria-hidden="true">dusky<strong>ai</strong></span></a>
-      <div class="site-links">
-        <a href="/aib-c01/">Practice exam</a>
-        <a href="/aib-c01/terms/" aria-current="page">Terms</a>
-      </div>
+      <div class="site-links"><a href="/aib-c01/">Practice exam</a></div>
     </nav>
     <header class="seo-landing">
       <h1>AIB-<em>C01</em> terms and concepts</h1>
       <p class="seo-tagline">Short definitions for the AWS Certified AI Business Strategist exam. Not an AWS product.</p>
       <p class="seo-meta">Use these with the <a href="/aib-c01/">AIB-C01 practice exam</a>. What the exam covers is defined in the <a href="https://docs.aws.amazon.com/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html" target="_blank" rel="noopener">AWS exam guide</a>.</p>
     </header>
-    <main>
+    <main itemscope itemtype="https://schema.org/DefinedTermSet">
+      <meta itemprop="name" content="AIB-C01 terms and concepts">
+      <meta itemprop="description" content="Unofficial short definitions for the AWS Certified AI Business Strategist (AIB-C01) exam.">
       <div class="term-tools">
         <label class="visually-hidden" for="term-search">Search terms and concepts</label>
         <input class="term-search" id="term-search" type="search" placeholder="Search, for example drift or KPI" autocomplete="off" enterkeyhint="search">
         <p class="term-count" id="term-count" aria-live="polite">43 terms</p>
+        <nav class="term-index" id="term-index" aria-label="Letters"></nav>
       </div>
       <p class="term-empty" id="term-empty" hidden>No matching term.</p>
-      <div class="term-list" id="term-list">
-        <article class="term" data-term="A/B testing"><h2>A/B testing</h2><p>Run the AI process and the current process on similar cases, then compare. That is how a later result can be attributed to the AI rather than to other changes.</p></article>
-        <article class="term" data-term="Accountable owner"><h2>Accountable owner</h2><p>The one business leader answerable for an AI system’s outcomes, risks, and decisions.</p></article>
-        <article class="term" data-term="AI agent"><h2>AI agent</h2><p>A system that plans steps, uses business tools, checks the result, and acts or escalates. A chatbot only replies.</p></article>
-        <article class="term" data-term="AI center of excellence"><h2>AI center of excellence</h2><p>The team that holds AI standards, reusable assets, and enablement so the company can scale.</p></article>
-        <article class="term" data-term="AI literacy"><h2>AI literacy</h2><p>The skill to use, question, and govern AI in one’s own role.</p></article>
-        <article class="term" data-term="Amazon Bedrock"><h2>Amazon Bedrock</h2><p>The managed way to build on foundation models, including Knowledge Bases, Guardrails, and agents.</p></article>
-        <article class="term" data-term="Amazon Quick"><h2>Amazon Quick</h2><p>The AI workspace for business users: analysis, research, and automation.</p></article>
-        <article class="term" data-term="Amazon SageMaker AI"><h2>Amazon SageMaker AI</h2><p>Where a team builds, trains, deploys, and monitors its own model when a ready-made one will not fit.</p></article>
-        <article class="term" data-term="Artificial intelligence"><h2>Artificial intelligence</h2><p>The umbrella term for machines performing tasks that normally need human intelligence. Machine learning, generative AI, and rule-based automation are more specific.</p></article>
-        <article class="term" data-term="Augmentation"><h2>Augmentation</h2><p>AI recommends or drafts, and a person decides. Automation is when the system acts.</p></article>
-        <article class="term" data-term="Baseline"><h2>Baseline</h2><p>The measurement taken before AI, so later change can be credited to the initiative.</p></article>
-        <article class="term" data-term="Bias"><h2>Bias</h2><p>A systematic difference in how the system treats similar people or cases. It can enter at any stage, and bias drift is that unfairness changing over time.</p></article>
-        <article class="term" data-term="Build-buy-partner"><h2>Build-buy-partner</h2><p>The sourcing choice: build it, buy it, or work with a partner, judged on time, skill, cost, and regulation.</p></article>
-        <article class="term" data-term="Context window"><h2>Context window</h2><p>How much text the model can consider at once: instructions, history, retrieved documents, and the answer.</p></article>
-        <article class="term" data-term="Drift"><h2>Drift</h2><p>The world moves and the model gets worse. Data drift is a change in the inputs. Concept drift is a change in what the right answer is. Model drift is the drop in performance.</p></article>
-        <article class="term" data-term="EU AI Act"><h2>EU AI Act</h2><p>EU law that sorts AI by risk and scales the obligations to that tier.</p></article>
-        <article class="term" data-term="Explainability"><h2>Explainability</h2><p>Being able to tell why the system produced an output.</p></article>
-        <article class="term" data-term="Fine-tuning"><h2>Fine-tuning</h2><p>Further training of a foundation model on your examples so its behavior changes.</p></article>
-        <article class="term" data-term="Foundation model"><h2>Foundation model</h2><p>A large model pretrained on broad data and then adapted to many tasks.</p></article>
-        <article class="term" data-term="Generative AI"><h2>Generative AI</h2><p>Models that create new text, images, audio, or code from a prompt.</p><p class="term-ex">Example: summarizing support calls for agents.</p></article>
-        <article class="term" data-term="Guardrails"><h2>Guardrails</h2><p>Controls on inputs and outputs: blocked topics, sensitive-data filters, and checks that the answer stays on the source.</p></article>
-        <article class="term" data-term="Hallucination"><h2>Hallucination</h2><p>Fluent output that is false or not supported by the source.</p></article>
-        <article class="term" data-term="Human-in-the-loop"><h2>Human-in-the-loop</h2><p>A person approves each decision before it counts. Human-on-the-loop means the system acts and a person can override it.</p></article>
-        <article class="term" data-term="Inference"><h2>Inference</h2><p>Using a trained model on a new case.</p><p class="term-ex">Example: scoring this month’s loan applications with a model trained on past ones.</p></article>
-        <article class="term" data-term="ISO/IEC 22989"><h2>ISO/IEC 22989</h2><p>The shared dictionary for AI terms, so teams and vendors mean the same thing.</p></article>
-        <article class="term" data-term="ISO/IEC 23053"><h2>ISO/IEC 23053</h2><p>A description of the parts of a machine-learning system and how they fit together. It does not certify the company.</p></article>
-        <article class="term" data-term="ISO/IEC 42001"><h2>ISO/IEC 42001</h2><p>The certifiable standard for how an organization manages AI: policy, roles, risk, controls, and improvement. A vendor’s certificate does not certify its customers.</p></article>
-        <article class="term" data-term="Knowledge Bases"><h2>Knowledge Bases</h2><p>Bedrock’s way of retrieving company documents at question time so answers can be grounded and cited.</p></article>
-        <article class="term" data-term="KPI"><h2>KPI</h2><p>The metric for the outcome the initiative exists to change. KPI means key performance indicator.</p></article>
-        <article class="term" data-term="Leading and lagging indicators"><h2>Leading and lagging indicators</h2><p>A leading indicator is an early signal, such as adoption or usage, visible before the business result. A lagging indicator is the result after the project is underway, such as revenue, cost saved, or ROI.</p></article>
-        <article class="term" data-term="Machine learning"><h2>Machine learning</h2><p>Models that learn patterns from historical data to predict or classify.</p><p class="term-ex">Example: predicting which customers will cancel next month.</p></article>
-        <article class="term" data-term="NIST AI RMF"><h2>NIST AI RMF</h2><p>The US framework for AI risk: Govern, Map, Measure, Manage. NIST AI RMF is the AI Risk Management Framework.</p></article>
-        <article class="term" data-term="Pilot purgatory"><h2>Pilot purgatory</h2><p>Many pilots that never reach production, because the operational pieces a real deployment needs were never built.</p></article>
-        <article class="term" data-term="Prompt engineering"><h2>Prompt engineering</h2><p>Writing the instruction, context, constraints, and examples so the output is usable.</p></article>
-        <article class="term" data-term="Proof of concept"><h2>Proof of concept</h2><p>A small, time-boxed test of whether an approach can work at all, before a pilot or a rollout.</p></article>
-        <article class="term" data-term="Retrieval augmented generation (RAG)"><h2>Retrieval augmented generation (RAG)</h2><p>Fetch the relevant company content, then give it to the model with the question.</p></article>
-        <article class="term" data-term="Risk classification"><h2>Risk classification</h2><p>Sorting use cases by possible harm and applying controls that match the tier.</p></article>
-        <article class="term" data-term="ROI"><h2>ROI</h2><p>Return on investment: benefits minus costs, divided by costs.</p></article>
-        <article class="term" data-term="Rule-based automation"><h2>Rule-based automation</h2><p>Fixed logic written by people, with no learning.</p><p class="term-ex">Example: routing invoices over a set amount to a manager.</p></article>
-        <article class="term" data-term="Shadow AI"><h2>Shadow AI</h2><p>People using AI tools the organization has not approved.</p></article>
-        <article class="term" data-term="Structured and unstructured data"><h2>Structured and unstructured data</h2><p>Rows and fields, versus documents, email, and images with no fixed schema.</p></article>
-        <article class="term" data-term="Token"><h2>Token</h2><p>The small piece of text a model reads or writes. Tokens are also how usage and the context window are counted.</p></article>
-        <article class="term" data-term="Training"><h2>Training</h2><p>Building a model from historical data. Inference is the separate step of using that model on a new case.</p></article>
+      <div id="term-list">
+        <section class="letter" id="letter-a" data-letter="A">
+          <h2 class="letter-label">A</h2>
+          <dl>
+            <div class="term" id="a-b-testing" data-term="A/B testing" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#a-b-testing">A/B testing</a></dt><dd itemprop="description"><p>Run the AI process and the current process on similar cases, then compare. That is how a later result can be attributed to the AI rather than to other changes.</p></dd></div>
+            <div class="term" id="accountable-owner" data-term="Accountable owner" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#accountable-owner">Accountable owner</a></dt><dd itemprop="description"><p>The one business leader answerable for an AI system’s outcomes, risks, and decisions.</p></dd></div>
+            <div class="term" id="ai-agent" data-term="AI agent" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#ai-agent">AI agent</a></dt><dd itemprop="description"><p>A system that plans steps, uses business tools, checks the result, and acts or escalates. A chatbot only replies.</p></dd></div>
+            <div class="term" id="ai-center-of-excellence" data-term="AI center of excellence" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#ai-center-of-excellence">AI center of excellence</a></dt><dd itemprop="description"><p>The team that holds AI standards, reusable assets, and enablement so the company can scale.</p></dd></div>
+            <div class="term" id="ai-literacy" data-term="AI literacy" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#ai-literacy">AI literacy</a></dt><dd itemprop="description"><p>The skill to use, question, and govern AI in one’s own role.</p></dd></div>
+            <div class="term" id="amazon-bedrock" data-term="Amazon Bedrock" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#amazon-bedrock">Amazon Bedrock</a></dt><dd itemprop="description"><p>The managed way to build on foundation models, including Knowledge Bases, Guardrails, and agents.</p></dd></div>
+            <div class="term" id="amazon-quick" data-term="Amazon Quick" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#amazon-quick">Amazon Quick</a></dt><dd itemprop="description"><p>The AI workspace for business users: analysis, research, and automation.</p></dd></div>
+            <div class="term" id="amazon-sagemaker-ai" data-term="Amazon SageMaker AI" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#amazon-sagemaker-ai">Amazon SageMaker AI</a></dt><dd itemprop="description"><p>Where a team builds, trains, deploys, and monitors its own model when a ready-made one will not fit.</p></dd></div>
+            <div class="term" id="artificial-intelligence" data-term="Artificial intelligence" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#artificial-intelligence">Artificial intelligence</a></dt><dd itemprop="description"><p>The umbrella term for machines performing tasks that normally need human intelligence. Machine learning, generative AI, and rule-based automation are more specific.</p></dd></div>
+            <div class="term" id="augmentation" data-term="Augmentation" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#augmentation">Augmentation</a></dt><dd itemprop="description"><p>AI recommends or drafts, and a person decides. Automation is when the system acts.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-b" data-letter="B">
+          <h2 class="letter-label">B</h2>
+          <dl>
+            <div class="term" id="baseline" data-term="Baseline" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#baseline">Baseline</a></dt><dd itemprop="description"><p>The measurement taken before AI, so later change can be credited to the initiative.</p></dd></div>
+            <div class="term" id="bias" data-term="Bias" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#bias">Bias</a></dt><dd itemprop="description"><p>A systematic difference in how the system treats similar people or cases. It can enter at any stage, and bias drift is that unfairness changing over time.</p></dd></div>
+            <div class="term" id="build-buy-partner" data-term="Build-buy-partner" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#build-buy-partner">Build-buy-partner</a></dt><dd itemprop="description"><p>The sourcing choice: build it, buy it, or work with a partner, judged on time, skill, cost, and regulation.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-c" data-letter="C">
+          <h2 class="letter-label">C</h2>
+          <dl>
+            <div class="term" id="context-window" data-term="Context window" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#context-window">Context window</a></dt><dd itemprop="description"><p>How much text the model can consider at once: instructions, history, retrieved documents, and the answer.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-d" data-letter="D">
+          <h2 class="letter-label">D</h2>
+          <dl>
+            <div class="term" id="drift" data-term="Drift" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#drift">Drift</a></dt><dd itemprop="description"><p>The world moves and the model gets worse. Data drift is a change in the inputs. Concept drift is a change in what the right answer is. Model drift is the drop in performance.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-e" data-letter="E">
+          <h2 class="letter-label">E</h2>
+          <dl>
+            <div class="term" id="eu-ai-act" data-term="EU AI Act" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#eu-ai-act">EU AI Act</a></dt><dd itemprop="description"><p>EU law that sorts AI by risk and scales the obligations to that tier.</p></dd></div>
+            <div class="term" id="explainability" data-term="Explainability" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#explainability">Explainability</a></dt><dd itemprop="description"><p>Being able to tell why the system produced an output.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-f" data-letter="F">
+          <h2 class="letter-label">F</h2>
+          <dl>
+            <div class="term" id="fine-tuning" data-term="Fine-tuning" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#fine-tuning">Fine-tuning</a></dt><dd itemprop="description"><p>Further training of a foundation model on your examples so its behavior changes.</p></dd></div>
+            <div class="term" id="foundation-model" data-term="Foundation model" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#foundation-model">Foundation model</a></dt><dd itemprop="description"><p>A large model pretrained on broad data and then adapted to many tasks.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-g" data-letter="G">
+          <h2 class="letter-label">G</h2>
+          <dl>
+            <div class="term" id="generative-ai" data-term="Generative AI" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#generative-ai">Generative AI</a></dt><dd itemprop="description"><p>Models that create new text, images, audio, or code from a prompt.</p><p class="term-ex">Example: summarizing support calls for agents.</p></dd></div>
+            <div class="term" id="guardrails" data-term="Guardrails" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#guardrails">Guardrails</a></dt><dd itemprop="description"><p>Controls on inputs and outputs: blocked topics, sensitive-data filters, and checks that the answer stays on the source.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-h" data-letter="H">
+          <h2 class="letter-label">H</h2>
+          <dl>
+            <div class="term" id="hallucination" data-term="Hallucination" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#hallucination">Hallucination</a></dt><dd itemprop="description"><p>Fluent output that is false or not supported by the source.</p></dd></div>
+            <div class="term" id="human-in-the-loop" data-term="Human-in-the-loop" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#human-in-the-loop">Human-in-the-loop</a></dt><dd itemprop="description"><p>A person approves each decision before it counts. Human-on-the-loop means the system acts and a person can override it.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-i" data-letter="I">
+          <h2 class="letter-label">I</h2>
+          <dl>
+            <div class="term" id="inference" data-term="Inference" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#inference">Inference</a></dt><dd itemprop="description"><p>Using a trained model on a new case.</p><p class="term-ex">Example: scoring this month’s loan applications with a model trained on past ones.</p></dd></div>
+            <div class="term" id="iso-iec-22989" data-term="ISO/IEC 22989" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#iso-iec-22989">ISO/IEC 22989</a></dt><dd itemprop="description"><p>The shared dictionary for AI terms, so teams and vendors mean the same thing.</p></dd></div>
+            <div class="term" id="iso-iec-23053" data-term="ISO/IEC 23053" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#iso-iec-23053">ISO/IEC 23053</a></dt><dd itemprop="description"><p>A description of the parts of a machine-learning system and how they fit together. It does not certify the company.</p></dd></div>
+            <div class="term" id="iso-iec-42001" data-term="ISO/IEC 42001" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#iso-iec-42001">ISO/IEC 42001</a></dt><dd itemprop="description"><p>The certifiable standard for how an organization manages AI: policy, roles, risk, controls, and improvement. A vendor’s certificate does not certify its customers.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-k" data-letter="K">
+          <h2 class="letter-label">K</h2>
+          <dl>
+            <div class="term" id="knowledge-bases" data-term="Knowledge Bases" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#knowledge-bases">Knowledge Bases</a></dt><dd itemprop="description"><p>Bedrock’s way of retrieving company documents at question time so answers can be grounded and cited.</p></dd></div>
+            <div class="term" id="kpi" data-term="KPI" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#kpi">KPI</a></dt><dd itemprop="description"><p>The metric for the outcome the initiative exists to change. KPI means key performance indicator.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-l" data-letter="L">
+          <h2 class="letter-label">L</h2>
+          <dl>
+            <div class="term" id="leading-and-lagging-indicators" data-term="Leading and lagging indicators" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#leading-and-lagging-indicators">Leading and lagging indicators</a></dt><dd itemprop="description"><p>A leading indicator is an early signal, such as adoption or usage, visible before the business result. A lagging indicator is the result after the project is underway, such as revenue, cost saved, or ROI.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-m" data-letter="M">
+          <h2 class="letter-label">M</h2>
+          <dl>
+            <div class="term" id="machine-learning" data-term="Machine learning" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#machine-learning">Machine learning</a></dt><dd itemprop="description"><p>Models that learn patterns from historical data to predict or classify.</p><p class="term-ex">Example: predicting which customers will cancel next month.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-n" data-letter="N">
+          <h2 class="letter-label">N</h2>
+          <dl>
+            <div class="term" id="nist-ai-rmf" data-term="NIST AI RMF" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#nist-ai-rmf">NIST AI RMF</a></dt><dd itemprop="description"><p>The US framework for AI risk: Govern, Map, Measure, Manage. NIST AI RMF is the AI Risk Management Framework.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-p" data-letter="P">
+          <h2 class="letter-label">P</h2>
+          <dl>
+            <div class="term" id="pilot-purgatory" data-term="Pilot purgatory" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#pilot-purgatory">Pilot purgatory</a></dt><dd itemprop="description"><p>Many pilots that never reach production, because the operational pieces a real deployment needs were never built.</p></dd></div>
+            <div class="term" id="prompt-engineering" data-term="Prompt engineering" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#prompt-engineering">Prompt engineering</a></dt><dd itemprop="description"><p>Writing the instruction, context, constraints, and examples so the output is usable.</p></dd></div>
+            <div class="term" id="proof-of-concept" data-term="Proof of concept" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#proof-of-concept">Proof of concept</a></dt><dd itemprop="description"><p>A small, time-boxed test of whether an approach can work at all, before a pilot or a rollout.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-r" data-letter="R">
+          <h2 class="letter-label">R</h2>
+          <dl>
+            <div class="term" id="retrieval-augmented-generation" data-term="Retrieval augmented generation (RAG)" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#retrieval-augmented-generation">Retrieval augmented generation (RAG)</a></dt><dd itemprop="description"><p>Fetch the relevant company content, then give it to the model with the question.</p></dd></div>
+            <div class="term" id="risk-classification" data-term="Risk classification" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#risk-classification">Risk classification</a></dt><dd itemprop="description"><p>Sorting use cases by possible harm and applying controls that match the tier.</p></dd></div>
+            <div class="term" id="roi" data-term="ROI" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#roi">ROI</a></dt><dd itemprop="description"><p>Return on investment: benefits minus costs, divided by costs.</p></dd></div>
+            <div class="term" id="rule-based-automation" data-term="Rule-based automation" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#rule-based-automation">Rule-based automation</a></dt><dd itemprop="description"><p>Fixed logic written by people, with no learning.</p><p class="term-ex">Example: routing invoices over a set amount to a manager.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-s" data-letter="S">
+          <h2 class="letter-label">S</h2>
+          <dl>
+            <div class="term" id="shadow-ai" data-term="Shadow AI" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#shadow-ai">Shadow AI</a></dt><dd itemprop="description"><p>People using AI tools the organization has not approved.</p></dd></div>
+            <div class="term" id="structured-and-unstructured-data" data-term="Structured and unstructured data" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#structured-and-unstructured-data">Structured and unstructured data</a></dt><dd itemprop="description"><p>Rows and fields, versus documents, email, and images with no fixed schema.</p></dd></div>
+          </dl>
+        </section>
+        <section class="letter" id="letter-t" data-letter="T">
+          <h2 class="letter-label">T</h2>
+          <dl>
+            <div class="term" id="token" data-term="Token" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#token">Token</a></dt><dd itemprop="description"><p>The small piece of text a model reads or writes. Tokens are also how usage and the context window are counted.</p></dd></div>
+            <div class="term" id="training" data-term="Training" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#training">Training</a></dt><dd itemprop="description"><p>Building a model from historical data. Inference is the separate step of using that model on a new case.</p></dd></div>
+          </dl>
+        </section>
       </div>
       <p class="term-foot">A longer glossary is on <a href="https://www.mindmeshacademy.com/certifications/aws/aib-c01-aws-certified-ai-business-strategist/study-guide/7-1-terms-a-z" target="_blank" rel="noopener">MindMesh Academy</a>. These definitions are written for this site.</p>
     </main>
