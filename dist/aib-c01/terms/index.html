@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3efe6">
+<script>
+try {
+  var saved = localStorage.getItem("aib-c01-practice-v2");
+  var prefs = saved && JSON.parse(saved).prefs;
+  if (prefs && prefs.theme === "dark") {
+    document.documentElement.dataset.theme = "dark";
+    document.querySelector('meta[name="theme-color"]').setAttribute("content", "#14110e");
+  }
+} catch (e) {}
+</script>
+<title>AIB-C01 Terms and Concepts | AWS AI Business Strategist</title>
+<meta name="description" content="Short unofficial definitions of the terms and concepts on the AWS Certified AI Business Strategist (AIB-C01) exam. Not affiliated with AWS.">
+<link rel="canonical" href="https://www.duskyai.com/aib-c01/terms/">
+<link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="duskyAI">
+<meta property="og:url" content="https://www.duskyai.com/aib-c01/terms/">
+<meta property="og:title" content="AIB-C01 Terms and Concepts | AWS AI Business Strategist">
+<meta property="og:description" content="Short unofficial definitions of the terms and concepts on the AWS Certified AI Business Strategist (AIB-C01) exam. Not affiliated with AWS.">
+<meta property="og:image" content="https://www.duskyai.com/assets/images/projects/aib-c01-og.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:image:alt" content="AIB-C01 terms and concepts — unofficial AWS Certified AI Business Strategist study notes">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AIB-C01 Terms and Concepts | AWS AI Business Strategist">
+<meta name="twitter:description" content="Short unofficial definitions of the terms and concepts on the AWS Certified AI Business Strategist (AIB-C01) exam. Not affiliated with AWS.">
+<meta name="twitter:image" content="https://www.duskyai.com/assets/images/projects/aib-c01-og.jpg">
+<meta name="twitter:image:alt" content="AIB-C01 terms and concepts — unofficial AWS Certified AI Business Strategist study notes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/seo.css">
+<link rel="stylesheet" href="../css/polish.css">
+<link rel="stylesheet" href="../css/terms.css">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="site-nav terms-nav" aria-label="Site">
+      <a class="site-logo" href="https://www.duskyai.com/" target="_blank" rel="noopener noreferrer" aria-label="duskyAI, opens in a new tab"><span class="wordmark" aria-hidden="true">dusky<strong>ai</strong></span></a>
+      <div class="site-links"><a href="/aib-c01/">Practice exam</a></div>
+    </nav>
+    <header class="seo-landing">
+      <h1>AIB-<em>C01</em> terms and concepts</h1>
+      <p class="seo-tagline">Short definitions for the AWS Certified AI Business Strategist exam. Not an AWS product.</p>
+      <p class="seo-meta">This AIB-C01 glossary lists the key terms the exam expects you to tell apart. It is not a cheat sheet of questions. Use it with the <a href="/aib-c01/">AIB-C01 practice exam</a>. Last reviewed November 2026 against the <a href="https://docs.aws.amazon.com/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html" target="_blank" rel="noopener">AWS exam guide</a>.</p>
+    </header>
+    <main itemscope itemtype="https://schema.org/DefinedTermSet">
+      <meta itemprop="name" content="AIB-C01 terms and concepts">
+      <meta itemprop="description" content="Unofficial short definitions for the AWS Certified AI Business Strategist (AIB-C01) exam.">
+      <div class="term-tools">
+        <label class="visually-hidden" for="term-search">Search terms and concepts</label>
+        <input class="term-search" id="term-search" type="search" placeholder="Search, for example drift or KPI" autocomplete="off" enterkeyhint="search">
+        <div class="term-actions">
+          <p class="term-count" id="term-count" aria-live="polite">70 terms</p>
+          <button type="button" class="btn quiet sm" id="term-selftest" aria-pressed="false">Self-test</button>
+        </div>
+        <div class="term-domains" role="group" aria-label="Exam domain">
+          <button type="button" class="term-chip" data-domain="all" aria-pressed="true">All</button>
+          <button type="button" class="term-chip" data-domain="1" aria-pressed="false">Fundamentals <span>24%</span></button>
+          <button type="button" class="term-chip" data-domain="2" aria-pressed="false">Strategy <span>28%</span></button>
+          <button type="button" class="term-chip" data-domain="3" aria-pressed="false">Governance <span>24%</span></button>
+          <button type="button" class="term-chip" data-domain="4" aria-pressed="false">Readiness <span>24%</span></button>
+        </div>
+      </div>
+      <section class="concepts-block mixups" id="dont-mix-up" aria-labelledby="mixups-heading">
+        <p class="kicker">Concepts</p>
+        <h2 id="mixups-heading">Don’t mix up</h2>
+        <p class="mixups-lead">The exam often asks which of two or three similar ideas fits the scenario.</p>
+        <div class="mixup" data-domain="1" data-search="prompt engineering retrieval augmented generation fine-tuning rag">
+          <h3><a href="#prompt-engineering">Prompt engineering</a> vs <a href="#retrieval-augmented-generation">retrieval augmented generation</a> vs <a href="#fine-tuning">fine-tuning</a></h3>
+          <p>Prompt engineering improves the instruction, context, and examples you give the model. Retrieval augmented generation fetches current company content at question time. Fine-tuning retrains the model on your examples so its behavior changes.</p>
+          <p class="term-exam">On the exam, start with the cheapest change that fixes the problem. Unclear output points to the prompt, missing or weekly-changing facts point to retrieval, and a consistent style or behavior the prompt cannot reach points to fine-tuning.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="artificial intelligence machine learning generative ai">
+          <h3><a href="#artificial-intelligence">Artificial intelligence</a> vs <a href="#machine-learning">machine learning</a> vs <a href="#generative-ai">generative AI</a></h3>
+          <p>Artificial intelligence is the umbrella term. Machine learning learns patterns from historical data to predict or classify. Generative AI creates new text, images, audio, or code from a prompt.</p>
+          <p class="term-exam">On the exam, scoring or predicting from past data is machine learning, creating new content is generative AI, and fixed if-then logic is neither.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="rule-based automation artificial intelligence ai">
+          <h3><a href="#rule-based-automation">Rule-based automation</a> vs <a href="#artificial-intelligence">AI</a></h3>
+          <p>Rule-based automation follows fixed logic written by people and never learns. AI handles cases too varied or unstructured to write rules for.</p>
+          <p class="term-exam">On the exam, if the logic is simple, stable, and must be auditable, rules beat AI. If the inputs are messy or the patterns change, AI earns its cost.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="aws quick amazon bedrock sagemaker ai">
+          <h3><a href="#aws-quick">AWS Quick</a> vs <a href="#amazon-bedrock">Bedrock</a> vs <a href="#amazon-sagemaker-ai">SageMaker AI</a></h3>
+          <p>AWS Quick, which the exam guide still calls Amazon Quick, is the ready-made workspace for business users. Amazon Bedrock is the managed platform for building a generative AI application on a foundation model, including retrieval and guardrails. Amazon SageMaker AI is where a team builds and trains a custom model when a ready-made one will not fit.</p>
+          <p class="term-exam">On the exam, business users with no builders point to Quick. A developer building a generative AI app points to Bedrock. A team that needs its own model points to SageMaker AI.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="ai agent chatbot assistant">
+          <h3><a href="#ai-agent">AI agent</a> vs <a href="#ai-agent">chatbot</a></h3>
+          <p>A chatbot replies. An AI agent plans steps, uses business tools, checks the result, and acts or escalates.</p>
+          <p class="term-exam">On the exam, a system that must take actions across tools is an agent. One that only answers questions is an assistant.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="augmentation automation human-in-the-loop">
+          <h3><a href="#augmentation">Augmentation</a> vs <a href="#automation">automation</a></h3>
+          <p>Augmentation keeps a person doing the job, with AI as the draft or recommendation. Automation lets the system carry out the job.</p>
+          <p class="term-exam">On the exam, a person still producing the outcome is augmentation. Whether each case must be approved is a separate <a href="#human-in-the-loop">human-in-the-loop</a> question.</p>
+        </div>
+        <div class="mixup" data-domain="2" data-search="kpi roi baseline total cost of ownership tco">
+          <h3><a href="#kpi">KPI</a> vs <a href="#roi">ROI</a> vs <a href="#baseline">baseline</a></h3>
+          <p>A KPI is the metric the initiative exists to move. ROI is benefits minus costs, divided by costs. A baseline is the measurement taken before AI, so the later change can be credited to it. <a href="#total-cost-of-ownership">Total cost of ownership</a> is the cost side of that ROI, not a third name for the KPI.</p>
+          <p class="term-exam">On the exam, a number with no before-measurement is not yet a result.</p>
+        </div>
+        <div class="mixup" data-domain="2" data-search="impact feasibility use-case prioritization">
+          <h3><a href="#use-case-prioritization">Impact</a> vs <a href="#use-case-prioritization">feasibility</a></h3>
+          <p>Business impact is the value if the use case works. Feasibility is whether the data, skills, risk, and time allow it to work.</p>
+          <p class="term-exam">On the exam, the first use case scores high on both. High impact with weak data is a data project first, not a pilot.</p>
+        </div>
+        <div class="mixup" data-domain="3" data-search="human-in-the-loop human-on-the-loop escalation">
+          <h3><a href="#human-in-the-loop">Human-in-the-loop</a> vs <a href="#human-on-the-loop">human-on-the-loop</a></h3>
+          <p>Human-in-the-loop means a person approves each decision before it counts. Human-on-the-loop means the system acts and a person can override it.</p>
+          <p class="term-exam">On the exam, a high-harm or low-confidence case is escalated to a person. A high-harm decision that must not go out unreviewed is human-in-the-loop. A system that acts, with someone able to stop it, is human-on-the-loop.</p>
+        </div>
+        <div class="mixup" data-domain="3" data-search="explainability transparency">
+          <h3><a href="#explainability">Explainability</a> vs <a href="#transparency">transparency</a></h3>
+          <p>Explainability is being able to say why the system produced an output. Transparency is telling people that AI is involved and what it can and cannot do.</p>
+          <p class="term-exam">On the exam, a regulator asking why a decision was made is explainability. A customer who should know they are talking to AI is transparency.</p>
+        </div>
+        <div class="mixup" data-domain="3" data-search="iso iec 22989 23053 42001">
+          <h3><a href="#iso-iec-22989">ISO/IEC 22989</a> vs <a href="#iso-iec-23053">23053</a> vs <a href="#iso-iec-42001">42001</a></h3>
+          <p>ISO/IEC 22989 is the shared vocabulary. ISO/IEC 23053 describes the parts of a machine-learning system and does not certify the company. ISO/IEC 42001 is the certifiable management system for how an organization runs AI.</p>
+          <p class="term-exam">On the exam, a vendor’s 42001 certificate does not certify its customers, and 23053 is not a certificate at all.</p>
+        </div>
+        <div class="mixup" data-domain="4" data-search="proof of concept pilot scale phased rollout pilot purgatory">
+          <h3><a href="#proof-of-concept">Proof of concept</a> vs pilot vs <a href="#phased-rollout">scale</a></h3>
+          <p>A proof of concept tests whether an approach can work at all. A pilot tests it with real users and real conditions. Scaling builds the ownership, support, and operations that production needs.</p>
+          <p class="term-exam">On the exam, a successful demo is not production readiness. Many pilots with no owner or operating plan is <a href="#pilot-purgatory">pilot purgatory</a>.</p>
+        </div>
+        <div class="mixup" data-domain="4" data-search="accountable owner center of excellence coe">
+          <h3><a href="#accountable-owner">Accountable owner</a> vs <a href="#ai-center-of-excellence">center of excellence</a></h3>
+          <p>The accountable owner answers for one AI system’s outcomes and risks. The AI center of excellence provides standards, reusable assets, and enablement across the company.</p>
+          <p class="term-exam">On the exam, who answers for a failure is the owner. Who helps every team do it well is the center of excellence.</p>
+        </div>
+      </section>
+      <p class="mixups-empty" id="mixups-empty" hidden>No matching comparison.</p>
+      <div class="glossary">
+        <nav class="term-index" id="term-index" aria-label="Letters"></nav>
+        <div class="glossary-main">
+          <p class="term-hint" id="term-hint" hidden>Select a term to show its definition.</p>
+          <p class="kicker terms-kicker">Terms</p>
+          <p class="term-empty" id="term-empty" hidden>No matching term.</p>
+          <div id="term-list">
+            <section class="letter" id="letter-a" data-letter="A">
+              <h2 class="letter-label">A</h2>
+              <dl>
+                <div class="term" id="a-b-testing" data-term="A/B testing" data-domain="2" data-related="baseline roi" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#a-b-testing">A/B testing</a></dt><dd itemprop="description"><p>A/B testing runs the AI process and the current process on similar cases, then compares them. A later result can then be attributed to the AI rather than to other changes.</p></dd></div>
+                <div class="term" id="accountable-owner" data-term="Accountable owner" data-domain="3" data-related="responsible-ai executive-sponsorship" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#accountable-owner">Accountable owner</a></dt><dd itemprop="description"><p>An accountable owner is the one business leader answerable for an AI system’s outcomes, risks, and decisions.</p></dd></div>
+                <div class="term" id="ai-agent" data-term="AI agent" data-domain="1" data-related="amazon-bedrock guardrails" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#ai-agent">AI agent</a></dt><dd itemprop="description"><p>An AI agent is a system that plans steps, uses business tools, checks the result, and acts or escalates. A chatbot only replies.</p></dd></div>
+                <div class="term" id="ai-center-of-excellence" data-term="AI center of excellence" data-domain="4" data-related="ai-literacy upskilling" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#ai-center-of-excellence">AI center of excellence</a></dt><dd itemprop="description"><p>An AI center of excellence is the team that holds AI standards, reusable assets, and enablement so the company can scale.</p></dd></div>
+                <div class="term" id="ai-literacy" data-term="AI literacy" data-domain="4" data-related="upskilling" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#ai-literacy">AI literacy</a></dt><dd itemprop="description"><p>AI literacy is the skill to use, question, and govern AI in one’s own role.</p></dd></div>
+                <div class="term" id="ai-use-case-types" data-term="AI use-case types" data-domain="1 2" data-related="use-case-prioritization machine-learning" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#ai-use-case-types">AI use-case types</a></dt><dd itemprop="description"><p>AI use-case types are the common categories a scenario is asking you to recognize: recommendation engines, natural language processing, computer vision, document extraction, and AI for customer operations. Recommendation ranks items for a person, natural language processing works with text or speech, computer vision works with images, and document extraction pulls fields out of forms and contracts.</p></dd></div>
+                <div class="term" id="amazon-bedrock" data-term="Amazon Bedrock" data-domain="1" data-related="aws-quick amazon-sagemaker-ai knowledge-bases" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#amazon-bedrock">Amazon Bedrock</a></dt><dd itemprop="description"><p>Amazon Bedrock is the managed way to build on foundation models, including Knowledge Bases, Guardrails, and agents.</p></dd></div>
+                <div class="term" id="amazon-sagemaker-ai" data-term="Amazon SageMaker AI" data-domain="1" data-related="amazon-bedrock aws-quick" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#amazon-sagemaker-ai">Amazon SageMaker AI</a></dt><dd itemprop="description"><p>Amazon SageMaker AI is where a team builds, trains, deploys, and monitors its own model when a ready-made one will not fit.</p></dd></div>
+                <div class="term" id="artificial-intelligence" data-term="Artificial intelligence" data-domain="1" data-related="machine-learning generative-ai" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#artificial-intelligence">Artificial intelligence</a></dt><dd itemprop="description"><p>Artificial intelligence is the umbrella term for machines performing tasks that normally need human intelligence. Machine learning, generative AI, and rule-based automation are more specific.</p></dd></div>
+                <div class="term" id="augmentation" data-term="Augmentation" data-domain="1 2" data-related="automation human-in-the-loop" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#augmentation">Augmentation</a></dt><dd itemprop="description"><p>Augmentation is when AI recommends or drafts and a person decides.</p></dd></div>
+                <div class="term" id="automation" data-term="Automation" data-domain="1 2" data-related="augmentation rule-based-automation" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#automation">Automation</a></dt><dd itemprop="description"><p>Automation is when the system acts on a decision. A person may watch it, but the system does not wait for approval on each case.</p></dd></div>
+                <div class="term" id="aws-cloud-adoption-framework" data-term="AWS Cloud Adoption Framework" data-domain="2 4" data-related="readiness-and-maturity" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#aws-cloud-adoption-framework">AWS Cloud Adoption Framework</a></dt><dd itemprop="description"><p>The AWS Cloud Adoption Framework is AWS’s plan for scaling adoption across business, people, governance, platform, security, and operations.</p></dd></div>
+                <div class="term" id="aws-cost-explorer" data-term="AWS Cost Explorer" data-domain="2" data-related="aws-pricing-calculator savings-plans" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#aws-cost-explorer">AWS Cost Explorer</a></dt><dd itemprop="description"><p>AWS Cost Explorer is the tool for seeing what you have already spent, and where.</p></dd></div>
+                <div class="term" id="aws-marketplace" data-term="AWS Marketplace" data-domain="2" data-related="build-buy-partner" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#aws-marketplace">AWS Marketplace</a></dt><dd itemprop="description"><p>AWS Marketplace is the catalog for buying a partner’s software, data, or model instead of building it. It is one path in a build-buy-partner decision.</p></dd></div>
+                <div class="term" id="aws-pricing-calculator" data-term="AWS Pricing Calculator" data-domain="2" data-related="aws-cost-explorer pricing-models" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#aws-pricing-calculator">AWS Pricing Calculator</a></dt><dd itemprop="description"><p>The AWS Pricing Calculator estimates what a workload will cost before you buy.</p></dd></div>
+                <div class="term" id="aws-quick" data-term="AWS Quick" data-domain="1" data-related="amazon-bedrock amazon-sagemaker-ai" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#aws-quick">AWS Quick</a></dt><dd itemprop="description"><p><span id="amazon-quick"></span>AWS Quick, which the exam guide still calls Amazon Quick, is the AI workspace for business users: analysis, research, and automation. The two names are the same product.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-b" data-letter="B">
+              <h2 class="letter-label">B</h2>
+              <dl>
+                <div class="term" id="baseline" data-term="Baseline" data-domain="2" data-related="kpi roi" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#baseline">Baseline</a></dt><dd itemprop="description"><p>A baseline is the measurement taken before AI, so later change can be credited to the initiative.</p></dd></div>
+                <div class="term" id="bias" data-term="Bias" data-domain="3" data-related="fairness drift" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#bias">Bias</a></dt><dd itemprop="description"><p>Bias is a systematic difference in how the system treats similar people or cases. It can enter at any stage, and bias drift is that unfairness changing over time.</p></dd></div>
+                <div class="term" id="build-buy-partner" data-term="Build-buy-partner" data-domain="2" data-related="aws-marketplace" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#build-buy-partner">Build-buy-partner</a></dt><dd itemprop="description"><p>Build-buy-partner is the sourcing choice: build it, buy it, or work with a partner, judged on time, skill, cost, and regulation.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-c" data-letter="C">
+              <h2 class="letter-label">C</h2>
+              <dl>
+                <div class="term" id="change-management" data-term="Change management" data-domain="4" data-related="executive-sponsorship upskilling" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#change-management">Change management</a></dt><dd itemprop="description"><p>Change management is the work of moving people to a new way of working: communication, incentives, training, and sponsorship. A model in production still fails if the team keeps the old process.</p></dd></div>
+                <div class="term" id="context-window" data-term="Context window" data-domain="1" data-related="token" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#context-window">Context window</a></dt><dd itemprop="description"><p>A context window is how much text the model can consider at once: instructions, history, retrieved documents, and the answer.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-d" data-letter="D">
+              <h2 class="letter-label">D</h2>
+              <dl>
+                <div class="term" id="data-governance" data-term="Data governance" data-domain="3 4" data-related="data-quality shared-responsibility-model" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#data-governance">Data governance</a></dt><dd itemprop="description"><p>Data governance is who owns the data, who may use it, and how it is kept fit for an AI initiative. Silos and unclear ownership block both quality and permission.</p></dd></div>
+                <div class="term" id="data-quality" data-term="Data quality" data-domain="1 4" data-related="data-governance drift" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#data-quality">Data quality</a></dt><dd itemprop="description"><p>Data quality is whether the data is accurate, complete, current, and fit for the decision. A model cannot repair a source the business does not trust.</p></dd></div>
+                <div class="term" id="drift" data-term="Drift" data-domain="1 3" data-related="robustness data-quality" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#drift">Drift</a></dt><dd itemprop="description"><p>Drift is when the world moves and the model gets worse. Data drift is a change in the inputs. Concept drift is a change in what the right answer is. Model drift is the drop in performance.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-e" data-letter="E">
+              <h2 class="letter-label">E</h2>
+              <dl>
+                <div class="term" id="eu-ai-act" data-term="EU AI Act" data-domain="3" data-related="risk-classification" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#eu-ai-act">EU AI Act</a></dt><dd itemprop="description"><p>The EU AI Act is EU law that sorts AI by risk and scales the obligations to that tier. The four tiers are prohibited, high, limited, and minimal.</p></dd></div>
+                <div class="term" id="executive-sponsorship" data-term="Executive sponsorship" data-domain="4" data-related="change-management accountable-owner" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#executive-sponsorship">Executive sponsorship</a></dt><dd itemprop="description"><p>Executive sponsorship is a named senior leader who gives an AI initiative authority, resources, and air cover. A champion without that backing cannot settle cross-team conflicts.</p></dd></div>
+                <div class="term" id="explainability" data-term="Explainability" data-domain="3" data-related="transparency responsible-ai" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#explainability">Explainability</a></dt><dd itemprop="description"><p>Explainability is being able to tell why the system produced an output.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-f" data-letter="F">
+              <h2 class="letter-label">F</h2>
+              <dl>
+                <div class="term" id="fairness" data-term="Fairness" data-domain="3" data-related="bias responsible-ai" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#fairness">Fairness</a></dt><dd itemprop="description"><p>Fairness is the requirement that an AI system’s effects are acceptable across groups of people. Bias is one way fairness fails.</p></dd></div>
+                <div class="term" id="fine-tuning" data-term="Fine-tuning" data-domain="1" data-related="retrieval-augmented-generation foundation-model" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#fine-tuning">Fine-tuning</a></dt><dd itemprop="description"><p>Fine-tuning is further training of a foundation model on your examples so its behavior changes.</p></dd></div>
+                <div class="term" id="foundation-model" data-term="Foundation model" data-domain="1" data-related="fine-tuning generative-ai amazon-bedrock" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#foundation-model">Foundation model</a></dt><dd itemprop="description"><p>A foundation model is a large model pretrained on broad data and then adapted to many tasks.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-g" data-letter="G">
+              <h2 class="letter-label">G</h2>
+              <dl>
+                <div class="term" id="generative-ai" data-term="Generative AI" data-domain="1" data-related="predictive-ai machine-learning" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#generative-ai">Generative AI</a></dt><dd itemprop="description"><p>Generative AI creates new text, images, audio, or code from a prompt.</p><p class="term-ex">Example: summarizing support calls for agents.</p></dd></div>
+                <div class="term" id="guardrails" data-term="Guardrails" data-domain="1 3" data-related="safety hallucination amazon-bedrock" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#guardrails">Guardrails</a></dt><dd itemprop="description"><p>Guardrails are controls on inputs and outputs: blocked topics, sensitive-data filters, and checks that the answer stays on the source.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-h" data-letter="H">
+              <h2 class="letter-label">H</h2>
+              <dl>
+                <div class="term" id="hallucination" data-term="Hallucination" data-domain="1 3" data-related="guardrails knowledge-bases" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#hallucination">Hallucination</a></dt><dd itemprop="description"><p>A hallucination is fluent output that is false or not supported by the source.</p></dd></div>
+                <div class="term" id="human-in-the-loop" data-term="Human-in-the-loop" data-domain="3" data-related="human-on-the-loop augmentation" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#human-in-the-loop">Human-in-the-loop</a></dt><dd itemprop="description"><p>Human-in-the-loop means a person approves each decision before it counts.</p></dd></div>
+                <div class="term" id="human-on-the-loop" data-term="Human-on-the-loop" data-domain="3" data-related="human-in-the-loop automation" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#human-on-the-loop">Human-on-the-loop</a></dt><dd itemprop="description"><p>Human-on-the-loop means the system acts and a person watches and can override it.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-i" data-letter="I">
+              <h2 class="letter-label">I</h2>
+              <dl>
+                <div class="term" id="inference" data-term="Inference" data-domain="1" data-related="training" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#inference">Inference</a></dt><dd itemprop="description"><p>Inference is using a trained model on a new case.</p><p class="term-ex">Example: scoring this month’s loan applications with a model trained on past ones.</p></dd></div>
+                <div class="term" id="iso-iec-22989" data-term="ISO/IEC 22989" data-domain="1 3" data-related="iso-iec-23053 iso-iec-42001" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#iso-iec-22989">ISO/IEC 22989</a></dt><dd itemprop="description"><p>ISO/IEC 22989 is the shared dictionary for AI terms, so teams and vendors mean the same thing.</p></dd></div>
+                <div class="term" id="iso-iec-23053" data-term="ISO/IEC 23053" data-domain="3" data-related="iso-iec-22989 iso-iec-42001" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#iso-iec-23053">ISO/IEC 23053</a></dt><dd itemprop="description"><p>ISO/IEC 23053 is a description of the parts of a machine-learning system and how they fit together. It does not certify the company.</p></dd></div>
+                <div class="term" id="iso-iec-42001" data-term="ISO/IEC 42001" data-domain="3" data-related="iso-iec-22989 iso-iec-23053" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#iso-iec-42001">ISO/IEC 42001</a></dt><dd itemprop="description"><p>ISO/IEC 42001 is the certifiable standard for how an organization manages AI: policy, roles, risk, controls, and improvement. A vendor’s certificate does not certify its customers.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-k" data-letter="K">
+              <h2 class="letter-label">K</h2>
+              <dl>
+                <div class="term" id="knowledge-bases" data-term="Knowledge Bases" data-domain="1" data-related="retrieval-augmented-generation amazon-bedrock" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#knowledge-bases">Knowledge Bases</a></dt><dd itemprop="description"><p>Knowledge Bases are Bedrock’s way of retrieving company documents at question time so answers can be grounded and cited.</p></dd></div>
+                <div class="term" id="kpi" data-term="KPI" data-domain="2" data-related="roi baseline" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#kpi">KPI</a></dt><dd itemprop="description"><p>A KPI, or key performance indicator, is the metric for the outcome the initiative exists to change.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-l" data-letter="L">
+              <h2 class="letter-label">L</h2>
+              <dl>
+                <div class="term" id="leading-and-lagging-indicators" data-term="Leading and lagging indicators" data-domain="2" data-related="kpi roi" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#leading-and-lagging-indicators">Leading and lagging indicators</a></dt><dd itemprop="description"><p>A leading indicator is an early signal, such as adoption or usage, visible before the business result. A lagging indicator is the result after the project is underway, such as revenue, cost saved, or ROI.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-m" data-letter="M">
+              <h2 class="letter-label">M</h2>
+              <dl>
+                <div class="term" id="machine-learning" data-term="Machine learning" data-domain="1" data-related="predictive-ai generative-ai" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#machine-learning">Machine learning</a></dt><dd itemprop="description"><p>Machine learning is the use of models that learn patterns from historical data to predict or classify.</p><p class="term-ex">Example: predicting which customers will cancel next month.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-n" data-letter="N">
+              <h2 class="letter-label">N</h2>
+              <dl>
+                <div class="term" id="nist-ai-rmf" data-term="NIST AI RMF" data-domain="3" data-related="responsible-ai iso-iec-42001" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#nist-ai-rmf">NIST AI RMF</a></dt><dd itemprop="description"><p>The NIST AI RMF is the US framework for AI risk: Govern, Map, Measure, Manage. NIST AI RMF means the AI Risk Management Framework.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-p" data-letter="P">
+              <h2 class="letter-label">P</h2>
+              <dl>
+                <div class="term" id="phased-rollout" data-term="Phased rollout" data-domain="4" data-related="proof-of-concept pilot-purgatory" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#phased-rollout">Phased rollout</a></dt><dd itemprop="description"><p>A phased rollout moves an AI initiative from a proof of concept to a pilot and then to production, widening scope only after each stage holds.</p></dd></div>
+                <div class="term" id="pilot-purgatory" data-term="Pilot purgatory" data-domain="4" data-related="phased-rollout proof-of-concept" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#pilot-purgatory">Pilot purgatory</a></dt><dd itemprop="description"><p>Pilot purgatory is many pilots that never reach production, because the operational pieces a real deployment needs were never built.</p></dd></div>
+                <div class="term" id="predictive-ai" data-term="Predictive AI" data-domain="1" data-related="generative-ai machine-learning" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#predictive-ai">Predictive AI</a></dt><dd itemprop="description"><p>Predictive AI scores or classifies a case from past data.</p></dd></div>
+                <div class="term" id="pricing-models" data-term="Pricing models" data-domain="2" data-related="savings-plans total-cost-of-ownership aws-pricing-calculator" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#pricing-models">Pricing models</a></dt><dd itemprop="description"><p>Pricing models for AWS AI services are consumption-based, instance-based, and seat-based. Consumption-based means you pay for what you use, such as tokens. Instance-based means you pay for capacity that is running. Seat-based means you pay per person, as with a business workspace.</p></dd></div>
+                <div class="term" id="privacy" data-term="Privacy" data-domain="3" data-related="responsible-ai data-governance" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#privacy">Privacy</a></dt><dd itemprop="description"><p>Privacy in AI is obtaining, using, and keeping data in a way the people it is about would recognize as legitimate. A useful model is not a reason to collect more than the decision needs.</p></dd></div>
+                <div class="term" id="prompt-engineering" data-term="Prompt engineering" data-domain="1" data-related="fine-tuning context-window" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#prompt-engineering">Prompt engineering</a></dt><dd itemprop="description"><p>Prompt engineering is writing the instruction, context, constraints, and examples so the output is usable.</p></dd></div>
+                <div class="term" id="proof-of-concept" data-term="Proof of concept" data-domain="2 4" data-related="phased-rollout pilot-purgatory" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#proof-of-concept">Proof of concept</a></dt><dd itemprop="description"><p>A proof of concept is a small, time-boxed test of whether an approach can work at all, before a pilot or a rollout.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-r" data-letter="R">
+              <h2 class="letter-label">R</h2>
+              <dl>
+                <div class="term" id="readiness-and-maturity" data-term="Readiness and maturity" data-domain="4" data-related="aws-cloud-adoption-framework phased-rollout" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#readiness-and-maturity">Readiness and maturity</a></dt><dd itemprop="description"><p>Readiness is whether the organization can adopt AI now, across leadership, data, culture, infrastructure, and governance. Maturity is how far along that journey is, from isolated experiments to enterprise-scale use.</p></dd></div>
+                <div class="term" id="retrieval-augmented-generation" data-term="Retrieval augmented generation (RAG)" data-domain="1" data-related="fine-tuning knowledge-bases" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#retrieval-augmented-generation">Retrieval augmented generation (RAG)</a></dt><dd itemprop="description"><p>Retrieval augmented generation (RAG) fetches the relevant company content and then gives it to the model with the question.</p></dd></div>
+                <div class="term" id="responsible-ai" data-term="Responsible AI" data-domain="3" data-related="fairness explainability well-architected-responsible-ai-lens" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#responsible-ai">Responsible AI</a></dt><dd itemprop="description"><p>Responsible AI is building and using AI so it is fair, transparent, private, safe, and robust, with people accountable for the outcome.</p><p class="term-exam">On the exam it shows up as a business tradeoff, not a technical fix.</p></dd></div>
+                <div class="term" id="risk-classification" data-term="Risk classification" data-domain="3" data-related="eu-ai-act" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#risk-classification">Risk classification</a></dt><dd itemprop="description"><p>Risk classification is sorting use cases by possible harm and applying controls that match the tier.</p></dd></div>
+                <div class="term" id="robustness" data-term="Robustness" data-domain="3" data-related="drift responsible-ai" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#robustness">Robustness</a></dt><dd itemprop="description"><p>Robustness is the system still producing a correct output when the input is unexpected or slightly off.</p></dd></div>
+                <div class="term" id="roi" data-term="ROI" data-domain="2" data-related="kpi baseline total-cost-of-ownership" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#roi">ROI</a></dt><dd itemprop="description"><p>ROI, or return on investment, is benefits minus costs, divided by costs.</p></dd></div>
+                <div class="term" id="rule-based-automation" data-term="Rule-based automation" data-domain="1" data-related="machine-learning automation" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#rule-based-automation">Rule-based automation</a></dt><dd itemprop="description"><p>Rule-based automation is fixed logic written by people, with no learning.</p><p class="term-ex">Example: routing invoices over a set amount to a manager.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-s" data-letter="S">
+              <h2 class="letter-label">S</h2>
+              <dl>
+                <div class="term" id="safety" data-term="Safety" data-domain="3" data-related="guardrails responsible-ai" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#safety">Safety</a></dt><dd itemprop="description"><p>Safety is blocking harmful output and misuse of an AI system. Guardrails are one control, and a person who can stop the action is another.</p></dd></div>
+                <div class="term" id="savings-plans" data-term="Savings Plans" data-domain="2" data-related="pricing-models aws-cost-explorer" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#savings-plans">Savings Plans</a></dt><dd itemprop="description"><p>Savings Plans are a commitment to a steady amount of AWS usage in exchange for a lower rate. They suit a workload you already know will keep running, not a one-off experiment.</p></dd></div>
+                <div class="term" id="shadow-ai" data-term="Shadow AI" data-domain="3 4" data-related="data-governance ai-literacy" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#shadow-ai">Shadow AI</a></dt><dd itemprop="description"><p>Shadow AI is people using AI tools the organization has not approved.</p></dd></div>
+                <div class="term" id="shared-responsibility-model" data-term="Shared responsibility model" data-domain="3" data-related="data-governance" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#shared-responsibility-model">Shared responsibility model</a></dt><dd itemprop="description"><p>The shared responsibility model for AI workloads means AWS secures and operates the service, and the customer is responsible for its data, who may use it, and how the AI is used.</p></dd></div>
+                <div class="term" id="structured-and-unstructured-data" data-term="Structured and unstructured data" data-domain="1 4" data-related="data-quality" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#structured-and-unstructured-data">Structured and unstructured data</a></dt><dd itemprop="description"><p>Structured data is rows and fields. Unstructured data is documents, email, and images with no fixed schema.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-t" data-letter="T">
+              <h2 class="letter-label">T</h2>
+              <dl>
+                <div class="term" id="token" data-term="Token" data-domain="1" data-related="context-window pricing-models" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#token">Token</a></dt><dd itemprop="description"><p>A token is the small piece of text a model reads or writes. Tokens are also how usage and the context window are counted.</p></dd></div>
+                <div class="term" id="total-cost-of-ownership" data-term="Total cost of ownership" data-domain="2" data-related="roi pricing-models" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#total-cost-of-ownership">Total cost of ownership</a></dt><dd itemprop="description"><p>Total cost of ownership is the full cost of an AI initiative over its life, including the service, people, data work, and ongoing operation.</p></dd></div>
+                <div class="term" id="training" data-term="Training" data-domain="1" data-related="inference fine-tuning" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#training">Training</a></dt><dd itemprop="description"><p>Training is building a model from historical data. Inference is the separate step of using that model on a new case.</p></dd></div>
+                <div class="term" id="transparency" data-term="Transparency" data-domain="3" data-related="explainability responsible-ai" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#transparency">Transparency</a></dt><dd itemprop="description"><p>Transparency is giving people enough information to decide whether and how to engage with an AI system. Explainability is the narrower ability to say why one output happened.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-u" data-letter="U">
+              <h2 class="letter-label">U</h2>
+              <dl>
+                <div class="term" id="upskilling" data-term="Upskilling" data-domain="4" data-related="ai-literacy change-management" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#upskilling">Upskilling</a></dt><dd itemprop="description"><p>Upskilling is teaching people the AI skill their role now needs. AI literacy is that skill, and upskilling is how the organization builds it.</p></dd></div>
+                <div class="term" id="use-case-prioritization" data-term="Use-case prioritization" data-domain="2" data-related="roi baseline ai-use-case-types" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#use-case-prioritization">Use-case prioritization</a></dt><dd itemprop="description"><p>Use-case prioritization is ranking AI initiatives by business value, feasibility, and strategic fit, and then choosing to scale, pause, or stop each one.</p></dd></div>
+              </dl>
+            </section>
+            <section class="letter" id="letter-w" data-letter="W">
+              <h2 class="letter-label">W</h2>
+              <dl>
+                <div class="term" id="well-architected-responsible-ai-lens" data-term="Well-Architected Responsible AI Lens" data-domain="3" data-related="responsible-ai" itemprop="hasDefinedTerm" itemscope itemtype="https://schema.org/DefinedTerm"><dt itemprop="name"><a href="#well-architected-responsible-ai-lens">Well-Architected Responsible AI Lens</a></dt><dd itemprop="description"><p>The AWS Well-Architected Responsible AI Lens is AWS’s governance guidance for building and running an AI use case responsibly. The exam’s dimensions include fairness, explainability, privacy, safety, transparency, and robustness.</p></dd></div>
+              </dl>
+            </section>
+          </div>
+        </div>
+      </div>
+      <p class="term-foot">These definitions are written for this site.</p>
+    </main>
+    <footer class="note">
+      Side project by <a href="https://www.duskyai.com/">Dusan Hajek</a>.
+      Unofficial notes for the AWS Certified AI Business Strategist (AIB-C01) exam. Not endorsed by AWS.
+    </footer>
+  </div>
+  <script src="../js/terms.js" defer></script>
+</body>
+</html>

@@ -21,8 +21,12 @@
     return '<span class="clock' + urgent + '" id="clock">' + A.ui.icon("clock") + "<span>" + clockText(ex) + "</span></span>";
   }
 
+  function domainLabel(q) {
+    return "Domain " + q.domain + " · " + (A.core.DOMAIN_SHORT[q.domain] || "");
+  }
+
   function examPills(ex, cursor, q, revealed) {
-    return [(revealed ? "Review · " : "") + (cursor + 1) + " / " + ex.ids.length, "Domain " + q.domain + " · " + (A.core.DOMAIN_SHORT[q.domain] || "")];
+    return [(revealed ? "Review · " : "") + (cursor + 1) + " / " + ex.ids.length, domainLabel(q)];
   }
 
   function answeredCount(ex) {
@@ -53,11 +57,11 @@
     return ui.qbar({
       pills: examPills(ex, ex.cursor, q, revealed),
       progress: { value: answered, max: ex.ids.length, label: answered + " of " + ex.ids.length + " answered" },
-      right: clockHtml(ex),
+      right: clockHtml(ex) + ui.quizHeaderTools(),
       homeTitle: revealed ? "Home" : "Exit (clock keeps running)",
     })
       + ui.dotMap(ex, ex.cursor, { flags: ex.flags, answered: ex.picks, graded: revealed ? ex.ok : null, jumpAct: "jump-exam" })
-      + ui.quizBody(ui.stemHtml(q.parts), top, ui.options(ex, id, draft, revealed, "exam-opt"), "", hint)
+      + ui.quizBody(ui.stemHtml(q.parts), domainLabel(q), top, ui.options(ex, id, draft, revealed, "exam-opt"), "", hint)
       + dock;
   }
 

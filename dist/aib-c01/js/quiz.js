@@ -11,8 +11,12 @@
     return q.select === 1 ? "Select an answer" : "Select " + need + " more";
   }
 
+  function domainLabel(q) {
+    return "Domain " + q.domain + " · " + (A.core.DOMAIN_SHORT[q.domain] || "");
+  }
+
   function quizPills(set, cursor, q) {
-    return [(cursor + 1) + " / " + set.ids.length, "Domain " + q.domain + " · " + (A.core.DOMAIN_SHORT[q.domain] || "")];
+    return [(cursor + 1) + " / " + set.ids.length, domainLabel(q)];
   }
 
   function html() {
@@ -37,11 +41,11 @@
     return ui.qbar({
       pills: quizPills(set, set.cursor, q),
       progress: { value: set.cursor + 1, max: set.ids.length, label: "Question " + (set.cursor + 1) + " of " + set.ids.length },
-      right: "",
+      right: ui.quizHeaderTools(),
       homeTitle: "Home",
     })
       + ui.dotMap(set, set.cursor, { graded: set.ok, answered: set.picks, jumpAct: "jump-learn" })
-      + ui.quizBody(ui.stemHtml(q.parts), top, ui.options(set, id, draft, revealed, "opt"), A.ctx.justRevealed ? "just-revealed" : "", hint)
+      + ui.quizBody(ui.stemHtml(q.parts), domainLabel(q), top, ui.options(set, id, draft, revealed, "opt"), A.ctx.justRevealed ? "just-revealed" : "", hint)
       + '<div class="dock">'
       + ui.btn("Previous", "prev", { icon: "arrowL", cls: "collapse", disabled: set.cursor === 0, key: "←", title: "Previous" })
       + ui.btn(saved ? "Saved" : "Save", "toggle-save", { icon: "bookmark", cls: "collapse", pressed: saved, key: "S", title: saved ? "Remove from saved" : "Save for later" })
@@ -99,8 +103,13 @@
     const go = document.getElementById("go");
     if (go) {
       const need = q.select - draft.length;
-      go.disabled = need !== 0;
-      go.querySelector(".btn-label").textContent = goLabel(q, need);
+      if (go.dataset.scrollMode === "1") {
+        go.disabled = false;
+        go.querySelector(".btn-label").textContent = "See answers";
+      } else {
+        go.disabled = need !== 0;
+        go.querySelector(".btn-label").textContent = goLabel(q, need);
+      }
     }
   }
 
@@ -165,5 +174,49 @@
     event.preventDefault();
   }
 
-  A.quiz = { html, start, startMissed, moveTo, toggle, check, next, prev, toggleSave, onKey };
+  let dockObserver = null;
+
+  function bindMobileDock() {
+    if (dockObserver) {
+      dockObserver.disconnect();
+      dockObserver = null;
+    }
+    const set = current();
+    if (!set || set.phase !== "pick") return;
+    if (!window.matchMedia("(max-width: 700px)").matches) return;
+    const opts = document.querySelector(".opts");
+    const go = document.getElementById("go");
+    if (!opts || !go) return;
+
+    function refresh() {
+      const q = A.core.BY_ID[set.ids[set.cursor]];
+      const draft = set.drafts[set.ids[set.cursor]] || [];
+      const need = q.select - draft.length;
+      const label = go.querySelector(".btn-label");
+      if (!label) return;
+      if (go.dataset.scrollMode === "1") {
+        label.textContent = "See answers";
+        go.disabled = false;
+      } else {
+        label.textContent = goLabel(q, need);
+        go.disabled = need !== 0;
+      }
+    }
+
+    dockObserver = new IntersectionObserver((entries) => {
+      const visible = entries[0] && entries[0].isIntersecting;
+      go.dataset.scrollMode = visible ? "0" : "1";
+      refresh();
+    }, { threshold: 0.12, rootMargin: "0px 0px -72px 0px" });
+    dockObserver.observe(opts);
+    go.dataset.scrollMode = "0";
+    refresh();
+  }
+
+  function scrollToAnswers() {
+    const opts = document.querySelector(".opts");
+    if (opts) opts.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  A.quiz = { html, start, startMissed, moveTo, toggle, check, next, prev, toggleSave, onKey, bindMobileDock, scrollToAnswers };
 })(this);

@@ -59,9 +59,14 @@
     else if (name === "exam") app.innerHTML = A.exam.html();
     else app.innerHTML = A.quiz.html();
     A.ctx.justRevealed = false;
-    document.body.classList.toggle("in-quiz", !!app.querySelector(".quiz-body"));
+    const inQuiz = !!app.querySelector(".quiz-body");
+    document.body.classList.toggle("in-quiz", inQuiz);
+    document.body.classList.toggle("in-learn", inQuiz && name === "quiz");
+    document.body.classList.toggle("in-exam", inQuiz && name === "exam");
+    if (!inQuiz) document.body.classList.remove("source-open");
     window.scrollTo(0, 0);
     A.ui.centerActiveDot();
+    if (name === "quiz") A.quiz.bindMobileDock();
     if (name === "exam" && A.core.hasActiveExam(A.ctx.state)) A.exam.startClock();
   }
 
@@ -138,7 +143,15 @@
     missed: (el) => A.quiz.startMissed(el.dataset.set),
     "review-q": (el) => A.quiz.moveTo(num(el, "index")),
     opt: (el) => A.quiz.toggle(el.dataset.letter),
-    check: () => A.quiz.check(),
+    check: () => {
+      const go = document.getElementById("go");
+      if (go && go.dataset.scrollMode === "1") {
+        A.quiz.scrollToAnswers();
+        return;
+      }
+      A.quiz.check();
+    },
+    "toggle-source": () => document.body.classList.toggle("source-open"),
     next: () => A.quiz.next(),
     prev: () => A.quiz.prev(),
     "jump-learn": (el) => A.quiz.moveTo(num(el, "index")),

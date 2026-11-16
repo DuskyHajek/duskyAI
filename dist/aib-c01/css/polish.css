@@ -82,6 +82,18 @@ button { -webkit-tap-highlight-color: transparent; }
 /* background-attachment: fixed is ignored on iOS and repaints on scroll elsewhere */
 body { background-attachment: scroll; }
 
+@media (max-width: 700px) {
+  body { background-image: none; }
+}
+
+@media (hover: none) {
+  .btn:hover:not(:disabled) { transform: none; box-shadow: none; }
+  .tile:hover { transform: none; box-shadow: var(--shadow); }
+  .dot:hover { transform: none; border-color: var(--line); color: var(--muted); }
+  .pace:hover { transform: none; box-shadow: none; border-color: var(--line-strong); }
+  .miss-row:hover { transform: none; border-color: var(--line); }
+}
+
 
 /* 3. CALMER EXAM ------------------------------------------------------- */
 /* Motion that answers a click is fine. Motion that decorates is removed. */

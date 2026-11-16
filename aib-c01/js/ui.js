@@ -20,6 +20,7 @@
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
     moon: '<path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/>',
     book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+    info: '<circle cx="12" cy="12" r="9"/><path d="M12 10v6M12 8h.01"/>',
   };
 
   function esc(value) {
@@ -194,9 +195,16 @@
       + ' · <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>. Not endorsed by the author or AWS.</p>';
   }
 
-  function quizBody(stem, top, opts, cls, hint) {
+  function quizHeaderTools() {
+    return '<a class="btn quiet sm icon-only q-terms" href="/aib-c01/terms/" target="_blank" rel="noopener noreferrer" aria-label="Terms and concepts">'
+      + icon("book") + "</a>"
+      + btn("", "toggle-source", { kind: "quiet", cls: "sm icon-only", icon: "info", title: "Attribution" });
+  }
+
+  function quizBody(stem, domainLabel, top, opts, cls, hint) {
+    const domain = domainLabel ? '<p class="stem-domain">' + esc(domainLabel) + "</p>" : "";
     return '<div class="quiz-body' + (cls ? " " + cls : "") + '">'
-      + '<section class="pane stem-pane"><div class="stem">' + stem + "</div></section>"
+      + '<section class="pane stem-pane">' + domain + '<div class="stem">' + stem + "</div></section>"
       + '<section class="pane opts-pane">' + top + (hint || "") + '<div class="opts" role="group" aria-label="Answers">' + opts + "</div></section></div>"
       + sourceLine();
   }
@@ -215,5 +223,5 @@
     if (dot) strip.scrollLeft = dot.offsetLeft - strip.offsetLeft - strip.clientWidth / 2 + dot.offsetWidth / 2;
   }
 
-  A.ui = { esc, icon, btn, ring, track, stemHtml, dotMap, options, reveal, selectLabel, qbar, pickHint, quizBody, syncOptions, syncPickHint, syncProgress, centerActiveDot };
+  A.ui = { esc, icon, btn, ring, track, stemHtml, dotMap, options, reveal, selectLabel, qbar, pickHint, quizBody, quizHeaderTools, syncOptions, syncPickHint, syncProgress, centerActiveDot };
 })(this);
