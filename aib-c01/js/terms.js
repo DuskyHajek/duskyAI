@@ -1,15 +1,47 @@
-/* Live filter and letter index for the terms and concepts page. */
+/* Live filter, domain chips, self-test, and letter index for the terms page. */
 (function (root) {
-  function filterTerms(items, query) {
-    const q = String(query || "").trim().toLowerCase();
-    if (!q) return items.slice();
-    return items.filter((item) => (item.term + " " + item.text).toLowerCase().includes(q));
+  function domainsOf(item) {
+    return String(item.domain || "").split(/\s+/).filter(Boolean);
   }
 
-  function visibleGroups(groups, query) {
+  function filterTerms(items, query, domain) {
+    const q = String(query || "").trim().toLowerCase();
+    const d = String(domain || "").trim();
+    return items.filter((item) => {
+      if (q && !(item.term + " " + item.text).toLowerCase().includes(q)) return false;
+      if (d && d !== "all" && domainsOf(item).indexOf(d) === -1) return false;
+      return true;
+    });
+  }
+
+  function visibleGroups(groups, query, domain) {
     return groups
-      .map((group) => ({ letter: group.letter, items: filterTerms(group.items, query) }))
+      .map((group) => ({ letter: group.letter, items: filterTerms(group.items, query, domain) }))
       .filter((group) => group.items.length > 0);
+  }
+
+  function addRelated(doc) {
+    Array.prototype.forEach.call(doc.querySelectorAll(".term[data-related]"), (el) => {
+      if (el.querySelector(".term-related")) return;
+      const p = doc.createElement("p");
+      p.className = "term-related";
+      let any = false;
+      String(el.getAttribute("data-related") || "").split(/\s+/).forEach((id) => {
+        if (!id) return;
+        const target = doc.getElementById(id);
+        const term = target && (target.classList.contains("term") ? target : target.closest(".term"));
+        if (!term) return;
+        if (any) p.appendChild(doc.createTextNode(", "));
+        else p.appendChild(doc.createTextNode("Related: "));
+        const link = doc.createElement("a");
+        link.href = "#" + id;
+        link.textContent = term.getAttribute("data-term") || id;
+        p.appendChild(link);
+        any = true;
+      });
+      const dd = el.querySelector("dd");
+      if (any && dd) dd.appendChild(p);
+    });
   }
 
   function bind(doc) {
@@ -17,14 +49,27 @@
     const index = doc.getElementById("term-index");
     const count = doc.getElementById("term-count");
     const empty = doc.getElementById("term-empty");
-    if (!input || !index || !count || !empty) return;
+    const main = doc.querySelector("main");
+    if (!input || !index || !count || !empty || !main) return;
+
+    addRelated(doc);
+    const domains = doc.querySelector(".term-domains");
+    const selfBtn = doc.getElementById("term-selftest");
+    const mix = doc.getElementById("dont-mix-up");
+    const hint = doc.getElementById("term-hint");
+    const list = doc.getElementById("term-list");
 
     const groups = Array.prototype.slice.call(doc.querySelectorAll(".letter")).map((section) => {
       const cards = Array.prototype.slice.call(section.querySelectorAll(".term"));
       return {
         section: section,
         letter: section.getAttribute("data-letter") || "",
-        items: cards.map((el) => ({ el: el, term: el.getAttribute("data-term") || "", text: el.textContent || "" })),
+        items: cards.map((el) => ({
+          el: el,
+          term: el.getAttribute("data-term") || "",
+          text: el.textContent || "",
+          domain: el.getAttribute("data-domain") || "",
+        })),
       };
     });
     const total = groups.reduce((sum, group) => sum + group.items.length, 0);
@@ -34,8 +79,13 @@
       return '<a href="#' + id + '" data-letter="' + group.letter + '">' + group.letter + "</a>";
     }).join("");
 
+    function domain() {
+      const pressed = domains && domains.querySelector('[aria-pressed="true"]');
+      return pressed ? pressed.getAttribute("data-domain") || "all" : "all";
+    }
+
     function apply() {
-      const shown = visibleGroups(groups, input.value);
+      const shown = visibleGroups(groups, input.value, domain());
       const letters = new Set(shown.map((group) => group.letter));
       const visible = new Set();
       shown.forEach((group) => group.items.forEach((item) => visible.add(item.el)));
@@ -52,9 +102,50 @@
       const n = visible.size;
       count.textContent = n === total ? total + " terms" : n + " of " + total;
       empty.hidden = n !== 0;
+      const filtering = String(input.value || "").trim() !== "" || domain() !== "all";
+      const testing = main.classList.contains("is-testing");
+      if (mix) mix.hidden = filtering || testing;
+      if (hint) hint.hidden = !testing;
     }
 
     input.addEventListener("input", apply);
+    if (domains) {
+      domains.addEventListener("click", (event) => {
+        const btn = event.target.closest(".term-chip");
+        if (!btn) return;
+        Array.prototype.forEach.call(domains.querySelectorAll(".term-chip"), (el) => {
+          el.setAttribute("aria-pressed", el === btn ? "true" : "false");
+        });
+        apply();
+      });
+    }
+    if (selfBtn) {
+      selfBtn.addEventListener("click", () => {
+        const on = !main.classList.contains("is-testing");
+        main.classList.toggle("is-testing", on);
+        selfBtn.setAttribute("aria-pressed", on ? "true" : "false");
+        Array.prototype.forEach.call(doc.querySelectorAll(".term"), (el) => {
+          el.classList.remove("is-open");
+          const link = el.querySelector("dt a");
+          if (!link) return;
+          if (on) link.setAttribute("aria-expanded", "false");
+          else link.removeAttribute("aria-expanded");
+        });
+        apply();
+      });
+    }
+    if (list) {
+      list.addEventListener("click", (event) => {
+        if (!main.classList.contains("is-testing")) return;
+        const name = event.target.closest(".term dt");
+        if (!name) return;
+        event.preventDefault();
+        const term = name.closest(".term");
+        const open = term.classList.toggle("is-open");
+        const link = name.querySelector("a");
+        if (link) link.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
     index.addEventListener("click", (event) => {
       const link = event.target.closest("a");
       if (link && link.getAttribute("aria-disabled") === "true") event.preventDefault();
