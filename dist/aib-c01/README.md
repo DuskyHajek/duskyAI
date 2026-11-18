@@ -18,9 +18,7 @@ Public exam facts (from the AWS exam guide and certification page, not from this
 
 ## Question order
 
-The first pass of the full set and of each domain follows the order in `questions.js`. Continue stays on that run. Start over on an unfinished exam-order run keeps that order and clears progress.
-
-Try again after a finished full set, domain, or saved review shuffles the questions. **Shuffle on retry** in the settings menu is on by default. Turning it off keeps exam order for those retries. Missed-question review always shuffles. A new timed mock always shuffles. Answer choices are shuffled once per question for that run. A later pass does not replace first-try domain scores.
+The full practice set is shuffled when you start it and whenever you start over, unless **Shuffle on retry** is off (then it follows `questions.js` order). Continue keeps the current run’s order. Domain sets and saved review follow bank order on the first pass; try again after a finished run shuffles them when **Shuffle on retry** is on. Start over on an unfinished domain or saved run keeps exam order until that run is finished. Missed-question review always shuffles. A new timed mock always shuffles. Answer choices are shuffled once per question for that run. A later pass does not replace first-try domain scores.
 
 ## Who it is for
 

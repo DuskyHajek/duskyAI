@@ -129,8 +129,12 @@
 
     function retryShuffles(state, setId, restart) {
       if (String(setId).startsWith("missed:")) return true;
-      if (!restart) return false;
       if (state.prefs && state.prefs.shuffleOnRetry === false) return false;
+      if (setId === "all") {
+        if (restart) return true;
+        return !(state.sets && state.sets[setId]);
+      }
+      if (!restart) return false;
       const old = state.sets && state.sets[setId];
       return !!(old && (old.phase === "done" || old.shuffled));
     }

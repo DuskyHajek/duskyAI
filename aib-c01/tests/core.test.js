@@ -149,7 +149,7 @@ function doneSet(ids, extra) {
   return set;
 }
 
-test("retryShuffles only a finished or already shuffled run", () => {
+test("retryShuffles: full set on first start and any restart; domains after finish", () => {
   const state = core.defaultState();
   delete state.prefs.shuffleOnRetry;
   const domainIds = core.idsFor(state, "2");
@@ -163,7 +163,7 @@ test("retryShuffles only a finished or already shuffled run", () => {
 
   state.sets.all.phase = "pick";
   state.sets.all.shuffled = false;
-  assert.equal(core.retryShuffles(state, "all", true), false);
+  assert.equal(core.retryShuffles(state, "all", true), true);
   state.sets.all.shuffled = true;
   assert.equal(core.retryShuffles(state, "all", true), true);
 
@@ -179,7 +179,11 @@ test("retryShuffles only a finished or already shuffled run", () => {
   assert.equal(core.retryShuffles(state, "missed:all", false), true);
 
   const fresh = core.defaultState();
-  assert.equal(core.retryShuffles(fresh, "all", true), false);
+  assert.equal(core.retryShuffles(fresh, "all", true), true);
+  assert.equal(core.retryShuffles(fresh, "all", false), true);
+  assert.equal(core.retryShuffles(fresh, "2", false), false);
+  delete fresh.sets.all;
+  assert.equal(core.retryShuffles(fresh, "all", false), true);
 });
 
 test("a shuffled set is a permutation and not the previous order", () => {

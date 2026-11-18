@@ -133,7 +133,7 @@
     return '<details class="menu"><summary class="btn quiet icon-only" aria-label="Settings" title="Settings">' + icon("sliders") + "</summary>"
       + '<div class="menu-pop">'
       + btn("Dark mode", "theme", { kind: "quiet", icon: dark ? "moon" : "sun", pressed: dark })
-      + btn("Shuffle on retry", "shuffle-retry", { kind: "quiet", icon: "redo", pressed: shuffleRetry, title: "Finished full set, domain, and saved review. Missed questions always shuffle." })
+      + btn("Shuffle on retry", "shuffle-retry", { kind: "quiet", icon: "redo", pressed: shuffleRetry, title: "Full set order and shuffles on retry for finished domain and saved runs. Missed questions always shuffle." })
       + "<hr>"
       + btn("Export progress", "export", { kind: "quiet", icon: "download" })
       + btn("Import progress", "import", { kind: "quiet", icon: "upload" })
