@@ -199,6 +199,13 @@
       }
     });
     apply();
+    function syncNavOffset() {
+      const nav = doc.querySelector(".site-nav");
+      if (!nav) return;
+      doc.documentElement.style.setProperty("--site-nav-h", Math.ceil(nav.getBoundingClientRect().height) + "px");
+    }
+    syncNavOffset();
+    root.addEventListener("resize", syncNavOffset);
   }
 
   const api = { filterTerms: filterTerms, filterMixups: filterMixups, visibleGroups: visibleGroups, bind: bind };

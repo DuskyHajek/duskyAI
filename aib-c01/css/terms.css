@@ -2,7 +2,7 @@
 .wrap { width: min(880px, calc(100% - 40px)); }
 .term-tools {
   position: sticky;
-  top: 0;
+  top: var(--site-nav-h, 64px);
   z-index: 5;
   display: grid;
   gap: 8px;
@@ -159,7 +159,7 @@ main.is-testing .concepts-block { display: none; }
   }
   .term-index {
     position: sticky;
-    top: 168px;
+    top: calc(168px + var(--site-nav-h, 64px));
     flex-direction: column;
     margin: 0;
     overflow: visible;

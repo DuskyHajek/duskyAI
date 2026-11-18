@@ -64,7 +64,13 @@
 .opt.wrong .letter { color: var(--on-solid); }
 
 /* One "dusk" hairline: green into gold, the two brand colours */
-.site-nav { position: relative; border-bottom: 0; }
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--paper);
+  border-bottom: 0;
+}
 .site-nav::after {
   content: "";
   position: absolute;
