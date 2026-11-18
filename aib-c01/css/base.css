@@ -102,7 +102,7 @@ h3 { font-size: 16px; letter-spacing: -0.01em; }
   color: var(--ink);
   box-shadow: var(--shadow);
 }
-.site-tools { grid-area: tools; display: flex; align-items: center; justify-self: end; }
+.site-tools { grid-area: tools; display: flex; align-items: center; justify-self: end; gap: 2px; }
 @media (max-width: 560px) {
   .site-nav {
     grid-template-columns: 1fr auto;
