@@ -46,9 +46,17 @@
     })
       + ui.dotMap(set, set.cursor, { graded: set.ok, answered: set.picks, jumpAct: "jump-learn" })
       + ui.quizBody(ui.stemHtml(q.parts), domainLabel(q), top, ui.options(set, id, draft, revealed, "opt"), A.ctx.justRevealed ? "just-revealed" : "", hint)
+      + (saved && A.ctx.view.setId === "saved"
+        ? '<p class="saved-note">' + ui.icon("bookmark") + "<span>On your saved list. Remove takes it off.</span></p>"
+        : "")
       + '<div class="dock">'
       + ui.btn("Previous", "prev", { icon: "arrowL", cls: "collapse", disabled: set.cursor === 0, key: "←", title: "Previous" })
-      + ui.btn(saved ? "Saved" : "Save", "toggle-save", { icon: "bookmark", cls: "collapse", pressed: saved, key: "S", title: saved ? "Remove from saved" : "Save for later" })
+      + ui.btn(saved ? "Remove" : "Save", "toggle-save", {
+        icon: saved ? "x" : "bookmark",
+        cls: "save-toggle",
+        key: "S",
+        title: saved ? "Remove from saved questions" : "Save for later",
+      })
       + '<span class="spacer"></span>' + go + "</div>";
   }
 
@@ -154,6 +162,21 @@
     if (core.isSaved(state, id)) {
       if (core.isPinned(state, id)) core.togglePin(state, id);
       else core.dropAutoSave(state, id);
+      if (A.ctx.view.setId === "saved") {
+        const idx = set.ids.indexOf(id);
+        if (idx >= 0) {
+          set.ids.splice(idx, 1);
+          if (set.cursor > idx) set.cursor -= 1;
+          if (set.cursor >= set.ids.length) set.cursor = Math.max(0, set.ids.length - 1);
+        }
+        if (!set.ids.length) {
+          delete state.sets.saved;
+          A.app.save();
+          return A.app.go({ name: "home" });
+        }
+        const nextId = set.ids[set.cursor];
+        set.phase = nextId in set.ok ? "reveal" : "pick";
+      }
     } else {
       core.togglePin(state, id);
     }

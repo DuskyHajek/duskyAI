@@ -38,6 +38,7 @@
 .tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
 .tile h3 { font-size: 19px; }
 .tile p:not(.eyebrow) { margin: 8px 0 0; color: var(--muted); font-size: 14.5px; line-height: 1.45; }
+.tile-hint { font-size: 13px !important; line-height: 1.4; }
 .tile .actions { margin-top: auto; padding-top: 12px; }
 .tile.empty { background: transparent; border-style: dashed; box-shadow: none; }
 .tile.empty:hover { transform: none; }

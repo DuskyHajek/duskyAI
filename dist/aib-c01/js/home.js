@@ -177,8 +177,9 @@
     const saved = sp.total
       ? '<article class="tile"><h3>Saved questions</h3><p>'
         + ui.esc(savedNote)
-        + '</p><div class="actions">' + ui.btn(savedPhase === "active" ? "Continue" : "Review", savedPhase === "active" ? "start" : "restart", { data: { set: "saved" }, iconEnd: "arrowR", cls: "sm" }) + "</div></article>"
-      : '<article class="tile empty"><h3>Saved questions</h3><p>Misses land here automatically. Pin any question with <kbd>S</kbd>.</p></article>';
+        + '</p><p class="tile-hint">Open one, then choose Remove. A later correct answer also drops a miss.</p><div class="actions">'
+        + ui.btn(savedPhase === "active" ? "Continue" : "Review", savedPhase === "active" ? "start" : "restart", { data: { set: "saved" }, iconEnd: "arrowR", cls: "sm" }) + "</div></article>"
+      : '<article class="tile empty"><h3>Saved questions</h3><p>Misses land here automatically. Save any question with Save or <kbd>S</kbd>, then Remove to drop it.</p></article>';
 
     const active = core.hasActiveExam(state);
     const last = lastMockRun(state.examHistory);
