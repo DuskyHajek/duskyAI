@@ -66,7 +66,7 @@ test("the glossary page has the study pieces and no competitor link", () => {
   assert.match(html, /id="dont-mix-up"/);
   assert.match(html, /two or three similar ideas/);
   assert.match(html, /class="kicker">Concepts</);
-  assert.match(html, /class="kicker terms-kicker">Terms</);
+  assert.match(html, /class="kicker terms-kicker">Vocabulary</);
   assert.match(html, /id="aws-quick"/);
   assert.match(html, /id="amazon-quick"/);
   assert.match(html, /AIB-C01 glossary/);

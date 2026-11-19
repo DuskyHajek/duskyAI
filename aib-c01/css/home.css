@@ -108,7 +108,6 @@
   .home-head { align-items: center; flex-wrap: nowrap; justify-content: space-between; gap: 10px; }
   .hero-cta { flex: 1 1 auto; min-width: 0; flex-wrap: nowrap; }
   .hero-cta .btn.lg:not(.primary) { display: none; }
-  .hero-cta a.btn { display: none; }
   .hero-cta .btn.primary { flex: 1 1 auto; min-width: min-content; overflow: visible; }
   .head-tools { flex: none; margin-left: 0; }
   .tiles, .pace-grid { grid-template-columns: 1fr; }

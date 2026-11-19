@@ -46,7 +46,7 @@ Serve the practice app at `https://www.duskyai.com/aib-c01/`. The terms and conc
 
 The practice page is `https://www.duskyai.com/aib-c01/`. Its title and H1 carry the long name. The path stays the exam code.
 
-The terms page is `https://www.duskyai.com/aib-c01/terms/`. Its title and H1 are **AIB-C01 terms and concepts**. The definitions are original wording for this site, not a second copy of the practice set, and the page links back to the practice exam.
+The vocabulary page is `https://www.duskyai.com/aib-c01/terms/`. Its title and H1 are **AIB-C01 vocabulary and concepts**. The definitions are original wording for this site, not a second copy of the practice set, and the page links back to the practice exam.
 
 **Primary terms** (title, H1, first paragraph):
 

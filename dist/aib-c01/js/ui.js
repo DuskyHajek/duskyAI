@@ -196,8 +196,8 @@
   }
 
   function quizHeaderTools() {
-    return '<a class="btn quiet sm icon-only q-terms" href="/aib-c01/terms/" target="_blank" rel="noopener noreferrer" aria-label="Terms and concepts">'
-      + icon("book") + "</a>"
+    return '<a class="btn quiet sm q-terms" href="/aib-c01/terms/" target="_blank" rel="noopener noreferrer" aria-label="Vocabulary and concepts">'
+      + icon("book") + '<span class="btn-label">Vocabulary</span></a>'
       + btn("", "toggle-source", { kind: "quiet", cls: "sm icon-only", icon: "info", title: "Attribution" });
   }
 
