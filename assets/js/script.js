@@ -9,7 +9,8 @@
  *    3. Refresh — they appear in the full-screen gallery
  *
  *  HOW TO ADD A PROJECT:
- *    Edit the PROJECTS array below.
+ *    Edit the PROJECTS array below and mirror the link in index.html
+ *    (#project-list) so crawlers without JavaScript still see it.
  * ============================================================
  */
 
@@ -25,7 +26,8 @@ const PROJECTS = [
         title: "AIB-C01 practice exam",
         desc: "Unofficial practice for the AWS Certified AI Business Strategist exam",
         url: "https://www.duskyai.com/aib-c01/",
-        tag: "Web"
+        tag: "Web",
+        sameTab: true
     },
     {
         title: "aibookdb.com",

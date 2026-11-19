@@ -1,4 +1,4 @@
-/* Slim page title + crawlable exam copy in a closed disclosure below the app. */
+/* Slim page title + crawlable exam copy in a disclosure below the app (open by default; hidden in quiz mode). */
 .seo-landing {
   padding: 12px 0 10px;
   margin-bottom: 2px;
