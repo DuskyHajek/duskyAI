@@ -63,22 +63,9 @@
 .opt.correct .letter,
 .opt.wrong .letter { color: var(--on-solid); }
 
-/* One "dusk" hairline: green into gold, the two brand colours */
-.site-nav {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: var(--paper);
-  border-bottom: 0;
-}
-.site-nav::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 1px;
-  background: linear-gradient(90deg, var(--accent), var(--gold) 55%, transparent);
-  opacity: .55;
-}
+/* Settings menu lives in the header on practice pages */
+.settings-wrap .menu { position: relative; }
+.settings-wrap .menu-pop { right: 0; left: auto; }
 
 .bar span { background: linear-gradient(90deg, var(--accent), var(--accent-soft)); }
 
@@ -120,12 +107,51 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }  /* options sliding 
   .home-grid > .panel > .drow { flex: 1; }
 }
 
-/* Exam weight sits on the muted description line, not beside the row title. */
-.dname .wt {
-  color: var(--muted);
-  font: 500 12.5px var(--sans);
-  letter-spacing: 0;
+.dname strong {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
 }
+.wt-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card-2);
+  color: var(--muted);
+  font: 600 11px var(--sans);
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
+.weak-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--rust-bg);
+  border: 1px solid color-mix(in srgb, var(--rust) 35%, transparent);
+  color: var(--rust);
+  font: 700 10px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.dacc-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex: none;
+}
+.dacc-label {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.dset .dacc-wrap .dacc { width: 88px; }
 
 /* Per-domain accuracy under or beside the question count.
    Markup:  <div class="track dacc"><i style="width:72%"></i></div>

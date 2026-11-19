@@ -50,6 +50,14 @@
     if (meta) meta.setAttribute("content", dark ? "#14110e" : "#f3efe6");
   }
 
+  function mountSettingsMenu() {
+    const slot = document.getElementById("settings-slot");
+    if (!slot) return;
+    const name = A.ctx.view.name;
+    if (name === "home" || name === "exam-intro") slot.innerHTML = A.home.menuHtml();
+    else slot.innerHTML = "";
+  }
+
   function render() {
     applyTheme();
     A.exam.stopClock();
@@ -58,6 +66,7 @@
     else if (name === "exam-intro") app.innerHTML = A.home.introHtml();
     else if (name === "exam") app.innerHTML = A.exam.html();
     else app.innerHTML = A.quiz.html();
+    mountSettingsMenu();
     A.ctx.justRevealed = false;
     const inQuiz = !!app.querySelector(".quiz-body");
     document.body.classList.toggle("in-quiz", inQuiz);
@@ -188,7 +197,10 @@
       return;
     }
     const el = event.target.closest("[data-act]");
-    if (!el || !app.contains(el) || el.disabled) return;
+    const settingsSlot = document.getElementById("settings-slot");
+    const inApp = el && app.contains(el);
+    const inSettings = el && settingsSlot && settingsSlot.contains(el);
+    if (!el || (!inApp && !inSettings) || el.disabled) return;
     const fn = ACTIONS[el.dataset.act];
     if (!fn) return;
     if (el.closest(".menu-pop")) closeMenus();

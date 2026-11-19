@@ -110,7 +110,47 @@ test("gradeExam scores picks, blanks are wrong, misses auto-saved", () => {
   assert.equal(state.saved[b], "auto");
   assert.equal(state.examHistory.length, 1);
   assert.equal(state.examHistory[0].correct, 1);
+  assert.equal(state.examHistory[0].answered, 2);
   assert.equal(core.hasActiveExam(state), false);
+});
+
+test("gradeExam with no answers does not append examHistory", () => {
+  const state = core.defaultState();
+  state.exam = core.newExam(130, 1000);
+  core.gradeExam(state, 2000);
+  assert.equal(state.exam.submitted, true);
+  assert.equal(state.examHistory.length, 0);
+});
+
+test("savedProgress uses live saved list for denominator", () => {
+  const state = core.defaultState();
+  const idA = QUESTIONS[0].id;
+  const idB = QUESTIONS[1].id;
+  state.saved[idA] = "auto";
+  state.saved[idB] = "pin";
+  state.sets.saved = core.blankSet([idA, idB, QUESTIONS[2].id], false);
+  state.sets.saved.ok[idA] = true;
+  state.sets.saved.ok[idB] = false;
+  core.dropAutoSave(state, idA);
+  const prog = core.savedProgress(state);
+  assert.equal(prog.total, 1);
+  assert.equal(prog.reviewed, 1);
+  assert.ok(prog.reviewed <= prog.total);
+});
+
+test("firstTryStats and weakestDomain", () => {
+  const state = core.defaultState();
+  const statsEmpty = core.firstTryStats(state);
+  assert.equal(statsEmpty.overall.answered, 0);
+  assert.equal(statsEmpty.weakestDomain, null);
+  const d1 = core.idsFor(state, "1").slice(0, 4);
+  d1.forEach((id, i) => {
+    state.firstTry[id] = i < 1;
+  });
+  const stats = core.firstTryStats(state);
+  assert.equal(stats.overall.answered, 4);
+  assert.equal(stats.byDomain[1].answered, 4);
+  assert.equal(stats.weakestDomain, 1);
 });
 
 test("exam time left and blank count", () => {

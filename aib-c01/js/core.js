@@ -104,6 +104,18 @@
       const keys = new Set(Object.keys(state.saved || {}));
       return QUESTIONS.map((q) => q.id).filter((id) => keys.has(id));
     }
+
+    function savedProgress(state) {
+      const ids = savedIds(state);
+      const savedSet = state.sets && state.sets.saved;
+      let reviewed = 0;
+      if (savedSet && savedSet.ok) {
+        ids.forEach((id) => {
+          if (id in savedSet.ok) reviewed += 1;
+        });
+      }
+      return { reviewed, total: ids.length };
+    }
     function isPinned(state, id) { return state.saved[id] === "pin"; }
     function isSaved(state, id) { return !!state.saved[id]; }
     function togglePin(state, id) {
@@ -288,21 +300,62 @@
       });
       ex.submitted = true;
       ex.review = false;
-      state.examHistory.push({
-        at: now ?? Date.now(),
-        correct: ex.ids.filter((id) => ex.ok[id]).length,
-        total: ex.ids.length,
-        durationMin: ex.durationMin,
+      const correct = ex.ids.filter((id) => ex.ok[id]).length;
+      const answered = ex.ids.filter((id) => ex.picks[id] && ex.picks[id].length).length;
+      if (answered > 0) {
+        state.examHistory.push({
+          at: now ?? Date.now(),
+          correct,
+          answered,
+          total: ex.ids.length,
+          durationMin: ex.durationMin,
+        });
+      }
+    }
+
+    function firstTryStats(state) {
+      const tries = state.firstTry || {};
+      const allIds = QUESTIONS.map((q) => q.id);
+      const answeredIds = allIds.filter((id) => id in tries);
+      const correct = answeredIds.filter((id) => tries[id]).length;
+      const total = allIds.length;
+      const overall = {
+        answered: answeredIds.length,
+        correct,
+        total,
+        pct: answeredIds.length ? correct / answeredIds.length : 0,
+      };
+      const byDomain = {};
+      let weakestDomain = null;
+      let weakestPct = null;
+      DOMAIN_IDS.forEach((d) => {
+        const ids = idsFor(state, String(d));
+        const domainAnswered = ids.filter((id) => id in tries);
+        const domainCorrect = domainAnswered.filter((id) => tries[id]).length;
+        const pct = domainAnswered.length ? domainCorrect / domainAnswered.length : 0;
+        byDomain[d] = {
+          answered: domainAnswered.length,
+          correct: domainCorrect,
+          total: ids.length,
+          pct,
+        };
+        if (domainAnswered.length >= 3 && pct < 0.85) {
+          if (weakestPct === null || pct < weakestPct) {
+            weakestPct = pct;
+            weakestDomain = d;
+          }
+        }
       });
+      return { overall, byDomain, weakestDomain };
     }
 
     return {
       KEY, QUESTIONS, BY_ID, DOMAINS, DOMAIN_IDS, DOMAIN_SHORT, DOMAIN_WEIGHT,
       todayKey, defaultState, normalizeState, loadState, saveState, shuffleArr,
-      savedIds, isPinned, isSaved, togglePin, autoSave, dropAutoSave,
+      savedIds, savedProgress, isPinned, isSaved, togglePin, autoSave, dropAutoSave,
       idsFor, keepSavedOrder, retryShuffles, blankSet, displayOptions, displayToOrig, origToDisplay, toggleDraft,
       letters, same, askOf, scoreOf, phaseOf, domainBreakdown, recordAnswer, migrateAnswers,
-      newExam, hasActiveExam, examTimeLeft, examBlankCount, gradeExam,
+      newExam, hasActiveExam, examTimeLeft, examBlankCount, gradeExam, firstTryStats,
     };
   }
 

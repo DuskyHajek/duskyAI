@@ -1,5 +1,5 @@
 /* Terms and concepts page. Loaded only here, after the shared sheets. */
-.wrap { width: min(880px, calc(100% - 40px)); }
+:root { --wrap-w: 880px; }
 .term-tools {
   position: sticky;
   top: var(--site-nav-h, 64px);
@@ -150,7 +150,7 @@ main.is-testing .concepts-block { display: none; }
   .term { grid-template-columns: 1fr; gap: 4px; }
 }
 @media (min-width: 960px) {
-  .wrap { width: min(1080px, calc(100% - 48px)); }
+  :root { --wrap-w: 1080px; }
   .glossary {
     display: grid;
     grid-template-columns: 44px minmax(0, 1fr);

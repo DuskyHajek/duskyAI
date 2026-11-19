@@ -2,6 +2,23 @@
 (function (root) {
   const A = (root.AIB = root.AIB || {});
 
+  function effectivePhase(set) {
+    if (!set) return "new";
+    const phase = A.core.phaseOf(set);
+    if (phase === "active" && A.core.scoreOf(set).answered === 0) return "new";
+    return phase;
+  }
+
+  function lastMockRun(history) {
+    const list = history || [];
+    for (let i = list.length - 1; i >= 0; i--) {
+      const entry = list[i];
+      const answered = entry.answered != null ? entry.answered : (entry.correct > 0 ? entry.total : 0);
+      if (answered > 0) return entry;
+    }
+    return null;
+  }
+
   function setActions(setId, phase) {
     const { btn } = A.ui;
     const data = { set: setId };
@@ -16,31 +33,64 @@
     return btn("Start", "start", { data, iconEnd: "arrowR", cls: "sm" });
   }
 
-  function heroCtaHtml(state) {
+  function heroPrimaryHtml(state) {
     const { core, ui } = A;
+    if (core.hasActiveExam(state)) {
+      return ui.btn("Continue mock", "exam-continue", { kind: "primary", cls: "lg", icon: "clock", iconEnd: "arrowR" });
+    }
     const all = state.sets.all;
     const allPhase = core.phaseOf(all);
-    const activeExam = core.hasActiveExam(state);
-    let primary;
-    if (allPhase === "new") {
-      primary = ui.btn("Start full set", "start", { kind: "primary", cls: "lg", data: { set: "all" }, iconEnd: "arrowR" });
-    } else if (allPhase === "active") {
+    const displayPhase = effectivePhase(all);
+    if (allPhase === "active") {
       const sc = core.scoreOf(all);
-      primary = ui.btn("", "start", {
+      if (sc.answered > 0) {
+        return ui.btn("", "start", {
+          kind: "primary",
+          cls: "lg",
+          data: { set: "all" },
+          iconEnd: "arrowR",
+          htmlLabel: '<span class="btn-label">Continue full set <span class="hero-count">' + sc.answered + " / " + sc.total + "</span></span>",
+        });
+      }
+    }
+    const savedN = core.savedIds(state).length;
+    if (displayPhase === "done" && savedN) {
+      const savedSet = state.sets.saved;
+      const sp = core.savedProgress(state);
+      if (core.phaseOf(savedSet) === "active" && sp.reviewed > 0 && sp.reviewed < sp.total) {
+        return ui.btn("", "start", {
+          kind: "primary",
+          cls: "lg",
+          data: { set: "saved" },
+          iconEnd: "arrowR",
+          htmlLabel: '<span class="btn-label">Continue saved <span class="hero-count">' + sp.reviewed + " / " + sp.total + "</span></span>",
+        });
+      }
+      return ui.btn("", "restart", {
         kind: "primary",
         cls: "lg",
-        data: { set: "all" },
+        data: { set: "saved" },
         iconEnd: "arrowR",
-        htmlLabel: '<span class="btn-label">Continue full set <span class="hero-count">' + sc.answered + " / " + sc.total + "</span></span>",
+        htmlLabel: '<span class="btn-label">Review saved <span class="hero-count">' + savedN + "</span></span>",
       });
-    } else {
-      primary = ui.btn("Review results", "results", { kind: "primary", cls: "lg", data: { set: "all" }, iconEnd: "arrowR" });
     }
-    const secondary = activeExam
-      ? ui.btn("Continue mock", "exam-continue", { cls: "lg", icon: "clock" })
-      : ui.btn("Timed mock", "exam-intro", { cls: "lg", icon: "clock" });
-    const vocabulary = '<a class="btn quiet" href="/aib-c01/terms/">Vocabulary</a>';
-    return '<div class="hero-cta">' + primary + secondary + vocabulary + "</div>";
+    if (allPhase === "done") {
+      return ui.btn("Review results", "results", { kind: "primary", cls: "lg", data: { set: "all" }, iconEnd: "arrowR" });
+    }
+    return ui.btn("Start full set", "start", { kind: "primary", cls: "lg", data: { set: "all" }, iconEnd: "arrowR" });
+  }
+
+  function firstTryChipHtml(state) {
+    const stats = A.core.firstTryStats(state);
+    if (stats.overall.answered < 1) return "";
+    const pct = Math.round(stats.overall.pct * 100);
+    const tip = "First-try accuracy across " + stats.overall.answered + " answered questions";
+    return '<p class="first-try-chip" title="' + A.ui.esc(tip) + '">First try · '
+      + stats.overall.answered + "/" + stats.overall.total + " · " + pct + "%</p>";
+  }
+
+  function heroCtaHtml(state) {
+    return '<div class="hero-cta">' + heroPrimaryHtml(state) + firstTryChipHtml(state) + "</div>";
   }
 
   function scoreMeter(correct, total) {
@@ -58,14 +108,18 @@
     const answered = answeredIds.length;
     const pct = correct / answered;
     const low = answered >= 5 && pct < 0.6 ? " low" : "";
-    const label = "First try, " + correct + " of " + answered + " answered";
-    return '<div class="track dacc' + low + '" role="meter" aria-valuemin="0" aria-valuemax="' + answered + '" aria-valuenow="' + correct + '" aria-label="' + A.ui.esc(label) + '"><i style="width:' + Math.round(pct * 100) + '%"></i></div>';
+    const label = correct + " of " + answered + " correct on first try";
+    const pctLabel = Math.round(pct * 100) + "% first try";
+    return '<span class="dacc-wrap" title="' + A.ui.esc(label) + '">'
+      + '<span class="dacc-label">' + pctLabel + "</span>"
+      + '<div class="track dacc' + low + '" role="meter" aria-valuemin="0" aria-valuemax="' + answered + '" aria-valuenow="' + correct + '" aria-label="' + A.ui.esc("First try, " + label) + '"><i style="width:' + Math.round(pct * 100) + '%"></i></div></span>';
   }
 
   function setNote(set, phase, fallback, compact) {
-    if (phase === "new") return fallback;
+    const display = effectivePhase(set);
+    if (display === "new") return fallback;
     const sc = A.core.scoreOf(set);
-    if (phase === "done") return sc.correct + (compact ? "/" : " of ") + sc.total + " correct";
+    if (display === "done") return sc.correct + (compact ? "/" : " of ") + sc.total + " correct";
     return compact
       ? sc.answered + "/" + sc.total + " done"
       : sc.answered + " of " + sc.total + " answered · " + sc.correct + " right";
@@ -73,16 +127,23 @@
 
   function domainsHtml(state) {
     const { core, ui } = A;
+    const stats = core.firstTryStats(state);
     const rows = core.DOMAIN_IDS.map((d) => {
       const id = String(d);
       const set = state.sets[id];
-      const phase = core.phaseOf(set);
+      const phase = effectivePhase(set);
       const count = core.idsFor(state, id).length;
-      const weight = core.DOMAIN_WEIGHT[d] != null ? ' <span class="wt">' + core.DOMAIN_WEIGHT[d] + "% of exam</span>" : "";
+      const weight = core.DOMAIN_WEIGHT[d] != null
+        ? '<span class="wt-pill">' + core.DOMAIN_WEIGHT[d] + "%</span>"
+        : "";
+      const weakest = stats.weakestDomain === d
+        ? '<span class="weak-badge">Weakest</span>'
+        : "";
       return '<div class="drow">'
         + '<div class="dname"><span class="dnum">' + d + "</span><div><strong>"
         + ui.esc(core.DOMAIN_SHORT[d] || "Domain " + d)
-        + "</strong><small>" + ui.esc(core.DOMAINS[d]) + weight + "</small></div></div>"
+        + weight + weakest
+        + "</strong><small>" + ui.esc(core.DOMAINS[d]) + "</small></div></div>"
         + '<div class="dset"><span>' + ui.esc(setNote(set, phase, count + " questions", true)) + "</span>"
         + domainMeter(state, id)
         + '<div class="actions">' + setActions(id, phase) + "</div></div>"
@@ -94,9 +155,9 @@
   function tilesHtml(state) {
     const { core, ui } = A;
     const all = state.sets.all;
-    const allPhase = core.phaseOf(all);
+    const allPhase = effectivePhase(all);
     const fullSc = allPhase === "new" ? null : core.scoreOf(all);
-    const fullScore = fullSc ? scoreMeter(fullSc.correct, fullSc.total) : "";
+    const fullScore = fullSc && fullSc.answered > 0 ? scoreMeter(fullSc.correct, fullSc.total) : "";
     const fullOrder = all && all.shuffled
       ? core.QUESTIONS.length + " questions, shuffled"
       : core.QUESTIONS.length + " questions in exam order";
@@ -104,21 +165,27 @@
       + ui.esc(setNote(all, allPhase, fullOrder)) + "</p>"
       + fullScore + '<div class="actions">' + setActions("all", allPhase) + "</div></article>";
 
-    const savedList = core.savedIds(state);
+    const sp = core.savedProgress(state);
     const savedSet = state.sets.saved;
-    const savedPhase = core.phaseOf(savedSet);
-    const saved = savedList.length
+    const savedPhase = effectivePhase(savedSet);
+    let savedNote;
+    if (sp.total) {
+      if (savedPhase === "active" && sp.reviewed > 0) savedNote = sp.reviewed + " of " + sp.total + " reviewed";
+      else if (savedPhase === "active") savedNote = sp.total + " left to review";
+      else savedNote = sp.total + " saved from misses and pins";
+    }
+    const saved = sp.total
       ? '<article class="tile"><h3>Saved questions</h3><p>'
-        + ui.esc(savedPhase === "active" ? core.scoreOf(savedSet).answered + " of " + savedList.length + " reviewed" : savedList.length + " saved from misses and pins")
+        + ui.esc(savedNote)
         + '</p><div class="actions">' + ui.btn(savedPhase === "active" ? "Continue" : "Review", savedPhase === "active" ? "start" : "restart", { data: { set: "saved" }, iconEnd: "arrowR", cls: "sm" }) + "</div></article>"
       : '<article class="tile empty"><h3>Saved questions</h3><p>Misses land here automatically. Pin any question with <kbd>S</kbd>.</p></article>';
 
     const active = core.hasActiveExam(state);
-    const last = state.examHistory[state.examHistory.length - 1];
+    const last = lastMockRun(state.examHistory);
     const mockNote = active
       ? "In progress · " + Math.max(0, Math.ceil(core.examTimeLeft(state.exam) / 60000)) + " min left"
       : last ? "Last run " + last.correct + "/" + last.total + " · " + core.QUESTIONS.length + " questions, no hints"
-        : core.QUESTIONS.length + " questions · 130 or 170 min · no hints";
+        : "No mock yet · " + core.QUESTIONS.length + " questions, no hints";
     const mock = '<article class="tile dark"><h3>Timed mock</h3><p>' + ui.esc(mockNote) + '</p><div class="actions">'
       + (active ? ui.btn("Continue", "exam-continue", { cls: "sm", iconEnd: "arrowR" }) : ui.btn("Start mock", "exam-intro", { cls: "sm", icon: "clock" }))
       + "</div></article>";
@@ -129,7 +196,8 @@
     const { btn, icon } = A.ui;
     const prefs = A.ctx.state.prefs || {};
     const shuffleRetry = prefs.shuffleOnRetry !== false;
-    return '<details class="menu"><summary class="btn quiet icon-only" aria-label="Settings" title="Settings">' + icon("sliders") + "</summary>"
+    return '<details class="menu"><summary class="btn quiet sm settings-btn" aria-label="Settings" title="Settings">'
+      + icon("sliders") + '<span class="btn-label">Settings</span></summary>'
       + '<div class="menu-pop">'
       + btn("Shuffle on retry", "shuffle-retry", { kind: "quiet", icon: "redo", pressed: shuffleRetry, title: "Full set order and shuffles on retry for finished domain and saved runs. Missed questions always shuffle." })
       + "<hr>"
@@ -142,7 +210,7 @@
   function html() {
     const state = A.ctx.state;
     return '<div class="home">'
-      + '<header class="home-head">' + heroCtaHtml(state) + '<div class="head-tools">' + menuHtml() + "</div></header>"
+      + '<header class="home-head">' + heroCtaHtml(state) + "</header>"
       + '<div class="home-grid">' + tilesHtml(state) + domainsHtml(state) + "</div></div>";
   }
 
@@ -162,5 +230,5 @@
       + ui.btn("Back", "home", { kind: "quiet", icon: "arrowL" }) + "</section>";
   }
 
-  A.home = { html, introHtml };
+  A.home = { html, introHtml, menuHtml };
 })(this);
