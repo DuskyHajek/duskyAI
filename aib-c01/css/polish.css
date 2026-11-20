@@ -101,10 +101,14 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }  /* options sliding 
 /* Left column is taller than the Domains card. Stretch the card and spread rows.
    Assumes the Domains card is a direct child of .home-grid with class .panel. */
 @media (min-width: 960px) {
+  body.has-app .wrap { width: min(1360px, calc(100% - 48px)); }
+  body.has-app .seo-landing { padding: 18px 0 20px; }
   .home-grid { align-items: stretch; }
-  .tile { min-height: 0; }
-  .home-grid > .panel { display: flex; flex-direction: column; padding: 14px 18px; }
-  .home-grid > .panel > .drow { flex: 1; }
+  .home-grid > .panel { display: flex; flex-direction: column; padding: 22px 26px; }
+  .home-grid > .panel > .drow { flex: 1; align-items: center; }
+  .dname strong { font-size: 16.5px; }
+  .dname small { font-size: 14px; }
+  .dnum { width: 36px; height: 36px; font-size: 16px; }
 }
 
 .dname strong {
