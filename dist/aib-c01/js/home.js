@@ -159,7 +159,7 @@
       ? core.QUESTIONS.length + " questions, shuffled"
       : core.QUESTIONS.length + " questions in exam order";
     const full = '<article class="tile"><div class="tile-row"><div class="tile-copy"><h3>Full practice set</h3><p>'
-      + ui.esc(setNote(all, allPhase, fullOrder)) + "</p></div><div class="actions">"
+      + ui.esc(setNote(all, allPhase, fullOrder)) + '</p></div><div class="actions">'
       + setActions("all", allPhase) + "</div></div>" + fullScore + "</article>";
 
     const sp = core.savedProgress(state);
@@ -177,7 +177,7 @@
         + '</p></div><div class="actions">'
         + ui.btn(savedPhase === "active" ? "Continue" : "Review", savedPhase === "active" ? "start" : "restart", { data: { set: "saved" }, iconEnd: "arrowR", cls: "sm" })
         + "</div></div></article>"
-      : '<article class="tile empty"><div class="tile-row"><div class="tile-copy"><h3>Saved questions</h3><p>Misses auto-save here; pin with Save or <kbd>S</kbd>.</p></div></div></article>";
+      : '<article class="tile empty"><div class="tile-row"><div class="tile-copy"><h3>Saved questions</h3><p>Misses auto-save here; pin with Save or <kbd>S</kbd>.</p></div></div></article>';
 
     const active = core.hasActiveExam(state);
     const last = lastMockRun(state.examHistory);
