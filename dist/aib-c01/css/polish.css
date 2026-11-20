@@ -29,9 +29,89 @@
 }
 .wordmark strong {
   font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1.5px;
+  text-decoration: none;
+  background-image: linear-gradient(#F6E27A, #F6E27A);
+  background-repeat: no-repeat;
+  background-size: 100% 0.38em;
+  background-position: 0 88%;
+}
+.site-logo:hover .wordmark {
+  background-image: linear-gradient(#F6E27A, #F6E27A);
+  background-repeat: no-repeat;
+  background-size: 100% 0.32em;
+  background-position: 0 92%;
+}
+
+/* Toolbar: section links and the right-hand tools share one hover — a highlighter mark.
+   Dropdown items stay ordinary buttons. */
+.site-sections a::after,
+.site-tools > .btn::after,
+.site-tools > .share-wrap > .btn::after,
+.site-tools .settings-wrap > .menu > summary::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 0;
+  height: 3px;
+  background: #F6E27A;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .2s var(--ease);
+  pointer-events: none;
+}
+.site-sections a:hover::after,
+.site-tools > .btn:hover:not(:disabled)::after,
+.site-tools > .share-wrap > .btn:hover:not(:disabled)::after,
+.site-tools .settings-wrap > .menu > summary:hover::after,
+.site-sections a[aria-current="page"]::after,
+.site-tools > .btn[aria-pressed="true"]::after,
+.site-tools .settings-wrap > .menu[open] > summary::after {
+  transform: scaleX(1);
+}
+.site-tools > .btn,
+.site-tools > .share-wrap > .btn,
+.site-tools .settings-wrap > .menu > summary {
+  position: relative;
+  align-self: stretch;
+  min-height: 0;
+  height: auto;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  --bg: transparent;
+  --bd: transparent;
+  --fg: var(--muted);
+  box-shadow: none;
+}
+.site-tools > .btn:hover:not(:disabled),
+.site-tools > .share-wrap > .btn:hover:not(:disabled),
+.site-tools .settings-wrap > .menu > summary:hover,
+.site-tools .settings-wrap > .menu[open] > summary,
+.site-tools > .btn[aria-pressed="true"] {
+  background: transparent;
+  --bg: transparent;
+  --bd: transparent;
+  --fg: var(--ink);
+  color: var(--ink);
+  transform: none;
+}
+.site-tools > .btn:active:not(:disabled),
+.site-tools > .share-wrap > .btn:active:not(:disabled),
+.site-tools .settings-wrap > .menu > summary:active { transform: none; }
+.site-tools > .btn[aria-pressed="true"] .ic { fill: none; }
+.site-tools .settings-wrap,
+.site-tools > .share-wrap,
+.site-tools .settings-wrap > .menu {
+  display: flex;
+  align-items: stretch;
+}
+.site-tools .settings-wrap > .menu > summary,
+.site-tools > .share-wrap > .btn,
+.site-tools > .btn {
+  display: inline-flex;
+  align-items: center;
 }
 
 .btn.primary { --bg: var(--accent); --bd: var(--accent-strong); --fg: var(--on-solid); }
@@ -222,6 +302,11 @@ html[data-theme="dark"] body {
 
 html[data-theme="dark"] .btn.quiet:hover:not(:disabled),
 html[data-theme="dark"] .menu[open] summary { background: rgba(255, 255, 255, 0.07); }
+html[data-theme="dark"] .site-tools > .btn:hover:not(:disabled),
+html[data-theme="dark"] .site-tools > .share-wrap > .btn:hover:not(:disabled),
+html[data-theme="dark"] .site-tools .settings-wrap > .menu > summary:hover,
+html[data-theme="dark"] .site-tools .settings-wrap > .menu[open] > summary,
+html[data-theme="dark"] .site-tools > .btn[aria-pressed="true"] { background: transparent; }
 
 html[data-theme="dark"] .explain.good { border-color: var(--ok); }
 html[data-theme="dark"] .explain.bad { border-color: var(--rust); }
