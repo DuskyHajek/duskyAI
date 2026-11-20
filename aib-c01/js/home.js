@@ -36,7 +36,7 @@
   function heroPrimaryHtml(state) {
     const { core, ui } = A;
     if (core.hasActiveExam(state)) {
-      return ui.btn("Continue mock", "exam-continue", { kind: "primary", cls: "lg", icon: "clock", iconEnd: "arrowR" });
+      return ui.btn("Continue mock", "exam-continue", { kind: "primary", icon: "clock", iconEnd: "arrowR" });
     }
     const all = state.sets.all;
     const allPhase = core.phaseOf(all);
@@ -46,7 +46,6 @@
       if (sc.answered > 0) {
         return ui.btn("", "start", {
           kind: "primary",
-          cls: "lg",
           data: { set: "all" },
           iconEnd: "arrowR",
           htmlLabel: '<span class="btn-label">Continue full set <span class="hero-count">' + sc.answered + " / " + sc.total + "</span></span>",
@@ -60,7 +59,6 @@
       if (core.phaseOf(savedSet) === "active" && sp.reviewed > 0 && sp.reviewed < sp.total) {
         return ui.btn("", "start", {
           kind: "primary",
-          cls: "lg",
           data: { set: "saved" },
           iconEnd: "arrowR",
           htmlLabel: '<span class="btn-label">Continue saved <span class="hero-count">' + sp.reviewed + " / " + sp.total + "</span></span>",
@@ -68,16 +66,15 @@
       }
       return ui.btn("", "restart", {
         kind: "primary",
-        cls: "lg",
         data: { set: "saved" },
         iconEnd: "arrowR",
         htmlLabel: '<span class="btn-label">Review saved <span class="hero-count">' + savedN + "</span></span>",
       });
     }
     if (allPhase === "done") {
-      return ui.btn("Review results", "results", { kind: "primary", cls: "lg", data: { set: "all" }, iconEnd: "arrowR" });
+      return ui.btn("Review results", "results", { kind: "primary", data: { set: "all" }, iconEnd: "arrowR" });
     }
-    return ui.btn("Start full set", "start", { kind: "primary", cls: "lg", data: { set: "all" }, iconEnd: "arrowR" });
+    return ui.btn("Start full set", "start", { kind: "primary", data: { set: "all" }, iconEnd: "arrowR" });
   }
 
   function firstTryChipHtml(state) {
@@ -90,7 +87,7 @@
   }
 
   function heroCtaHtml(state) {
-    return '<div class="hero-cta">' + heroPrimaryHtml(state) + firstTryChipHtml(state) + "</div>";
+    return '<div class="hero-cta">' + firstTryChipHtml(state) + heroPrimaryHtml(state) + "</div>";
   }
 
   function scoreMeter(correct, total) {
@@ -161,9 +158,9 @@
     const fullOrder = all && all.shuffled
       ? core.QUESTIONS.length + " questions, shuffled"
       : core.QUESTIONS.length + " questions in exam order";
-    const full = '<article class="tile"><h3>Full practice set</h3><p>'
-      + ui.esc(setNote(all, allPhase, fullOrder)) + "</p>"
-      + fullScore + '<div class="actions">' + setActions("all", allPhase) + "</div></article>";
+    const full = '<article class="tile"><div class="tile-row"><div class="tile-copy"><h3>Full practice set</h3><p>'
+      + ui.esc(setNote(all, allPhase, fullOrder)) + "</p></div><div class="actions">"
+      + setActions("all", allPhase) + "</div></div>" + fullScore + "</article>";
 
     const sp = core.savedProgress(state);
     const savedSet = state.sets.saved;
@@ -175,11 +172,12 @@
       else savedNote = sp.total + " saved from misses and pins";
     }
     const saved = sp.total
-      ? '<article class="tile"><h3>Saved questions</h3><p>'
+      ? '<article class="tile"><div class="tile-row"><div class="tile-copy"><h3>Saved questions</h3><p>'
         + ui.esc(savedNote)
-        + '</p><p class="tile-hint">Open one, then choose Remove. A later correct answer also drops a miss.</p><div class="actions">'
-        + ui.btn(savedPhase === "active" ? "Continue" : "Review", savedPhase === "active" ? "start" : "restart", { data: { set: "saved" }, iconEnd: "arrowR", cls: "sm" }) + "</div></article>"
-      : '<article class="tile empty"><h3>Saved questions</h3><p>Misses land here automatically. Save any question with Save or <kbd>S</kbd>, then Remove to drop it.</p></article>';
+        + '</p></div><div class="actions">'
+        + ui.btn(savedPhase === "active" ? "Continue" : "Review", savedPhase === "active" ? "start" : "restart", { data: { set: "saved" }, iconEnd: "arrowR", cls: "sm" })
+        + "</div></div></article>"
+      : '<article class="tile empty"><div class="tile-row"><div class="tile-copy"><h3>Saved questions</h3><p>Misses auto-save here; pin with Save or <kbd>S</kbd>.</p></div></div></article>";
 
     const active = core.hasActiveExam(state);
     const last = lastMockRun(state.examHistory);
@@ -187,9 +185,11 @@
       ? "In progress · " + Math.max(0, Math.ceil(core.examTimeLeft(state.exam) / 60000)) + " min left"
       : last ? "Last run " + last.correct + "/" + last.total + " · " + core.QUESTIONS.length + " questions, no hints"
         : "No mock yet · " + core.QUESTIONS.length + " questions, no hints";
-    const mock = '<article class="tile dark"><h3>Timed mock</h3><p>' + ui.esc(mockNote) + '</p><div class="actions">'
+    const mock = '<article class="tile dark"><div class="tile-row"><div class="tile-copy"><h3>Timed mock</h3><p>'
+      + ui.esc(mockNote)
+      + '</p></div><div class="actions">'
       + (active ? ui.btn("Continue", "exam-continue", { cls: "sm", iconEnd: "arrowR" }) : ui.btn("Start mock", "exam-intro", { cls: "sm", icon: "clock" }))
-      + "</div></article>";
+      + "</div></div></article>";
     return '<div class="tiles">' + full + saved + mock + "</div>";
   }
 
@@ -210,9 +210,7 @@
 
   function html() {
     const state = A.ctx.state;
-    return '<div class="home">'
-      + '<header class="home-head">' + heroCtaHtml(state) + "</header>"
-      + '<div class="home-grid">' + tilesHtml(state) + domainsHtml(state) + "</div></div>";
+    return '<div class="home"><div class="home-grid">' + tilesHtml(state) + domainsHtml(state) + "</div></div>";
   }
 
   function introHtml() {
@@ -231,5 +229,5 @@
       + ui.btn("Back", "home", { kind: "quiet", icon: "arrowL" }) + "</section>";
   }
 
-  A.home = { html, introHtml, menuHtml };
+  A.home = { html, introHtml, menuHtml, heroCtaHtml };
 })(this);

@@ -103,7 +103,7 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }  /* options sliding 
 @media (min-width: 960px) {
   .home-grid { align-items: stretch; }
   .tile { min-height: 0; }
-  .home-grid > .panel { display: flex; flex-direction: column; }
+  .home-grid > .panel { display: flex; flex-direction: column; padding: 14px 18px; }
   .home-grid > .panel > .drow { flex: 1; }
 }
 
@@ -163,8 +163,8 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }  /* options sliding 
 .drow { cursor: pointer; }
 .drow:hover .dname strong { color: var(--accent); }
 .drow:hover .dname .wt { color: var(--muted); }
-.tile .track { margin-top: 12px; }
 .home .track i { animation: none; }
+body.has-app footer.note { padding: 6px 0 10px; }
 
 
 /* 5. QUIZ -------------------------------------------------------------- */

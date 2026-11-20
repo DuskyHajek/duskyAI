@@ -1,7 +1,8 @@
 /* Question pages (learn + mock): fixed-height two-pane layout, options, map, dock. */
 body.in-quiz { height: 100dvh; overflow: hidden; }
 body.in-quiz .wrap { width: min(1080px, calc(100% - 40px)); height: 100%; min-height: 0; }
-body.in-quiz .site-bar, body.in-quiz .seo-landing, body.in-quiz .seo-about, body.in-quiz footer.note { display: none; }
+body.in-quiz .site-bar, body.in-quiz .seo-landing, body.in-quiz .seo-about, body.in-quiz footer.note,
+body.in-subview .seo-landing, body.in-subview .seo-about { display: none; }
 body.in-quiz #app { flex: 1; min-height: 0; display: flex; flex-direction: column; padding-top: 12px; }
 
 .qbar-row { display: flex; align-items: center; gap: 10px; }

@@ -1,8 +1,29 @@
-/* Slim page title + crawlable exam copy in a disclosure below the app (open by default; hidden in quiz mode). */
+/* Slim page title + crawlable exam copy in a collapsible disclosure below the app. */
 .seo-landing {
   padding: 12px 0 10px;
   margin-bottom: 2px;
 }
+body.has-app .seo-landing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding: 8px 0 6px;
+  margin-bottom: 0;
+}
+body.has-app .seo-copy { flex: 1; min-width: min(100%, 280px); }
+body.has-app .seo-landing h1 {
+  font-size: clamp(24px, 2.5vw, 32px);
+}
+body.has-app .seo-tagline { margin-top: 4px; font-size: 13.5px; }
+body.has-app .seo-meta { margin-top: 4px; font-size: 13px; max-width: none; }
+body.has-app .hero-slot { flex: none; display: flex; align-items: center; max-width: 100%; }
+body.has-app .hero-slot[hidden] { display: none !important; }
+body.in-subview .seo-landing,
+body.in-subview .seo-about,
+body.in-quiz .seo-landing,
+body.in-quiz .seo-about { display: none; }
 .seo-landing h1 {
   margin: 0;
   font-size: clamp(28px, 3vw, 40px);
@@ -28,9 +49,9 @@
   line-height: 1.5;
 }
 .seo-about {
-  margin: 14px 0 0;
-  border-top: 1px solid var(--line);
-  padding-top: 12px;
+  margin: 8px 0 0;
+  border-top: 0;
+  padding-top: 0;
 }
 .seo-about > summary {
   cursor: pointer;
@@ -39,7 +60,13 @@
   font-size: 14px;
   color: var(--muted);
   list-style: none;
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card-2);
+  transition: color .15s var(--ease), border-color .15s, background-color .15s;
 }
+.seo-about > summary:hover { color: var(--ink); border-color: var(--line-strong); background: var(--card); }
 .seo-about > summary::-webkit-details-marker { display: none; }
 .seo-about > summary::before {
   content: "▸";
@@ -52,82 +79,26 @@
 .seo-about-body {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 16px 0 8px;
+  gap: 18px;
+  padding: 12px 0 4px;
 }
-.seo-panel,
 .seo-source-card,
 .seo-domains li,
-.seo-steps li,
 .seo-faq-item {
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--card);
   box-shadow: var(--shadow-sm);
 }
-.seo-panel {
-  padding: 14px 16px;
-}
 .seo-checked {
   margin: 0 0 10px;
   color: var(--muted);
   font-size: 12px;
 }
-.seo-steps {
-  counter-reset: step;
-  display: grid;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.seo-steps li {
-  counter-increment: step;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 14px;
-  color: var(--ink-2);
-  font-size: 14.5px;
-  line-height: 1.5;
-}
-.seo-steps li::before {
-  content: counter(step);
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: var(--track);
-  color: var(--ink);
-  font: 600 14px var(--display);
-}
-.seo-steps strong {
-  color: var(--ink);
-  font-family: var(--display);
-  font-weight: 600;
-}
 .seo-block h2 {
   margin: 0 0 10px;
   font-size: clamp(18px, 1.8vw, 20px);
   line-height: 1.25;
-}
-.seo-facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.seo-facts li {
-  padding: 5px 11px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--card-2);
-  font-size: 13px;
-  color: var(--ink-2);
 }
 .seo-sources {
   display: grid;
@@ -235,33 +206,23 @@
   gap: 8px;
   margin: 0;
 }
-.seo-faq-item {
-  padding: 0;
-  overflow: hidden;
+@media (min-width: 701px) {
+  .seo-faq { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-.seo-faq-item > summary {
-  cursor: pointer;
+.seo-faq-item {
   padding: 12px 14px;
+}
+.seo-faq-item h3 {
+  margin: 0;
   font-family: var(--display);
   font-weight: 600;
   font-size: 14px;
   letter-spacing: -0.01em;
   line-height: 1.4;
-  list-style: none;
 }
-.seo-faq-item > summary::-webkit-details-marker { display: none; }
-.seo-faq-item > summary::before {
-  content: "▸";
-  display: inline-block;
-  margin-right: 8px;
-  color: var(--muted);
-  transition: transform .2s var(--ease);
-}
-.seo-faq-item[open] > summary::before { transform: rotate(90deg); }
-.seo-faq-item[open] > summary { color: var(--ink); }
 .seo-faq-item > p {
-  margin: 0;
-  padding: 0 14px 12px 28px;
+  margin: 8px 0 0;
+  padding: 0;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.55;

@@ -58,6 +58,19 @@
     else slot.innerHTML = "";
   }
 
+  function mountHeroSlot() {
+    const slot = document.getElementById("hero-slot");
+    if (!slot) return;
+    const name = A.ctx.view.name;
+    if (name === "home") {
+      slot.innerHTML = A.home.heroCtaHtml(A.ctx.state);
+      slot.hidden = false;
+    } else {
+      slot.innerHTML = "";
+      slot.hidden = true;
+    }
+  }
+
   function render() {
     applyTheme();
     A.exam.stopClock();
@@ -67,9 +80,11 @@
     else if (name === "exam") app.innerHTML = A.exam.html();
     else app.innerHTML = A.quiz.html();
     mountSettingsMenu();
+    mountHeroSlot();
     A.ctx.justRevealed = false;
     const inQuiz = !!app.querySelector(".quiz-body");
     document.body.classList.toggle("in-quiz", inQuiz);
+    document.body.classList.toggle("in-subview", name !== "home");
     document.body.classList.toggle("in-learn", inQuiz && name === "quiz");
     document.body.classList.toggle("in-exam", inQuiz && name === "exam");
     if (!inQuiz) document.body.classList.remove("source-open");
@@ -198,9 +213,11 @@
     }
     const el = event.target.closest("[data-act]");
     const settingsSlot = document.getElementById("settings-slot");
+    const heroSlot = document.getElementById("hero-slot");
     const inApp = el && app.contains(el);
     const inSettings = el && settingsSlot && settingsSlot.contains(el);
-    if (!el || (!inApp && !inSettings) || el.disabled) return;
+    const inHero = el && heroSlot && heroSlot.contains(el);
+    if (!el || (!inApp && !inSettings && !inHero) || el.disabled) return;
     const fn = ACTIONS[el.dataset.act];
     if (!fn) return;
     if (el.closest(".menu-pop")) closeMenus();
