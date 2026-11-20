@@ -36,9 +36,7 @@ try {
 <meta name="twitter:description" content="Short unofficial definitions of the vocabulary on the AWS Certified AI Business Strategist (AIB-C01) exam. Not affiliated with AWS.">
 <meta name="twitter:image" content="https://www.duskyai.com/assets/images/projects/aib-c01-og.jpg">
 <meta name="twitter:image:alt" content="AIB-C01 vocabulary — unofficial AWS Certified AI Business Strategist study notes">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/fonts.css">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/seo.css">
 <link rel="stylesheet" href="../css/polish.css">
@@ -96,8 +94,8 @@ try {
     <nav class="site-nav" aria-label="Site">
       <a class="site-logo" href="https://www.duskyai.com/" target="_blank" rel="noopener noreferrer" aria-label="duskyAI, opens in a new tab"><span class="wordmark" aria-hidden="true">dusky<strong>ai</strong></span></a>
       <div class="site-sections" role="navigation" aria-label="AIB-C01 sections">
-        <a href="/aib-c01/">Practice exam</a>
-        <a href="/aib-c01/terms/" aria-current="page">Vocabulary</a>
+        <a href="/aib-c01/">Practice</a>
+        <a href="/aib-c01/terms/" aria-current="page">Glossary</a>
         <a href="/aib-c01/concepts/">Concepts</a>
       </div>
       <div class="site-tools">
@@ -112,7 +110,7 @@ try {
     <header class="seo-landing">
       <h1>AIB-<em>C01</em> vocabulary</h1>
       <p class="seo-tagline">Short definitions for the AWS Certified AI Business Strategist exam. Not an AWS product.</p>
-      <p class="seo-meta">This AIB-C01 glossary lists the key terms the exam expects you to tell apart. It is not a cheat sheet of questions. Similar ideas are on the <a href="/aib-c01/concepts/">concepts</a> page. Use it with the <a href="/aib-c01/">AIB-C01 practice exam</a>. Last reviewed November 2026 against the <a href="https://docs.aws.amazon.com/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html" target="_blank" rel="noopener">AWS exam guide</a>.</p>
+      <p class="seo-meta">AIB-C01 glossary: key terms to tell apart on the exam, not a question cheat sheet. <a href="https://docs.aws.amazon.com/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html" target="_blank" rel="noopener">AWS exam guide</a> · reviewed Nov 2026.</p>
     </header>
     <main itemscope itemtype="https://schema.org/DefinedTermSet">
       <meta itemprop="name" content="AIB-C01 vocabulary">
@@ -122,7 +120,7 @@ try {
         <input class="term-search" id="term-search" type="search" placeholder="Search, for example drift or KPI" autocomplete="off" enterkeyhint="search">
         <div class="term-actions">
           <p class="term-count" id="term-count" aria-live="polite">70 terms</p>
-          <button type="button" class="btn quiet sm" id="term-selftest" aria-pressed="false">Self-test</button>
+          <button type="button" class="selftest-toggle" id="term-selftest" aria-pressed="false" role="switch"><span class="selftest-knob" aria-hidden="true"></span>Self-test</button>
         </div>
         <div class="term-domains" role="group" aria-label="Exam domain">
           <button type="button" class="term-chip" data-domain="all" aria-pressed="true">All</button>

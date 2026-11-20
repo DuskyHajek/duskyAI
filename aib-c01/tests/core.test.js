@@ -25,6 +25,13 @@ test("question bank loads with derived domains", () => {
   assert.equal(core.idsFor(core.defaultState(), "2").length, QUESTIONS.filter((q) => q.domain === 2).length);
 });
 
+test("scaledScore maps percent correct to 100-1000 linear estimate", () => {
+  assert.equal(core.scaledScore(0), 100);
+  assert.equal(core.scaledScore(1), 1000);
+  assert.equal(core.scaledScore(2 / 3), 700);
+  assert.equal(core.scaledScore(null), null);
+});
+
 test("domain weights match the public exam guide", () => {
   assert.deepEqual(
     core.DOMAIN_IDS.map((d) => core.DOMAIN_WEIGHT[d]),

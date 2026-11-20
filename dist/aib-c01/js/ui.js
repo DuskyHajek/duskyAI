@@ -62,6 +62,12 @@
     return '<div class="track' + (cls ? " " + cls : "") + '"><i style="width:' + Math.round(pct * 100) + '%"></i></div>';
   }
 
+  function richText(text, isAsk) {
+    const plain = esc(text);
+    if (isAsk || !A.widgets || !A.widgets.highlightEvidence) return plain;
+    return A.widgets.highlightEvidence(plain);
+  }
+
   function stemHtml(parts) {
     let last = -1;
     parts.forEach((part, index) => { if (part.t === "p") last = index; });
@@ -71,12 +77,13 @@
       if (parts[index].t === "b") {
         let items = "";
         while (index < parts.length && parts[index].t === "b") {
-          items += "<li>" + esc(parts[index].v) + "</li>";
+          items += "<li>" + richText(parts[index].v, false) + "</li>";
           index += 1;
         }
         html += "<ul>" + items + "</ul>";
       } else {
-        html += "<p" + (index === last ? ' class="ask"' : "") + ">" + esc(parts[index].v) + "</p>";
+        const isAsk = index === last;
+        html += "<p" + (isAsk ? ' class="ask"' : "") + ">" + richText(parts[index].v, isAsk) + "</p>";
         index += 1;
       }
     }
@@ -119,15 +126,21 @@
       const isAnswer = q.answer.includes(opt.origLetter);
       let cls = "opt";
       let extra = "";
+      let letterInner = opt.displayLetter;
       if (revealed) {
         cls += isAnswer ? " correct" : on ? " wrong" : " dim";
-        const tag = isAnswer ? (on ? "Your pick · correct" : "Answer") : on ? "Your pick" : "";
+        if (isAnswer) letterInner = icon("check");
+        else if (on) letterInner = icon("x");
+        const tag = isAnswer ? (on ? "Correct" : "Answer") : on ? "Your pick" : "";
         if (tag) extra += '<span class="tag">' + tag + "</span>";
         if (!isAnswer && q.whyNot[opt.origLetter]) extra += '<span class="why">' + esc(q.whyNot[opt.origLetter]) + "</span>";
       }
+      const body = revealed && on && !isAnswer
+        ? '<span class="struck">' + esc(opt.text) + "</span>"
+        : esc(opt.text);
       return '<button type="button" class="' + cls + '" data-act="' + act + '" data-letter="' + opt.displayLetter + '" aria-pressed="' + (on && !revealed) + '"' + (revealed ? " disabled" : "") + ">"
-        + '<span class="letter">' + opt.displayLetter + "</span>"
-        + '<span class="otext">' + esc(opt.text) + extra + "</span></button>";
+        + '<span class="letter">' + letterInner + "</span>"
+        + '<span class="otext">' + body + extra + "</span></button>";
     }).join("");
   }
 
@@ -158,10 +171,16 @@
       const pct = Math.max(0, Math.min(100, Math.round(value / max * 100)));
       bar = '<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + max + '" aria-valuenow="' + value + '" aria-label="' + esc(o.progress.label) + '"><span style="width:' + pct + '%"></span></div>';
     }
-    return '<header class="qbar"><div class="qbar-row">'
+    const pills = o.pills.map((p, i) => {
+      if (i === 0 && o.jump) {
+        return '<button type="button" class="pill strong jump-pill" data-act="toggle-jump" aria-expanded="false" aria-controls="qjump-pop">' + esc(p) + "</button>";
+      }
+      return '<span class="pill' + (i === 0 ? " strong" : "") + '">' + esc(p) + "</span>";
+    }).join("");
+    return '<div class="qbar-shell"><header class="qbar"><div class="qbar-inner"><div class="qbar-row">'
       + btn("", "home", { kind: "quiet", cls: "icon-only", icon: "home", title: o.homeTitle || "Home" })
-      + '<div class="qmeta">' + o.pills.map((p, i) => '<span class="pill' + (i === 0 ? " strong" : "") + '">' + esc(p) + "</span>").join("") + "</div>"
-      + right + "</div></header>" + bar;
+      + '<div class="qmeta">' + pills + "</div>"
+      + right + "</div></div></header>" + bar + "</div>";
   }
 
   function pickHintText(select, picked) {
@@ -196,18 +215,19 @@
   }
 
   function quizHeaderTools() {
-    return '<a class="btn quiet sm q-terms" href="/aib-c01/terms/" target="_blank" rel="noopener noreferrer" aria-label="Vocabulary">'
-      + icon("book") + '<span class="btn-label">Vocabulary</span></a>'
+    return '<a class="btn quiet sm q-terms" href="/aib-c01/terms/" target="_blank" rel="noopener noreferrer" aria-label="Glossary">'
+      + icon("book") + '<span class="btn-label">Glossary</span></a>'
       + '<a class="btn quiet sm q-terms" href="/aib-c01/concepts/" target="_blank" rel="noopener noreferrer" aria-label="Concepts">'
       + icon("book") + '<span class="btn-label">Concepts</span></a>'
       + btn("", "toggle-source", { kind: "quiet", cls: "sm icon-only", icon: "info", title: "Attribution" });
   }
 
-  function quizBody(stem, domainLabel, top, opts, cls, hint) {
+  function quizBody(stem, domainLabel, top, opts, cls, hint, dock) {
     const domain = domainLabel ? '<p class="stem-domain">' + esc(domainLabel) + "</p>" : "";
+  const dockHtml = dock ? '<div class="dock dock-inline">' + dock + "</div>" : "";
     return '<div class="quiz-body' + (cls ? " " + cls : "") + '">'
       + '<section class="pane stem-pane">' + domain + '<div class="stem">' + stem + "</div></section>"
-      + '<section class="pane opts-pane">' + top + (hint || "") + '<div class="opts" role="group" aria-label="Answers">' + opts + "</div></section></div>"
+      + '<section class="pane opts-pane">' + top + (hint || "") + '<div class="opts" role="group" aria-label="Answers">' + opts + "</div>" + dockHtml + "</section></div>"
       + sourceLine();
   }
 

@@ -176,9 +176,16 @@
       A.quiz.check();
     },
     "toggle-source": () => document.body.classList.toggle("source-open"),
+    "toggle-jump": (el) => {
+      const pop = document.getElementById("qjump-pop");
+      if (!pop) return;
+      const open = pop.hidden;
+      pop.hidden = !open;
+      if (el) el.setAttribute("aria-expanded", open ? "true" : "false");
+    },
     next: () => A.quiz.next(),
     prev: () => A.quiz.prev(),
-    "jump-learn": (el) => A.quiz.moveTo(num(el, "index")),
+    "jump-learn": (el) => { closeJumpPop(); A.quiz.moveTo(num(el, "index")); },
     "toggle-save": () => A.quiz.toggleSave(),
     "exam-intro": () => go({ name: "exam-intro" }),
     "exam-start": (el) => A.exam.start(num(el, "min")),
@@ -186,7 +193,7 @@
     "exam-opt": (el) => A.exam.toggle(el.dataset.letter),
     "exam-next": () => A.exam.next(),
     "exam-prev": () => A.exam.moveTo(A.ctx.state.exam.cursor - 1),
-    "jump-exam": (el) => A.exam.moveTo(num(el, "index")),
+    "jump-exam": (el) => { closeJumpPop(); A.exam.moveTo(num(el, "index")); },
     "exam-flag": () => A.exam.flag(),
     "exam-submit": () => A.exam.submit(false),
     "exam-review": (el) => A.exam.review(num(el, "index")),
@@ -201,7 +208,17 @@
     document.querySelectorAll("details.menu[open]").forEach((d) => { if (d !== except) d.open = false; });
   }
 
+  function closeJumpPop(except) {
+    const pop = document.getElementById("qjump-pop");
+    const pill = document.querySelector(".jump-pill");
+    if (!pop || pop.hidden) return;
+    if (except && (pop.contains(except) || (pill && pill.contains(except)))) return;
+    pop.hidden = true;
+    if (pill) pill.setAttribute("aria-expanded", "false");
+  }
+
   document.addEventListener("click", (event) => {
+    if (!event.target.closest(".jump-pill") && !event.target.closest("#qjump-pop")) closeJumpPop();
     closeMenus(event.target.closest("details.menu"));
     const row = event.target.closest(".drow");
     if (row && app.contains(row) && !event.target.closest("[data-act]")) {
@@ -226,7 +243,10 @@
 
   document.addEventListener("keydown", (event) => {
     if (event.metaKey || event.ctrlKey || event.altKey) return;
-    if (event.key === "Escape") return closeMenus();
+    if (event.key === "Escape") {
+      closeJumpPop();
+      return closeMenus();
+    }
     if (event.target.closest && event.target.closest("input, textarea, select, summary")) return;
     const key = event.key.toUpperCase();
     if (A.ctx.view.name === "quiz") A.quiz.onKey(event, key);

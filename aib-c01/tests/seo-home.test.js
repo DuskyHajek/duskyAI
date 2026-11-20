@@ -48,7 +48,8 @@ test("home, hero CTA, quiz, exam, and results modules render across states", () 
   const core = createCore(QUESTIONS);
   const state = core.defaultState();
   const sandbox = {
-    AIB: { core, ctx: { state, view: { name: "home" }, justRevealed: false } },
+    AIB: { core, ctx: { state, view: { name: "home" }, justRevealed: false }, widgets: null },
+    globalThis: null,
     Date,
     Math,
     Number,
@@ -56,8 +57,9 @@ test("home, hero CTA, quiz, exam, and results modules render across states", () 
     Object,
     Array,
   };
+  sandbox.globalThis = sandbox;
   vm.createContext(sandbox);
-  for (const mod of ["ui.js", "home.js", "quiz.js", "exam.js", "results.js"]) {
+  for (const mod of ["widgets.js", "ui.js", "home.js", "quiz.js", "exam.js", "results.js"]) {
     const code = fs.readFileSync(path.join(rootDir, "js", mod), "utf8");
     vm.runInContext(code, sandbox, { filename: mod });
   }
@@ -66,10 +68,11 @@ test("home, hero CTA, quiz, exam, and results modules render across states", () 
   const freshHome = A.home.html();
   const freshHero = A.home.heroCtaHtml(state);
   assert.match(freshHome, /Full practice set/);
+  assert.match(freshHome, /Start full set/);
   assert.match(freshHome, /Saved questions/);
   assert.match(freshHome, /Timed mock/);
   assert.match(freshHome, /Domains/);
-  assert.match(freshHero, /Start full set/);
+  assert.doesNotMatch(freshHero || "", /Start full set/);
 
   // Active progress + saved questions state
   state.sets.all = core.blankSet(core.idsFor(state, "all"), false);
@@ -79,9 +82,8 @@ test("home, hero CTA, quiz, exam, and results modules render across states", () 
   const activeHero = A.home.heroCtaHtml(state);
   assert.match(activeHome, /1 of 85 answered/);
   assert.match(activeHome, /1 saved from misses and pins/);
-  assert.match(activeHero, /Continue full set/);
+  assert.match(activeHome, /Continue/);
   assert.match(activeHero, /First try/);
-
   assert.match(A.home.introHtml(), /Exam guide pace/);
   assert.match(A.home.menuHtml(), /Shuffle on retry/);
 });

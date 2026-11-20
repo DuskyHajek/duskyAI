@@ -19,62 +19,37 @@
     return null;
   }
 
-  function setActions(setId, phase) {
+  function domainActions(setId, phase) {
     const { btn } = A.ui;
     const data = { set: setId };
     if (phase === "active") {
-      return btn("Continue", "start", { data, iconEnd: "arrowR", cls: "sm" })
+      return btn("Continue", "start", { data, kind: "quiet", cls: "sm" })
         + btn("", "restart", { data, kind: "quiet", cls: "sm icon-only", icon: "redo", title: "Start over" });
     }
     if (phase === "done") {
-      return btn("Results", "results", { data, cls: "sm" })
+      return btn("Results", "results", { data, kind: "quiet", cls: "sm" })
         + btn("", "restart", { data, kind: "quiet", cls: "sm icon-only", icon: "redo", title: "Try again" });
     }
-    return btn("Start", "start", { data, iconEnd: "arrowR", cls: "sm" });
+    return btn("Start", "start", { data, kind: "quiet", cls: "sm" });
   }
 
-  function heroPrimaryHtml(state) {
-    const { core, ui } = A;
-    if (core.hasActiveExam(state)) {
-      return ui.btn("Continue mock", "exam-continue", { kind: "primary", icon: "clock", iconEnd: "arrowR" });
-    }
-    const all = state.sets.all;
-    const allPhase = core.phaseOf(all);
-    const displayPhase = effectivePhase(all);
+  function fullSetActions(allPhase, set) {
+    const { btn } = A.ui;
+    const data = { set: "all" };
     if (allPhase === "active") {
-      const sc = core.scoreOf(all);
-      if (sc.answered > 0) {
-        return ui.btn("", "start", {
-          kind: "primary",
-          data: { set: "all" },
-          iconEnd: "arrowR",
-          htmlLabel: '<span class="btn-label">Continue full set <span class="hero-count">' + sc.answered + " / " + sc.total + "</span></span>",
-        });
-      }
-    }
-    const savedN = core.savedIds(state).length;
-    if (displayPhase === "done" && savedN) {
-      const savedSet = state.sets.saved;
-      const sp = core.savedProgress(state);
-      if (core.phaseOf(savedSet) === "active" && sp.reviewed > 0 && sp.reviewed < sp.total) {
-        return ui.btn("", "start", {
-          kind: "primary",
-          data: { set: "saved" },
-          iconEnd: "arrowR",
-          htmlLabel: '<span class="btn-label">Continue saved <span class="hero-count">' + sp.reviewed + " / " + sp.total + "</span></span>",
-        });
-      }
-      return ui.btn("", "restart", {
+      const sc = A.core.scoreOf(set);
+      return ui.btn("", "start", {
         kind: "primary",
-        data: { set: "saved" },
+        data,
         iconEnd: "arrowR",
-        htmlLabel: '<span class="btn-label">Review saved <span class="hero-count">' + savedN + "</span></span>",
-      });
+        htmlLabel: '<span class="btn-label">Continue <span class="hero-count">' + sc.answered + " / " + sc.total + "</span></span>",
+      }) + btn("", "restart", { data, kind: "quiet", cls: "sm icon-only", icon: "redo", title: "Start over" });
     }
     if (allPhase === "done") {
-      return ui.btn("Review results", "results", { kind: "primary", data: { set: "all" }, iconEnd: "arrowR" });
+      return btn("Review results", "results", { kind: "primary", data, iconEnd: "arrowR" })
+        + btn("", "restart", { data, kind: "quiet", cls: "sm icon-only", icon: "redo", title: "Try again" });
     }
-    return ui.btn("Start full set", "start", { kind: "primary", data: { set: "all" }, iconEnd: "arrowR" });
+    return btn("Start full set", "start", { kind: "primary", data, iconEnd: "arrowR" });
   }
 
   function firstTryChipHtml(state) {
@@ -87,7 +62,23 @@
   }
 
   function heroCtaHtml(state) {
-    return '<div class="hero-cta">' + firstTryChipHtml(state) + heroPrimaryHtml(state) + "</div>";
+    const chip = firstTryChipHtml(state);
+    if (!chip) return "";
+    return '<div class="hero-cta">' + chip + "</div>";
+  }
+
+  function passRulerHtml(state) {
+    if (!A.widgets) return "";
+    const stats = A.core.firstTryStats(state);
+    const pct = stats.overall.answered ? stats.overall.pct : null;
+    const last = lastMockRun(state.examHistory);
+    const mockPct = last && last.total ? last.correct / last.total : null;
+    let html = A.widgets.passRuler({ pct, label: "First-try pace on scaled score" });
+    if (mockPct != null) {
+      html += '<p class="sub mock-pass-note">Last mock · ' + last.correct + "/" + last.total
+        + " · estimate " + A.core.scaledScore(mockPct) + "</p>";
+    }
+    return '<section class="panel pass-panel">' + html + "</section>";
   }
 
   function scoreMeter(correct, total) {
@@ -96,20 +87,16 @@
     return '<div class="track" role="meter" aria-valuemin="0" aria-valuemax="' + total + '" aria-valuenow="' + correct + '" aria-label="' + A.ui.esc(label) + '"><i style="width:' + pct + '%"></i></div>';
   }
 
-  function domainMeter(state, domainId) {
-    const ids = A.core.idsFor(state, String(domainId));
-    const tries = state.firstTry || {};
-    const answeredIds = ids.filter((id) => id in tries);
-    if (!answeredIds.length) return "";
-    const correct = answeredIds.filter((id) => tries[id]).length;
-    const answered = answeredIds.length;
-    const pct = correct / answered;
-    const low = answered >= 5 && pct < 0.6 ? " low" : "";
-    const label = correct + " of " + answered + " correct on first try";
-    const pctLabel = Math.round(pct * 100) + "% first try";
-    return '<span class="dacc-wrap" title="' + A.ui.esc(label) + '">'
-      + '<span class="dacc-label">' + pctLabel + "</span>"
-      + '<div class="track dacc' + low + '" role="meter" aria-valuemin="0" aria-valuemax="' + answered + '" aria-valuenow="' + correct + '" aria-label="' + A.ui.esc("First try, " + label) + '"><i style="width:' + Math.round(pct * 100) + '%"></i></div></span>';
+  function domainWeightsBar(state) {
+    if (!A.widgets) return "";
+    const stats = A.core.firstTryStats(state);
+    const segments = A.core.DOMAIN_IDS.map((d) => ({
+      domain: d,
+      weight: A.core.DOMAIN_WEIGHT[d],
+      short: A.core.DOMAIN_SHORT[d],
+      pct: stats.byDomain[d].answered ? stats.byDomain[d].pct : null,
+    }));
+    return '<div class="domain-weights">' + A.widgets.weightsBar(segments) + "</div>";
   }
 
   function setNote(set, phase, fallback, compact) {
@@ -130,23 +117,20 @@
       const set = state.sets[id];
       const phase = effectivePhase(set);
       const count = core.idsFor(state, id).length;
-      const weight = core.DOMAIN_WEIGHT[d] != null
-        ? '<span class="wt-pill">' + core.DOMAIN_WEIGHT[d] + "%</span>"
-        : "";
       const weakest = stats.weakestDomain === d
         ? '<span class="weak-badge">Weakest</span>'
         : "";
       return '<div class="drow">'
         + '<div class="dname"><span class="dnum">' + d + "</span><div><strong>"
         + ui.esc(core.DOMAIN_SHORT[d] || "Domain " + d)
-        + weight + weakest
+        + weakest
         + "</strong><small>" + ui.esc(core.DOMAINS[d]) + "</small></div></div>"
         + '<div class="dset"><span>' + ui.esc(setNote(set, phase, count + " questions", true)) + "</span>"
-        + domainMeter(state, id)
-        + '<div class="actions">' + setActions(id, phase) + "</div></div>"
+        + '<div class="actions">' + domainActions(id, phase) + "</div></div>"
         + "</div>";
     }).join("");
-    return '<section class="panel domains"><div class="panel-head"><h2>Domains</h2></div>' + rows + "</section>";
+    return '<section class="panel domains"><div class="panel-head"><h2>Domains</h2></div>'
+      + domainWeightsBar(state) + rows + "</section>";
   }
 
   function tilesHtml(state) {
@@ -158,9 +142,9 @@
     const fullOrder = all && all.shuffled
       ? core.QUESTIONS.length + " questions, shuffled"
       : core.QUESTIONS.length + " questions in exam order";
-    const full = '<article class="tile"><div class="tile-row"><div class="tile-copy"><h3>Full practice set</h3><p>'
+    const full = '<article class="tile tile-primary"><div class="tile-row"><div class="tile-copy"><h3>Full practice set</h3><p>'
       + ui.esc(setNote(all, allPhase, fullOrder)) + '</p></div><div class="actions">'
-      + setActions("all", allPhase) + "</div></div>" + fullScore + "</article>";
+      + fullSetActions(allPhase, all) + "</div></div>" + fullScore + "</article>";
 
     const sp = core.savedProgress(state);
     const savedSet = state.sets.saved;
@@ -175,20 +159,20 @@
       ? '<article class="tile"><div class="tile-row"><div class="tile-copy"><h3>Saved questions</h3><p>'
         + ui.esc(savedNote)
         + '</p></div><div class="actions">'
-        + ui.btn(savedPhase === "active" ? "Continue" : "Review", savedPhase === "active" ? "start" : "restart", { data: { set: "saved" }, iconEnd: "arrowR", cls: "sm" })
+        + ui.btn(savedPhase === "active" ? "Continue" : "Review", savedPhase === "active" ? "start" : "restart", { data: { set: "saved" }, kind: "quiet", cls: "sm" })
         + "</div></div></article>"
       : '<article class="tile empty"><div class="tile-row"><div class="tile-copy"><h3>Saved questions</h3><p>Misses auto-save here; pin with Save or <kbd>S</kbd>.</p></div></div></article>';
 
     const active = core.hasActiveExam(state);
     const last = lastMockRun(state.examHistory);
     const mockNote = active
-      ? "In progress · " + Math.max(0, Math.ceil(core.examTimeLeft(state.exam) / 60000)) + " min left"
-      : last ? "Last run " + last.correct + "/" + last.total + " · " + core.QUESTIONS.length + " questions, no hints"
-        : "No mock yet · " + core.QUESTIONS.length + " questions, no hints";
+      ? "Mock: in progress · " + Math.max(0, Math.ceil(core.examTimeLeft(state.exam) / 60000)) + " min left"
+      : last ? "Mock: last run " + last.correct + "/" + last.total + ". 130 minutes, no hints."
+        : "Mock: not started. 130 minutes, no hints.";
     const mock = '<article class="tile dark"><div class="tile-row"><div class="tile-copy"><h3>Timed mock</h3><p>'
       + ui.esc(mockNote)
       + '</p></div><div class="actions">'
-      + (active ? ui.btn("Continue", "exam-continue", { cls: "sm", iconEnd: "arrowR" }) : ui.btn("Start mock", "exam-intro", { cls: "sm", icon: "clock" }))
+      + (active ? ui.btn("Continue", "exam-continue", { kind: "quiet", cls: "sm" }) : ui.btn("Start mock", "exam-intro", { kind: "quiet", cls: "sm", icon: "clock" }))
       + "</div></div></article>";
     return '<div class="tiles">' + full + saved + mock + "</div>";
   }
@@ -210,7 +194,8 @@
 
   function html() {
     const state = A.ctx.state;
-    return '<div class="home"><div class="home-grid">' + tilesHtml(state) + domainsHtml(state) + "</div></div>";
+    return '<div class="home">' + passRulerHtml(state)
+      + '<div class="home-grid">' + tilesHtml(state) + domainsHtml(state) + "</div></div>";
   }
 
   function introHtml() {
@@ -219,9 +204,9 @@
     const active = core.hasActiveExam(state);
     const warn = active
       ? '<div class="warn"><span>A mock is already running with ' + Math.max(0, Math.ceil(core.examTimeLeft(state.exam) / 60000)) + " min left. Starting a new one discards it.</span>"
-        + ui.btn("Continue it", "exam-continue", { cls: "sm", iconEnd: "arrowR" }) + "</div>"
+        + ui.btn("Continue it", "exam-continue", { cls: "sm" }) + "</div>"
       : "";
-    const pace = (min, title, sub) => '<button type="button" class="pace" data-act="exam-start" data-min="' + min + '"><strong>' + min + "<small>min</small></strong><span>" + title + "</span><em>" + sub + "</em>" + ui.icon("arrowR", "ic-end") + "</button>";
+    const pace = (min, title, sub) => '<button type="button" class="pace" data-act="exam-start" data-min="' + min + '"><strong>' + min + "<small>min</small></strong><span>" + title + "</span><em>" + sub + "</em></button>";
     return '<section class="panel intro"><p class="kicker">Timed mock</p><h2>' + core.QUESTIONS.length + " questions, exam pressure</h2>"
       + '<ul class="rules"><li>' + ui.icon("x") + "No rationales until you submit</li><li>" + ui.icon("flag") + "Flag items with <kbd>M</kbd> to revisit</li><li>" + ui.icon("clock") + "Blanks count as wrong; time up submits</li></ul>"
       + warn

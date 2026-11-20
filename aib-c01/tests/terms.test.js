@@ -71,7 +71,7 @@ test("the glossary page has the study pieces and no competitor link", () => {
   assert.match(html, /AIB-C01 glossary/);
   assert.match(html, /key terms/);
   assert.match(html, /cheat sheet/);
-  assert.match(html, /Last reviewed November 2026/);
+  assert.match(html, /reviewed Nov 2026/);
   assert.match(html, /href="\/aib-c01\/"/);
   assert.match(html, /href="\/aib-c01\/concepts\/"/);
   assert.match(practice, /href="\/aib-c01\/terms\/"/);

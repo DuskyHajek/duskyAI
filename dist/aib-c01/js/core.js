@@ -313,6 +313,12 @@
       }
     }
 
+    function scaledScore(pct) {
+      if (pct == null || Number.isNaN(pct)) return null;
+      const p = Math.max(0, Math.min(1, pct));
+      return 100 + Math.round(p * 900);
+    }
+
     function firstTryStats(state) {
       const tries = state.firstTry || {};
       const allIds = QUESTIONS.map((q) => q.id);
@@ -354,7 +360,7 @@
       todayKey, defaultState, normalizeState, loadState, saveState, shuffleArr,
       savedIds, savedProgress, isPinned, isSaved, togglePin, autoSave, dropAutoSave,
       idsFor, keepSavedOrder, retryShuffles, blankSet, displayOptions, displayToOrig, origToDisplay, toggleDraft,
-      letters, same, askOf, scoreOf, phaseOf, domainBreakdown, recordAnswer, migrateAnswers,
+      letters, same, askOf, scoreOf, phaseOf, domainBreakdown, recordAnswer, migrateAnswers, scaledScore,
       newExam, hasActiveExam, examTimeLeft, examBlankCount, gradeExam, firstTryStats,
     };
   }

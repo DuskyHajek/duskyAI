@@ -47,22 +47,24 @@
     const hint = !revealed && q.select > 1 ? ui.pickHint(q.select, draft.length) : "";
     const answered = answeredCount(ex);
     const nextLabel = revealed ? (isLast ? "Finish review" : "Next") : isLast ? "Submit mock" : "Next";
-    const dock = '<div class="dock">'
-      + ui.btn("Previous", "exam-prev", { icon: "arrowL", cls: "collapse", disabled: ex.cursor === 0, key: "←", title: "Previous" })
+    const dock = ui.btn("Previous", "exam-prev", { icon: "arrowL", cls: "collapse", disabled: ex.cursor === 0, key: "←", title: "Previous" })
       + (revealed ? "" : ui.btn(ex.flags[id] ? "Flagged" : "Flag", "exam-flag", { icon: "flag", cls: "collapse flag-btn", pressed: !!ex.flags[id], key: "M", title: "Flag for review" }))
       + '<span class="spacer"></span>'
       + (revealed || isLast ? "" : ui.btn("Submit", "exam-submit", { kind: "quiet", icon: "send" }))
-      + ui.btn(nextLabel, "exam-next", { kind: "primary", id: "go", iconEnd: isLast && !revealed ? "send" : "arrowR", key: "Enter" })
-      + "</div>";
+      + ui.btn(nextLabel, "exam-next", { kind: "primary", id: "go", iconEnd: isLast && !revealed ? "send" : "arrowR", key: "Enter" });
+    const W = A.widgets;
+    const map = revealed ? "" : ui.dotMap(ex, ex.cursor, { flags: ex.flags, answered: ex.picks, jumpAct: "jump-exam" });
+    const seg = W ? W.segmentedBar(ex, ex.cursor, { flags: ex.flags, answered: ex.picks, graded: revealed ? ex.ok : null }) : "";
+    const grid = W ? W.questionGrid(ex, ex.cursor, { flags: ex.flags, answered: ex.picks, graded: revealed ? ex.ok : null, jumpAct: "jump-exam" }) : "";
     return ui.qbar({
       pills: examPills(ex, ex.cursor, q, revealed),
+      jump: true,
       progress: { value: answered, max: ex.ids.length, label: answered + " of " + ex.ids.length + " answered" },
       right: clockHtml(ex) + ui.quizHeaderTools(),
       homeTitle: revealed ? "Home" : "Exit (clock keeps running)",
     })
-      + ui.dotMap(ex, ex.cursor, { flags: ex.flags, answered: ex.picks, graded: revealed ? ex.ok : null, jumpAct: "jump-exam" })
-      + ui.quizBody(ui.stemHtml(q.parts), domainLabel(q), top, ui.options(ex, id, draft, revealed, "exam-opt"), "", hint)
-      + dock;
+      + seg + map + grid
+      + ui.quizBody(ui.stemHtml(q.parts), domainLabel(q), top, ui.options(ex, id, draft, revealed, "exam-opt"), "", hint, dock);
   }
 
   function start(durationMin) {

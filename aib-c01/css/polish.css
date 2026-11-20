@@ -66,7 +66,6 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }
 
 /* 4. HOME layout refinements */
 @media (min-width: 960px) {
-  body.has-app .wrap { width: min(1360px, calc(100% - 48px)); }
   body.has-app .seo-landing { padding: 18px 0 20px; }
   .home-grid { align-items: stretch; }
   .home-grid > .panel { display: flex; flex-direction: column; padding: 22px 26px; }
@@ -127,7 +126,7 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }
 .dacc.low i { background: var(--rust); }
 
 .drow { cursor: pointer; }
-.drow:hover .dname strong { color: var(--accent); }
+.drow:hover .dname strong { color: var(--ink); }
 .drow:hover .dname .wt { color: var(--muted); }
 .home .track i { animation: none; }
 body.has-app footer.note { padding: 6px 0 10px; }
@@ -149,7 +148,6 @@ body.has-app footer.note { padding: 6px 0 10px; }
 .dock { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
 
 body.in-quiz #app { display: flex; flex-direction: column; }
-body.in-quiz .dock { order: 1; flex-shrink: 0; margin-top: 0; }
 body.in-quiz .source {
   order: 2;
   margin: 0;
@@ -207,7 +205,8 @@ html[data-theme="dark"] {
   --accent-bg: #10203D;
   --ok: #34C77B;
   --ok-bg: #0F2A1C;
-  --rust: #FF5C4D;
+  --rust: #FF624D;
+  --hl: rgba(246, 226, 122, 0.28);
   --rust-bg: #331411;
   --gold: #F0B429;
   --gold-bg: #2E2209;
@@ -228,16 +227,13 @@ html[data-theme="dark"] .explain.good { border-color: var(--ok); }
 html[data-theme="dark"] .explain.bad { border-color: var(--rust); }
 
 html[data-theme="dark"] .tile.dark {
-  background-color: #0a0a09;
-  border-color: #0a0a09;
-  border-left-color: var(--accent);
-  color: #F4F4F0;
-  background-image: none;
+  background: var(--card-2);
+  border-color: var(--line-strong);
+  color: var(--ink);
 }
-html[data-theme="dark"] .tile.dark .eyebrow { color: var(--gold); }
-html[data-theme="dark"] .tile.dark p:not(.eyebrow) { color: #b4ab9d; }
-html[data-theme="dark"] .tile.dark .btn { --bg: transparent; --fg: #F4F4F0; --bd: #F4F4F0; }
-html[data-theme="dark"] .tile.dark .btn:hover:not(:disabled) { --bg: rgba(244, 244, 240, 0.1); --fg: #fff; --bd: #fff; }
+html[data-theme="dark"] .tile.dark .eyebrow { color: var(--muted); }
+html[data-theme="dark"] .tile.dark p:not(.eyebrow) { color: var(--ink-2); }
+html[data-theme="dark"] .tile.dark:hover { border-color: var(--ink); background: var(--card); }
 
 html[data-theme="dark"] .pill.strong,
 html[data-theme="dark"] .dot.on,

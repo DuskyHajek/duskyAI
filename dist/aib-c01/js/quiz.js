@@ -38,26 +38,28 @@
     const go = revealed
       ? ui.btn(isLast ? "See results" : "Next question", "next", { kind: "primary", id: "go", iconEnd: "arrowR", key: "Enter" })
       : ui.btn(goLabel(q, need), "check", { kind: "primary", id: "go", disabled: need !== 0, key: "Enter" });
-    return ui.qbar({
-      pills: quizPills(set, set.cursor, q),
-      progress: { value: set.cursor + 1, max: set.ids.length, label: "Question " + (set.cursor + 1) + " of " + set.ids.length },
-      right: ui.quizHeaderTools(),
-      homeTitle: "Home",
-    })
-      + ui.dotMap(set, set.cursor, { graded: set.ok, answered: set.picks, jumpAct: "jump-learn" })
-      + ui.quizBody(ui.stemHtml(q.parts), domainLabel(q), top, ui.options(set, id, draft, revealed, "opt"), A.ctx.justRevealed ? "just-revealed" : "", hint)
-      + (saved && A.ctx.view.setId === "saved"
-        ? '<p class="saved-note">' + ui.icon("bookmark") + "<span>On your saved list. Remove takes it off.</span></p>"
-        : "")
-      + '<div class="dock">'
-      + ui.btn("Previous", "prev", { icon: "arrowL", cls: "collapse", disabled: set.cursor === 0, key: "←", title: "Previous" })
+    const dock = ui.btn("Previous", "prev", { icon: "arrowL", cls: "collapse", disabled: set.cursor === 0, key: "←", title: "Previous" })
       + ui.btn(saved ? "Remove" : "Save", "toggle-save", {
         icon: saved ? "x" : "bookmark",
         cls: "save-toggle",
         key: "S",
         title: saved ? "Remove from saved questions" : "Save for later",
       })
-      + '<span class="spacer"></span>' + go + "</div>";
+      + '<span class="spacer"></span>' + go;
+    const W = A.widgets;
+    return ui.qbar({
+      pills: quizPills(set, set.cursor, q),
+      jump: true,
+      progress: { value: set.cursor + 1, max: set.ids.length, label: "Question " + (set.cursor + 1) + " of " + set.ids.length },
+      right: ui.quizHeaderTools(),
+      homeTitle: "Home",
+    })
+      + (W ? W.segmentedBar(set, set.cursor, { graded: set.ok, answered: set.picks }) : "")
+      + (W ? W.questionGrid(set, set.cursor, { graded: set.ok, answered: set.picks, jumpAct: "jump-learn" }) : "")
+      + (saved && A.ctx.view.setId === "saved"
+        ? '<p class="saved-note">' + ui.icon("bookmark") + "<span>On your saved list. Remove takes it off.</span></p>"
+        : "")
+      + ui.quizBody(ui.stemHtml(q.parts), domainLabel(q), top, ui.options(set, id, draft, revealed, "opt"), A.ctx.justRevealed ? "just-revealed" : "", hint, dock);
   }
 
   function start(setId, restart) {

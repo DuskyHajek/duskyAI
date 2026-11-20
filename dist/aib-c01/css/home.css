@@ -1,7 +1,7 @@
 /* Home dashboard, mock intro, results. */
 .home { animation: rise .35s var(--ease); }
 .home-title { font-size: clamp(28px, 3.4vw, 40px); }
-.home-title em { font-style: normal; color: var(--accent); }
+.home-title em { font-style: normal; color: var(--ink); }
 #app { scroll-margin-top: 12px; }
 .home-head { display: flex; justify-content: flex-start; align-items: center; gap: 16px; padding: 4px 0 14px; flex-wrap: wrap; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; justify-content: flex-end; }
@@ -53,7 +53,6 @@
   min-height: 0;
   padding: 18px 20px;
   border: 1px solid var(--line);
-  border-top: 2px solid var(--ink);
   border-radius: 0;
   background: var(--card);
   box-shadow: none;
@@ -69,17 +68,13 @@
 .tile.empty { background: transparent; border-style: dashed; border-top-style: dashed; }
 .tile.empty:hover { border-color: var(--line); background: transparent; }
 .tile.dark {
-  background: #111111;
-  border-color: #111111;
-  border-top-color: #111111;
-  border-left: 4px solid var(--accent);
-  color: var(--paper);
+  background: var(--card-2);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
 }
-.tile.dark .eyebrow { color: var(--gold); }
-.tile.dark p:not(.eyebrow) { color: #bdb4a7; }
-.tile.dark .btn { --bg: transparent; --fg: var(--paper); --bd: var(--paper); }
-.tile.dark .btn:hover:not(:disabled) { --bg: rgba(244, 244, 240, 0.08); --fg: #fff; --bd: #fff; }
-.tile.dark:hover { background: #111111; border-color: #111111; }
+.tile.dark .eyebrow { color: var(--muted); }
+.tile.dark p:not(.eyebrow) { color: var(--ink-2); }
+.tile.dark:hover { border-color: var(--ink); background: var(--card); }
 
 @media (min-width: 960px) {
   .home-grid { grid-template-columns: minmax(400px, 480px) minmax(0, 1fr); gap: 22px; align-items: start; }
@@ -206,3 +201,75 @@
   .site-tools .settings-btn .btn-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   .site-tools .settings-btn { width: 34px; padding: 0; justify-content: center; }
 }
+
+.pass-panel { margin: 0 0 14px; padding: 16px 20px; }
+.pass-ruler { margin: 4px 0 0; }
+.pass-track {
+  position: relative;
+  height: 8px;
+  margin: 28px 0 6px;
+  background: var(--track);
+  border: 1px solid var(--line);
+}
+.pass-line.pass-cut {
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--rust);
+}
+.pass-mark {
+  position: absolute;
+  top: -22px;
+  transform: translateX(-50%);
+  font: 600 11px var(--mono);
+  color: var(--muted);
+}
+.pass-mark.pass-100 { transform: none; }
+.pass-mark.pass-1000 { transform: none; left: auto; }
+.pass-user {
+  position: absolute;
+  top: -4px;
+  width: 10px;
+  height: 16px;
+  margin-left: -5px;
+  background: var(--ink);
+  clip-path: polygon(50% 100%, 0 40%, 100% 40%);
+}
+.pass-foot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; font-size: 13px; }
+.pass-score { font: 600 22px var(--mono); letter-spacing: -0.03em; }
+.pass-score.muted { color: var(--muted); font-size: 18px; }
+.pass-note { color: var(--muted); font-size: 12px; }
+.mock-pass-note { margin: 8px 0 0; }
+.domain-weights, .weights-wrap { margin: 0 0 14px; }
+.weights-bar {
+  display: grid;
+  gap: 2px;
+  height: 22px;
+  border: 1px solid var(--line);
+  background: var(--track);
+}
+.wt-seg { position: relative; min-height: 22px; border-right: 1px solid var(--line); background: var(--card-2); overflow: hidden; }
+.wt-seg:last-child { border-right: 0; }
+.wt-fill {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  opacity: 0.75;
+}
+.wt-fill.low { background: var(--rust); }
+.wt-lbl {
+  position: absolute;
+  left: 4px;
+  bottom: 2px;
+  font: 600 9px var(--mono);
+  color: var(--muted);
+  pointer-events: none;
+}
+.heatmap-wrap { margin: 0 0 12px; }
+.heatmap-title { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+.qheatmap { position: static; max-width: none; padding: 0; border: 0; box-shadow: none; }
+.home .pass-panel + .home-grid { margin-top: 0; }
+.tile-primary .actions .btn.primary { min-width: 160px; }
+.miss-row .ic-end { display: none; }
