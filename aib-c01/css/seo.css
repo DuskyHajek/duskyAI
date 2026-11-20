@@ -6,17 +6,17 @@
 body.has-app .seo-landing {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 12px 20px;
-  padding: 8px 0 6px;
+  gap: 10px 20px;
+  padding: 12px 0;
   margin-bottom: 0;
 }
 body.has-app .seo-copy { flex: 1; min-width: min(100%, 280px); }
 body.has-app .seo-landing h1 {
   font-size: clamp(24px, 2.5vw, 32px);
 }
-body.has-app .seo-tagline { margin-top: 4px; font-size: 13.5px; }
+body.has-app .seo-tagline { max-width: none; margin-top: 4px; font-size: 13.5px; }
 body.has-app .seo-meta { margin-top: 4px; font-size: 13px; max-width: none; }
 body.has-app .hero-slot { flex: none; display: flex; align-items: center; max-width: 100%; }
 body.has-app .hero-slot[hidden] { display: none !important; }
@@ -49,7 +49,7 @@ body.in-quiz .seo-about { display: none; }
   line-height: 1.5;
 }
 .seo-about {
-  margin: 8px 0 0;
+  margin: 14px 0 0;
   border-top: 0;
   padding-top: 0;
 }

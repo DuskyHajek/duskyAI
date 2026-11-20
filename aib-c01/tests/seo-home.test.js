@@ -86,6 +86,12 @@ test("home, hero CTA, quiz, exam, and results modules render across states", () 
   assert.match(A.home.menuHtml(), /Shuffle on retry/);
 });
 
+test("base.css does not push seo-about below the fold", () => {
+  const baseCss = fs.readFileSync(path.join(rootDir, "css/base.css"), "utf8");
+  assert.doesNotMatch(baseCss, /\.wrap\s*\{[^}]*min-height:\s*100dvh/);
+  assert.doesNotMatch(baseCss, /#app\s*\{\s*flex:\s*1/);
+});
+
 test("seo-about is collapsed by default", () => {
   assert.match(html, /<details class="seo-about">/);
   assert.doesNotMatch(html, /<details class="seo-about"\s+open/);
