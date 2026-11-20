@@ -7,18 +7,19 @@
 body.has-app .seo-landing {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  gap: 10px 20px;
-  padding: 14px 0 16px;
+  gap: 12px 24px;
+  padding: 28px 0 22px;
   margin-bottom: 0;
 }
 body.has-app .seo-copy { flex: 1; min-width: min(100%, 280px); }
 body.has-app .seo-landing h1 {
-  font-size: clamp(24px, 2.5vw, 32px);
+  font-size: clamp(40px, 4.6vw, 58px);
+  letter-spacing: -0.035em;
 }
-body.has-app .seo-tagline { max-width: none; margin-top: 4px; font-size: 13.5px; }
-body.has-app .seo-meta { margin-top: 4px; font-size: 13px; max-width: none; }
+body.has-app .seo-tagline { max-width: 62ch; margin-top: 10px; font-size: 16.5px; line-height: 1.4; color: var(--ink-2); }
+body.has-app .seo-meta { margin-top: 8px; font-size: 14px; max-width: none; }
 body.has-app .hero-slot { flex: none; display: flex; align-items: center; max-width: 100%; }
 body.has-app .hero-slot[hidden] { display: none !important; }
 body.in-subview .seo-landing,
@@ -31,9 +32,10 @@ body.in-quiz .seo-about { display: none; }
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
+.seo-landing h1 .exam-code,
 .seo-landing h1 em {
   font-style: normal;
-  color: var(--ink);
+  color: var(--accent);
 }
 .seo-tagline {
   max-width: 58ch;

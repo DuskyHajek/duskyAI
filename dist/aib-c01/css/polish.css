@@ -66,7 +66,7 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }
 
 /* 4. HOME layout refinements */
 @media (min-width: 960px) {
-  body.has-app .seo-landing { padding: 18px 0 20px; }
+  body.has-app .seo-landing { padding: 32px 0 24px; }
   .home-grid { align-items: stretch; }
   .home-grid > .panel { display: flex; flex-direction: column; padding: 22px 26px; }
   .home-grid > .panel > .drow { flex: 1; align-items: center; }

@@ -107,7 +107,7 @@ test("FAQ has no nested details inside #faq", () => {
 
 test("static SEO landmarks stay in HTML", () => {
   assert.match(html, /<title>AIB-C01 Practice Exam \| AWS AI Business Strategist<\/title>/);
-  assert.match(html, /<h1>AIB-<em>C01<\/em> practice exam<\/h1>/);
+  assert.match(html, /<h1><span class="exam-code">AIB-<em>C01<\/em><\/span> practice exam<\/h1>/);
   assert.match(html, /class="seo-tagline"[\s\S]*AIB-C01 practice test[\s\S]*AWS Certified AI Business Strategist/);
   assert.match(html, /id="hero-slot"/);
   assert.match(html, /class="seo-landing"[\s\S]*ai-business-strategist-01\.html/);

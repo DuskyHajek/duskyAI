@@ -69,4 +69,4 @@
   }
 
   A.results = { setHtml, examHtml };
-})();
+})(typeof globalThis !== "undefined" ? globalThis : this);

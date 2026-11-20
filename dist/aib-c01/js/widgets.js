@@ -9,12 +9,12 @@
     if (!escapedText) return "";
     const skips = [];
     let masked = escapedText.replace(SKIP_RE, (m) => {
-      const key = "§" + skips.length + "§";
+      const key = "__SKIP" + String.fromCharCode(65 + skips.length) + "__";
       skips.push(m);
       return key;
     });
     masked = masked.replace(EVIDENCE_RE, (m) => '<mark class="ev">' + m + "</mark>");
-    return masked.replace(/§(\d+)§/g, (_, i) => skips[Number(i)] || "");
+    return masked.replace(/__SKIP([A-Z])__/g, (_, ch) => skips[ch.charCodeAt(0) - 65] || "");
   }
 
   function passRuler(opts) {
@@ -45,7 +45,7 @@
       const low = s.pct != null && fill < 60 ? " low" : "";
       const tip = "Domain " + s.domain + " · " + (s.weight || 0) + "% · " + (s.pct != null ? fill + "% first try" : "not started");
       html += '<div class="wt-seg" title="' + tip + '"><i class="wt-fill' + low + '" style="width:' + fill + '%"></i>'
-        + '<span class="wt-lbl">' + (A.ui ? A.ui.esc(s.short || "D" + s.domain) : s.domain) + "</span></div>";
+        + '<span class="wt-lbl">' + (A.ui ? A.ui.esc(s.short || "D" + s.domain) : (s.short || ("D" + s.domain))) + "</span></div>";
     });
     return html + "</div>";
   }

@@ -38,7 +38,7 @@
     const data = { set: "all" };
     if (allPhase === "active") {
       const sc = A.core.scoreOf(set);
-      return ui.btn("", "start", {
+      return btn("", "start", {
         kind: "primary",
         data,
         iconEnd: "arrowR",

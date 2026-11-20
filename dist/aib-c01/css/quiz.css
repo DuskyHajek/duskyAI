@@ -6,7 +6,7 @@ body.in-subview .seo-landing, body.in-subview .seo-about { display: none; }
 body.in-quiz #app { flex: 1; min-height: 0; display: flex; flex-direction: column; padding-top: 12px; }
 
 .qbar-row { display: flex; align-items: center; gap: 10px; }
-.qmeta { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.qmeta { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; position: relative; }
 .qright { flex: none; }
 .score, .clock {
   display: inline-flex;
