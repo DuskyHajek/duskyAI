@@ -196,8 +196,10 @@
   }
 
   function quizHeaderTools() {
-    return '<a class="btn quiet sm q-terms" href="/aib-c01/terms/" target="_blank" rel="noopener noreferrer" aria-label="Vocabulary and concepts">'
+    return '<a class="btn quiet sm q-terms" href="/aib-c01/terms/" target="_blank" rel="noopener noreferrer" aria-label="Vocabulary">'
       + icon("book") + '<span class="btn-label">Vocabulary</span></a>'
+      + '<a class="btn quiet sm q-terms" href="/aib-c01/concepts/" target="_blank" rel="noopener noreferrer" aria-label="Concepts">'
+      + icon("book") + '<span class="btn-label">Concepts</span></a>'
       + btn("", "toggle-source", { kind: "quiet", cls: "sm icon-only", icon: "info", title: "Attribution" });
   }
 

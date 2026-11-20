@@ -40,13 +40,15 @@ Do not publish the question bank as separate public pages. The interactive set s
 
 Static files. `npm run build` copies this folder to `dist/aib-c01/` and skips `tests/` and `1791415052344.pdf`. Relative paths to `css/`, `js/`, and `questions.js` stay inside the folder. The logo and favicon are the site-root files under `/assets/`.
 
-Serve the practice app at `https://www.duskyai.com/aib-c01/`. The terms and concepts page is a separate document at `https://www.duskyai.com/aib-c01/terms/`. Do not add a second URL for the practice app itself. The homepage project card uses the anchor **AIB-C01 practice exam**. Both URLs belong in the host-root sitemap. Submit the sitemap in Search Console after deploy.
+Serve the practice app at `https://www.duskyai.com/aib-c01/`. Vocabulary is `https://www.duskyai.com/aib-c01/terms/`. Concepts are `https://www.duskyai.com/aib-c01/concepts/`. Do not add a second URL for the practice app itself. The homepage project card uses the anchor **AIB-C01 practice exam**. All three URLs belong in the host-root sitemap. Submit the sitemap in Search Console after deploy.
 
 ## SEO
 
 The practice page is `https://www.duskyai.com/aib-c01/`. Its title and H1 carry the long name. The path stays the exam code.
 
-The vocabulary page is `https://www.duskyai.com/aib-c01/terms/`. Its title and H1 are **AIB-C01 vocabulary and concepts**. The definitions are original wording for this site, not a second copy of the practice set, and the page links back to the practice exam.
+The vocabulary page is `https://www.duskyai.com/aib-c01/terms/`. Its title and H1 are **AIB-C01 vocabulary**. The definitions are original wording for this site, not a second copy of the practice set, and the page links back to the practice exam.
+
+The concepts page is `https://www.duskyai.com/aib-c01/concepts/`. Its title and H1 are **AIB-C01 concepts**. It compares similar ideas and links each name to the vocabulary page.
 
 **Primary terms** (title, H1, first paragraph):
 

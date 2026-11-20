@@ -61,12 +61,12 @@
     const count = doc.getElementById("term-count");
     const empty = doc.getElementById("term-empty");
     const main = doc.querySelector("main");
-    if (!input || !index || !count || !empty || !main) return;
+    const mixSection = doc.getElementById("dont-mix-up");
+    if (!input || !main || (!index && !mixSection)) return;
 
-    addRelated(doc);
+    if (index) addRelated(doc);
     const domains = doc.querySelector(".term-domains");
     const selfBtn = doc.getElementById("term-selftest");
-    const mixSection = doc.getElementById("dont-mix-up");
     const mixEmpty = doc.getElementById("mixups-empty");
     const hint = doc.getElementById("term-hint");
     const list = doc.getElementById("term-list");
@@ -95,10 +95,12 @@
     });
     const total = groups.reduce((sum, group) => sum + group.items.length, 0);
 
-    index.innerHTML = groups.map((group) => {
-      const id = "letter-" + group.letter.toLowerCase();
-      return '<a href="#' + id + '" data-letter="' + group.letter + '">' + group.letter + "</a>";
-    }).join("");
+    if (index) {
+      index.innerHTML = groups.map((group) => {
+        const id = "letter-" + group.letter.toLowerCase();
+        return '<a href="#' + id + '" data-letter="' + group.letter + '">' + group.letter + "</a>";
+      }).join("");
+    }
 
     function domain() {
       const pressed = domains && domains.querySelector('[aria-pressed="true"]');
@@ -110,23 +112,25 @@
       const q = input.value;
       const testing = main.classList.contains("is-testing");
 
-      const shown = visibleGroups(groups, q, d);
-      const letters = new Set(shown.map((group) => group.letter));
-      const visible = new Set();
-      shown.forEach((group) => group.items.forEach((item) => visible.add(item.el)));
-      groups.forEach((group) => {
-        group.section.hidden = !letters.has(group.letter);
-        group.items.forEach((item) => { item.el.hidden = !visible.has(item.el); });
-      });
-      Array.prototype.forEach.call(index.querySelectorAll("a"), (link) => {
-        const on = letters.has(link.getAttribute("data-letter"));
-        link.classList.toggle("dim", !on);
-        if (on) link.removeAttribute("aria-disabled");
-        else link.setAttribute("aria-disabled", "true");
-      });
-      const n = visible.size;
-      count.textContent = n === total ? total + " terms" : n + " of " + total;
-      empty.hidden = n !== 0;
+      if (index && count && empty) {
+        const shown = visibleGroups(groups, q, d);
+        const letters = new Set(shown.map((group) => group.letter));
+        const visible = new Set();
+        shown.forEach((group) => group.items.forEach((item) => visible.add(item.el)));
+        groups.forEach((group) => {
+          group.section.hidden = !letters.has(group.letter);
+          group.items.forEach((item) => { item.el.hidden = !visible.has(item.el); });
+        });
+        Array.prototype.forEach.call(index.querySelectorAll("a"), (link) => {
+          const on = letters.has(link.getAttribute("data-letter"));
+          link.classList.toggle("dim", !on);
+          if (on) link.removeAttribute("aria-disabled");
+          else link.setAttribute("aria-disabled", "true");
+        });
+        const n = visible.size;
+        count.textContent = n === total ? total + " terms" : n + " of " + total;
+        empty.hidden = n !== 0;
+      }
 
       if (mixSection && !testing) {
         const visibleMix = filterMixups(mixups, q, d);
@@ -135,6 +139,11 @@
         const anyMix = visibleMix.length > 0;
         mixSection.hidden = !anyMix;
         if (mixEmpty) mixEmpty.hidden = anyMix;
+        if (count && !index) {
+          count.textContent = visibleMix.length === mixups.length
+            ? mixups.length + " comparisons"
+            : visibleMix.length + " of " + mixups.length;
+        }
       } else if (mixSection) {
         mixSection.hidden = true;
         if (mixEmpty) mixEmpty.hidden = true;
@@ -181,10 +190,12 @@
         if (link) link.setAttribute("aria-expanded", open ? "true" : "false");
       });
     }
-    index.addEventListener("click", (event) => {
-      const link = event.target.closest("a");
-      if (link && link.getAttribute("aria-disabled") === "true") event.preventDefault();
-    });
+    if (index) {
+      index.addEventListener("click", (event) => {
+        const link = event.target.closest("a");
+        if (link && link.getAttribute("aria-disabled") === "true") event.preventDefault();
+      });
+    }
     doc.addEventListener("keydown", (event) => {
       if (event.metaKey || event.ctrlKey || event.altKey) return;
       const typing = event.target.closest && event.target.closest("input, textarea");

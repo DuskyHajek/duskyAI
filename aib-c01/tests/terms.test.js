@@ -59,13 +59,12 @@ test("mixup filter matches domain and search", () => {
 const fs = require("node:fs");
 const path = require("node:path");
 const html = fs.readFileSync(path.join(__dirname, "../terms/index.html"), "utf8");
+const concepts = fs.readFileSync(path.join(__dirname, "../concepts/index.html"), "utf8");
 const practice = fs.readFileSync(path.join(__dirname, "../index.html"), "utf8");
 
 test("the glossary page has the study pieces and no competitor link", () => {
   assert.equal(html.toLowerCase().includes("mindmesh"), false);
-  assert.match(html, /id="dont-mix-up"/);
-  assert.match(html, /two or three similar ideas/);
-  assert.match(html, /class="kicker">Concepts</);
+  assert.doesNotMatch(html, /id="dont-mix-up"/);
   assert.match(html, /class="kicker terms-kicker">Vocabulary</);
   assert.match(html, /id="aws-quick"/);
   assert.match(html, /id="amazon-quick"/);
@@ -74,17 +73,23 @@ test("the glossary page has the study pieces and no competitor link", () => {
   assert.match(html, /cheat sheet/);
   assert.match(html, /Last reviewed November 2026/);
   assert.match(html, /href="\/aib-c01\/"/);
+  assert.match(html, /href="\/aib-c01\/concepts\/"/);
   assert.match(practice, /href="\/aib-c01\/terms\/"/);
-  const quickMix = html.match(/data-search="aws quick[\s\S]*?<\/div>\s*<div class="mixup"/);
-  assert.ok(quickMix);
-  assert.doesNotMatch(quickMix[0], /seat-based|consumption-based|instance-based/i);
-  assert.match(html, /business users with no builders point to Quick/);
+  assert.match(practice, /href="\/aib-c01\/concepts\/"/);
 });
 
-test("every comparison has a domain tag", () => {
-  const mixups = html.match(/<div class="mixup" /g) || [];
+test("the concepts page holds the comparisons", () => {
+  assert.match(concepts, /id="dont-mix-up"/);
+  assert.match(concepts, /two or three similar ideas/);
+  assert.match(concepts, /class="kicker">Concepts</);
+  assert.match(concepts, /href="\/aib-c01\/terms\/"/);
+  const quickMix = concepts.match(/data-search="aws quick[\s\S]*?<\/div>\s*<div class="mixup"/);
+  assert.ok(quickMix);
+  assert.doesNotMatch(quickMix[0], /seat-based|consumption-based|instance-based/i);
+  assert.match(concepts, /business users with no builders point to Quick/);
+  const mixups = concepts.match(/<div class="mixup" /g) || [];
   assert.equal(mixups.length, 13);
-  const section = html.match(/id="dont-mix-up"[\s\S]*?<\/section>/);
+  const section = concepts.match(/id="dont-mix-up"[\s\S]*?<\/section>/);
   assert.ok(section);
   assert.equal((section[0].match(/data-domain="[1-4]"/g) || []).length, 13);
   assert.equal((section[0].match(/class="term-exam"/g) || []).length, 13);

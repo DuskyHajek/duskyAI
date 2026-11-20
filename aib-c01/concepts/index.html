@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3efe6">
+<script>
+try {
+  var saved = localStorage.getItem("aib-c01-practice-v2");
+  var prefs = saved && JSON.parse(saved).prefs;
+  if (prefs && prefs.theme === "dark") {
+    document.documentElement.dataset.theme = "dark";
+    document.querySelector('meta[name="theme-color"]').setAttribute("content", "#14110e");
+  }
+} catch (e) {}
+</script>
+<title>AIB-C01 Concepts | AWS AI Business Strategist</title>
+<meta name="description" content="Unofficial comparisons of similar AIB-C01 ideas for the AWS Certified AI Business Strategist exam. Not affiliated with AWS.">
+<link rel="canonical" href="https://www.duskyai.com/aib-c01/concepts/">
+<link rel="describedby" href="https://www.duskyai.com/llms.txt">
+<link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="duskyAI">
+<meta property="og:url" content="https://www.duskyai.com/aib-c01/concepts/">
+<meta property="og:title" content="AIB-C01 Concepts | AWS AI Business Strategist">
+<meta property="og:description" content="Unofficial comparisons of similar AIB-C01 ideas for the AWS Certified AI Business Strategist exam. Not affiliated with AWS.">
+<meta property="og:image" content="https://www.duskyai.com/assets/images/projects/aib-c01-og.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:image:alt" content="AIB-C01 concepts — unofficial AWS Certified AI Business Strategist study notes">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AIB-C01 Concepts | AWS AI Business Strategist">
+<meta name="twitter:description" content="Unofficial comparisons of similar AIB-C01 ideas for the AWS Certified AI Business Strategist exam. Not affiliated with AWS.">
+<meta name="twitter:image" content="https://www.duskyai.com/assets/images/projects/aib-c01-og.jpg">
+<meta name="twitter:image:alt" content="AIB-C01 concepts — unofficial AWS Certified AI Business Strategist study notes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/seo.css">
+<link rel="stylesheet" href="../css/polish.css">
+<link rel="stylesheet" href="../css/terms.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.duskyai.com/aib-c01/concepts/#webpage",
+      "url": "https://www.duskyai.com/aib-c01/concepts/",
+      "name": "AIB-C01 Concepts | AWS AI Business Strategist",
+      "dateModified": "2026-11-20",
+      "isPartOf": { "@id": "https://www.duskyai.com/#website" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.duskyai.com/" },
+        { "@type": "ListItem", "position": 2, "name": "AIB-C01 practice exam", "item": "https://www.duskyai.com/aib-c01/" },
+        { "@type": "ListItem", "position": 3, "name": "Concepts", "item": "https://www.duskyai.com/aib-c01/concepts/" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <div class="site-bar">
+    <nav class="site-nav" aria-label="Site">
+      <a class="site-logo" href="https://www.duskyai.com/" target="_blank" rel="noopener noreferrer" aria-label="duskyAI, opens in a new tab"><span class="wordmark" aria-hidden="true">dusky<strong>ai</strong></span></a>
+      <div class="site-sections" role="navigation" aria-label="AIB-C01 sections">
+        <a href="/aib-c01/">Practice exam</a>
+        <a href="/aib-c01/terms/">Vocabulary</a>
+        <a href="/aib-c01/concepts/" aria-current="page">Concepts</a>
+      </div>
+      <div class="site-tools">
+        <button type="button" class="btn quiet sm" id="theme-toggle" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/></svg><span class="btn-label">Dark</span></button>
+        <div class="share-wrap" id="share-wrap">
+          <button type="button" class="btn quiet sm" id="share-page" aria-haspopup="menu" aria-expanded="false" aria-controls="share-pop" title="Share this page"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg><span class="btn-label">Share</span></button>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="wrap">
+    <header class="seo-landing">
+      <h1>AIB-<em>C01</em> concepts</h1>
+      <p class="seo-tagline">Similar ideas the AWS Certified AI Business Strategist exam asks you to tell apart. Not an AWS product.</p>
+      <p class="seo-meta">Each comparison links to the matching entry on the <a href="/aib-c01/terms/">AIB-C01 vocabulary</a> page. Use it with the <a href="/aib-c01/">AIB-C01 practice exam</a>.</p>
+    </header>
+    <main>
+      <div class="term-tools">
+        <label class="visually-hidden" for="term-search">Search concepts</label>
+        <input class="term-search" id="term-search" type="search" placeholder="Search, for example drift or KPI" autocomplete="off" enterkeyhint="search">
+        <p class="term-count" id="term-count" aria-live="polite">13 comparisons</p>
+        <div class="term-domains" role="group" aria-label="Exam domain">
+          <button type="button" class="term-chip" data-domain="all" aria-pressed="true">All</button>
+          <button type="button" class="term-chip" data-domain="1" aria-pressed="false">Fundamentals <span>24%</span></button>
+          <button type="button" class="term-chip" data-domain="2" aria-pressed="false">Strategy <span>28%</span></button>
+          <button type="button" class="term-chip" data-domain="3" aria-pressed="false">Governance <span>24%</span></button>
+          <button type="button" class="term-chip" data-domain="4" aria-pressed="false">Readiness <span>24%</span></button>
+        </div>
+      </div>
+<section class="concepts-block mixups" id="dont-mix-up" aria-labelledby="mixups-heading">
+        <p class="kicker">Concepts</p>
+        <h2 id="mixups-heading">Don’t mix up</h2>
+        <p class="mixups-lead">The exam often asks which of two or three similar ideas fits the scenario.</p>
+        <div class="mixup" data-domain="1" data-search="prompt engineering retrieval augmented generation fine-tuning rag">
+          <h3><a href="/aib-c01/terms/#prompt-engineering">Prompt engineering</a> vs <a href="/aib-c01/terms/#retrieval-augmented-generation">retrieval augmented generation</a> vs <a href="/aib-c01/terms/#fine-tuning">fine-tuning</a></h3>
+          <p>Prompt engineering improves the instruction, context, and examples you give the model. Retrieval augmented generation fetches current company content at question time. Fine-tuning retrains the model on your examples so its behavior changes.</p>
+          <p class="term-exam">On the exam, start with the cheapest change that fixes the problem. Unclear output points to the prompt, missing or weekly-changing facts point to retrieval, and a consistent style or behavior the prompt cannot reach points to fine-tuning.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="artificial intelligence machine learning generative ai">
+          <h3><a href="/aib-c01/terms/#artificial-intelligence">Artificial intelligence</a> vs <a href="/aib-c01/terms/#machine-learning">machine learning</a> vs <a href="/aib-c01/terms/#generative-ai">generative AI</a></h3>
+          <p>Artificial intelligence is the umbrella term. Machine learning learns patterns from historical data to predict or classify. Generative AI creates new text, images, audio, or code from a prompt.</p>
+          <p class="term-exam">On the exam, scoring or predicting from past data is machine learning, creating new content is generative AI, and fixed if-then logic is neither.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="rule-based automation artificial intelligence ai">
+          <h3><a href="/aib-c01/terms/#rule-based-automation">Rule-based automation</a> vs <a href="/aib-c01/terms/#artificial-intelligence">AI</a></h3>
+          <p>Rule-based automation follows fixed logic written by people and never learns. AI handles cases too varied or unstructured to write rules for.</p>
+          <p class="term-exam">On the exam, if the logic is simple, stable, and must be auditable, rules beat AI. If the inputs are messy or the patterns change, AI earns its cost.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="aws quick amazon bedrock sagemaker ai">
+          <h3><a href="/aib-c01/terms/#aws-quick">AWS Quick</a> vs <a href="/aib-c01/terms/#amazon-bedrock">Bedrock</a> vs <a href="/aib-c01/terms/#amazon-sagemaker-ai">SageMaker AI</a></h3>
+          <p>AWS Quick, which the exam guide still calls Amazon Quick, is the ready-made workspace for business users. Amazon Bedrock is the managed platform for building a generative AI application on a foundation model, including retrieval and guardrails. Amazon SageMaker AI is where a team builds and trains a custom model when a ready-made one will not fit.</p>
+          <p class="term-exam">On the exam, business users with no builders point to Quick. A developer building a generative AI app points to Bedrock. A team that needs its own model points to SageMaker AI.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="ai agent chatbot assistant">
+          <h3><a href="/aib-c01/terms/#ai-agent">AI agent</a> vs <a href="/aib-c01/terms/#ai-agent">chatbot</a></h3>
+          <p>A chatbot replies. An AI agent plans steps, uses business tools, checks the result, and acts or escalates.</p>
+          <p class="term-exam">On the exam, a system that must take actions across tools is an agent. One that only answers questions is an assistant.</p>
+        </div>
+        <div class="mixup" data-domain="1" data-search="augmentation automation human-in-the-loop">
+          <h3><a href="/aib-c01/terms/#augmentation">Augmentation</a> vs <a href="/aib-c01/terms/#automation">automation</a></h3>
+          <p>Augmentation keeps a person doing the job, with AI as the draft or recommendation. Automation lets the system carry out the job.</p>
+          <p class="term-exam">On the exam, a person still producing the outcome is augmentation. Whether each case must be approved is a separate <a href="/aib-c01/terms/#human-in-the-loop">human-in-the-loop</a> question.</p>
+        </div>
+        <div class="mixup" data-domain="2" data-search="kpi roi baseline total cost of ownership tco">
+          <h3><a href="/aib-c01/terms/#kpi">KPI</a> vs <a href="/aib-c01/terms/#roi">ROI</a> vs <a href="/aib-c01/terms/#baseline">baseline</a></h3>
+          <p>A KPI is the metric the initiative exists to move. ROI is benefits minus costs, divided by costs. A baseline is the measurement taken before AI, so the later change can be credited to it. <a href="/aib-c01/terms/#total-cost-of-ownership">Total cost of ownership</a> is the cost side of that ROI, not a third name for the KPI.</p>
+          <p class="term-exam">On the exam, a number with no before-measurement is not yet a result.</p>
+        </div>
+        <div class="mixup" data-domain="2" data-search="impact feasibility use-case prioritization">
+          <h3><a href="/aib-c01/terms/#use-case-prioritization">Impact</a> vs <a href="/aib-c01/terms/#use-case-prioritization">feasibility</a></h3>
+          <p>Business impact is the value if the use case works. Feasibility is whether the data, skills, risk, and time allow it to work.</p>
+          <p class="term-exam">On the exam, the first use case scores high on both. High impact with weak data is a data project first, not a pilot.</p>
+        </div>
+        <div class="mixup" data-domain="3" data-search="human-in-the-loop human-on-the-loop escalation">
+          <h3><a href="/aib-c01/terms/#human-in-the-loop">Human-in-the-loop</a> vs <a href="/aib-c01/terms/#human-on-the-loop">human-on-the-loop</a></h3>
+          <p>Human-in-the-loop means a person approves each decision before it counts. Human-on-the-loop means the system acts and a person can override it.</p>
+          <p class="term-exam">On the exam, a high-harm or low-confidence case is escalated to a person. A high-harm decision that must not go out unreviewed is human-in-the-loop. A system that acts, with someone able to stop it, is human-on-the-loop.</p>
+        </div>
+        <div class="mixup" data-domain="3" data-search="explainability transparency">
+          <h3><a href="/aib-c01/terms/#explainability">Explainability</a> vs <a href="/aib-c01/terms/#transparency">transparency</a></h3>
+          <p>Explainability is being able to say why the system produced an output. Transparency is telling people that AI is involved and what it can and cannot do.</p>
+          <p class="term-exam">On the exam, a regulator asking why a decision was made is explainability. A customer who should know they are talking to AI is transparency.</p>
+        </div>
+        <div class="mixup" data-domain="3" data-search="iso iec 22989 23053 42001">
+          <h3><a href="/aib-c01/terms/#iso-iec-22989">ISO/IEC 22989</a> vs <a href="/aib-c01/terms/#iso-iec-23053">23053</a> vs <a href="/aib-c01/terms/#iso-iec-42001">42001</a></h3>
+          <p>ISO/IEC 22989 is the shared vocabulary. ISO/IEC 23053 describes the parts of a machine-learning system and does not certify the company. ISO/IEC 42001 is the certifiable management system for how an organization runs AI.</p>
+          <p class="term-exam">On the exam, a vendor’s 42001 certificate does not certify its customers, and 23053 is not a certificate at all.</p>
+        </div>
+        <div class="mixup" data-domain="4" data-search="proof of concept pilot scale phased rollout pilot purgatory">
+          <h3><a href="/aib-c01/terms/#proof-of-concept">Proof of concept</a> vs pilot vs <a href="/aib-c01/terms/#phased-rollout">scale</a></h3>
+          <p>A proof of concept tests whether an approach can work at all. A pilot tests it with real users and real conditions. Scaling builds the ownership, support, and operations that production needs.</p>
+          <p class="term-exam">On the exam, a successful demo is not production readiness. Many pilots with no owner or operating plan is <a href="/aib-c01/terms/#pilot-purgatory">pilot purgatory</a>.</p>
+        </div>
+        <div class="mixup" data-domain="4" data-search="accountable owner center of excellence coe">
+          <h3><a href="/aib-c01/terms/#accountable-owner">Accountable owner</a> vs <a href="/aib-c01/terms/#ai-center-of-excellence">center of excellence</a></h3>
+          <p>The accountable owner answers for one AI system’s outcomes and risks. The AI center of excellence provides standards, reusable assets, and enablement across the company.</p>
+          <p class="term-exam">On the exam, who answers for a failure is the owner. Who helps every team do it well is the center of excellence.</p>
+        </div>
+      </section>
+      <p class="mixups-empty" id="mixups-empty" hidden>No matching comparison.</p>
+    </main>
+    <footer class="note">
+      Side project by <a href="https://www.duskyai.com/" target="_blank" rel="noopener noreferrer">Dusan Hajek</a>.
+      Unofficial notes for the AWS Certified AI Business Strategist (AIB-C01) exam. Not endorsed by AWS.
+    </footer>
+  </div>
+  <script src="../js/terms.js" defer></script>
+  <script src="../js/share.js" defer></script>
+  <script src="../js/theme.js" defer></script>
+</body>
+</html>

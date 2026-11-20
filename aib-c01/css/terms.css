@@ -44,7 +44,7 @@
 .term-hint { margin: 0 0 12px; color: var(--muted); font-size: 13.5px; }
 
 .concepts-block.mixups {
-  margin: 0 0 28px;
+  margin: 0 0 8px;
   padding: 2px 0 4px;
   border: none;
   border-top: 1px solid var(--line);

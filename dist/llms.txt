@@ -13,7 +13,8 @@ Portfolio covering AI solutions, web development, generative media, and automati
 
 - [crm.urbanista.sk](https://crm.urbanista.sk/): CRM for estate agents — deal workflows and document automation
 - [AIB-C01 practice exam](https://www.duskyai.com/aib-c01/): Unofficial practice for the AWS Certified AI Business Strategist (AIB-C01) exam. Not an AWS product.
-- [AIB-C01 vocabulary and concepts](https://www.duskyai.com/aib-c01/terms/): Short unofficial definitions for the same exam. Not an AWS product.
+- [AIB-C01 vocabulary](https://www.duskyai.com/aib-c01/terms/): Short unofficial definitions for the same exam. Not an AWS product.
+- [AIB-C01 concepts](https://www.duskyai.com/aib-c01/concepts/): Unofficial comparisons of similar ideas on the same exam. Not an AWS product.
 - [aibookdb.com](https://www.aibookdb.com/): Curated directory of essential AI literature with editorial summaries
 - [makeaivisible.com](https://www.makeaivisible.com/): AI recommendation visibility — articles, glossary, resources, and a fetch check for sites
 - [@duskylab](https://www.instagram.com/duskylab/): AI visual production studio
