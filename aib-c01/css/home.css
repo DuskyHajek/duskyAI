@@ -242,7 +242,7 @@
 .pass-score.muted { color: var(--muted); font-size: 18px; }
 .pass-note { color: var(--muted); font-size: 12px; }
 .mock-pass-note { margin: 8px 0 0; }
-.domain-weights, .weights-wrap { margin: 0 0 14px; }
+.weights-wrap { margin: 0 0 14px; }
 .weights-bar {
   display: grid;
   gap: 2px;

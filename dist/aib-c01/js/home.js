@@ -87,18 +87,6 @@
     return '<div class="track" role="meter" aria-valuemin="0" aria-valuemax="' + total + '" aria-valuenow="' + correct + '" aria-label="' + A.ui.esc(label) + '"><i style="width:' + pct + '%"></i></div>';
   }
 
-  function domainWeightsBar(state) {
-    if (!A.widgets) return "";
-    const stats = A.core.firstTryStats(state);
-    const segments = A.core.DOMAIN_IDS.map((d) => ({
-      domain: d,
-      weight: A.core.DOMAIN_WEIGHT[d],
-      short: A.core.DOMAIN_SHORT[d],
-      pct: stats.byDomain[d].answered ? stats.byDomain[d].pct : null,
-    }));
-    return '<div class="domain-weights">' + A.widgets.weightsBar(segments) + "</div>";
-  }
-
   function setNote(set, phase, fallback, compact) {
     const display = effectivePhase(set);
     if (display === "new") return fallback;
@@ -129,8 +117,7 @@
         + '<div class="actions">' + domainActions(id, phase) + "</div></div>"
         + "</div>";
     }).join("");
-    return '<section class="panel domains"><div class="panel-head"><h2>Domains</h2></div>'
-      + domainWeightsBar(state) + rows + "</section>";
+    return '<section class="panel domains"><div class="panel-head"><h2>Domains</h2></div>' + rows + "</section>";
   }
 
   function tilesHtml(state) {
