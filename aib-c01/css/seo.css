@@ -1,7 +1,8 @@
 /* Slim page title + crawlable exam copy in a collapsible disclosure below the app. */
 .seo-landing {
-  padding: 12px 0 10px;
+  padding: 16px 0 14px;
   margin-bottom: 2px;
+  border-bottom: 2px solid var(--ink);
 }
 body.has-app .seo-landing {
   display: flex;
@@ -9,7 +10,7 @@ body.has-app .seo-landing {
   align-items: center;
   justify-content: space-between;
   gap: 10px 20px;
-  padding: 12px 0;
+  padding: 14px 0 16px;
   margin-bottom: 0;
 }
 body.has-app .seo-copy { flex: 1; min-width: min(100%, 280px); }
@@ -17,7 +18,7 @@ body.has-app .seo-landing h1 {
   font-size: clamp(24px, 2.5vw, 32px);
 }
 body.has-app .seo-tagline { max-width: none; margin-top: 4px; font-size: 13.5px; }
-body.has-app .seo-meta { margin-top: 4px; font-size: 13px; max-width: none; }
+body.has-app .seo-meta { margin-top: 4px; font-size: 13px; max-width: none; font-family: var(--mono); }
 body.has-app .hero-slot { flex: none; display: flex; align-items: center; max-width: 100%; }
 body.has-app .hero-slot[hidden] { display: none !important; }
 body.in-subview .seo-landing,
@@ -47,6 +48,7 @@ body.in-quiz .seo-about { display: none; }
   color: var(--ink-2);
   font-size: 13.5px;
   line-height: 1.5;
+  font-family: var(--mono);
 }
 .seo-about {
   margin: 18px 0 0;
@@ -55,27 +57,29 @@ body.in-quiz .seo-about { display: none; }
 }
 .seo-about > summary {
   cursor: pointer;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 14px;
   color: var(--muted);
   list-style: none;
-  padding: 9px 14px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 0;
   background: var(--card-2);
-  transition: color .15s var(--ease), border-color .15s, background-color .15s;
+  transition: color .12s, border-color .12s, background-color .12s;
 }
-.seo-about > summary:hover { color: var(--ink); border-color: var(--line-strong); background: var(--card); }
+.seo-about > summary:hover { color: var(--ink); border-color: var(--ink); background: var(--card); }
 .seo-about > summary::-webkit-details-marker { display: none; }
 .seo-about > summary::before {
-  content: "▸";
+  content: ">";
   display: inline-block;
   margin-right: 8px;
-  transition: transform .2s var(--ease);
+  font-family: var(--mono);
+  font-weight: 600;
+  transition: transform .15s var(--ease);
 }
 .seo-about[open] > summary::before { transform: rotate(90deg); }
-.seo-about[open] > summary { color: var(--ink); }
+.seo-about[open] > summary { color: var(--ink); border-color: var(--ink); }
 .seo-about-body {
   display: flex;
   flex-direction: column;
@@ -86,14 +90,15 @@ body.in-quiz .seo-about { display: none; }
 .seo-domains li,
 .seo-faq-item {
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 0;
   background: var(--card);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 .seo-checked {
   margin: 0 0 10px;
   color: var(--muted);
   font-size: 12px;
+  font-family: var(--mono);
 }
 .seo-block h2 {
   margin: 0 0 10px;
@@ -122,15 +127,14 @@ body.in-quiz .seo-about { display: none; }
   text-decoration: none;
   color: inherit;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 0;
   background: var(--card);
-  box-shadow: var(--shadow-sm);
-  transition: transform .2s var(--ease), border-color .2s, box-shadow .2s;
+  box-shadow: none;
+  transition: border-color .12s, background-color .12s;
 }
 .seo-source-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  box-shadow: var(--shadow-lift);
+  border-color: var(--ink);
+  background: var(--card-2);
   color: inherit;
 }
 .seo-source-title {
@@ -138,7 +142,7 @@ body.in-quiz .seo-about { display: none; }
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 14px;
   color: var(--ink);
@@ -147,6 +151,7 @@ body.in-quiz .seo-about { display: none; }
   color: var(--muted);
   font-size: 13px;
   line-height: 1;
+  font-family: var(--mono);
 }
 .seo-source-card:hover .ext { color: var(--accent); }
 .seo-source-card > span:last-child {
@@ -173,6 +178,7 @@ body.in-quiz .seo-about { display: none; }
   gap: 12px;
   padding: 12px 14px;
   font-size: 14px;
+  border-left: 3px solid var(--accent);
 }
 .seo-domains .dnum {
   display: grid;
@@ -180,9 +186,10 @@ body.in-quiz .seo-about { display: none; }
   flex: none;
   width: 28px;
   height: 28px;
-  border-radius: 8px;
-  background: var(--track);
-  font: 600 14px var(--display);
+  border-radius: 0;
+  border: 1px solid var(--line-strong);
+  background: var(--card-2);
+  font: 600 14px var(--mono);
 }
 .seo-domains .dtext {
   display: flex;
@@ -191,7 +198,7 @@ body.in-quiz .seo-about { display: none; }
   min-width: 0;
 }
 .seo-domains strong {
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.35;
@@ -211,10 +218,11 @@ body.in-quiz .seo-about { display: none; }
 }
 .seo-faq-item {
   padding: 12px 14px;
+  border-top: 2px solid var(--ink);
 }
 .seo-faq-item h3 {
   margin: 0;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 14px;
   letter-spacing: -0.01em;

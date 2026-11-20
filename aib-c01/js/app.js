@@ -47,7 +47,7 @@
     const dark = A.ctx.state.prefs && A.ctx.state.prefs.theme === "dark";
     document.documentElement.dataset.theme = dark ? "dark" : "light";
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", dark ? "#14110e" : "#f3efe6");
+    if (meta) meta.setAttribute("content", dark ? "#0E0E0D" : "#F4F4F0");
   }
 
   function mountSettingsMenu() {

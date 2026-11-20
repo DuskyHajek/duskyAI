@@ -11,7 +11,7 @@
   function paint(btn, dark) {
     document.documentElement.dataset.theme = dark ? "dark" : "light";
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", dark ? "#14110e" : "#f3efe6");
+    if (meta) meta.setAttribute("content", dark ? "#0E0E0D" : "#F4F4F0");
     if (!btn) return;
     btn.setAttribute("aria-pressed", dark ? "true" : "false");
     btn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");

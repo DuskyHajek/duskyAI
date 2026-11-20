@@ -1,23 +1,9 @@
-/* polish.css
-   Load AFTER base.css, home.css, quiz.css, seo.css.
-   Nothing here replaces your files; it overrides tokens and a few rules.
-   Sections: 1 tokens · 2 brand · 3 calmer exam · 4 home · 5 quiz · 6 dark (dusk) */
+/* polish.css — overrides after base, home, quiz, seo. Layout + dark mode + badges */
 
-
-/* 1. TOKENS ------------------------------------------------------------ */
+/* 1. TOKENS (accessibility tweaks) */
 :root {
   color-scheme: light;
-
-  --muted: #625b52;
-  --line-strong: #8c8272;
-  --serif: "Source Serif 4", Georgia, "Iowan Old Style", Palatino, serif;
-
-  --accent-strong: #0a4538;   /* primary hover/pressed */
-  --accent-soft:   #1f8a6e;   /* was hard-coded in .bar */
-  --on-solid:      #fff;      /* text on any solid fill (ink, accent, rust) */
-
-  /* gold was ~4.4:1 on paper for 11.5px kicker text; this is ~5.2:1 */
-  --gold: #7c5f28;
+  --on-solid: #fff;
 }
 
 .btn.primary:disabled {
@@ -25,19 +11,16 @@
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
-  --bg: #e7e1d6;
-  --bd: #e7e1d6;
+  --bg: #E2E2DA;
+  --bd: #E2E2DA;
   --fg: var(--muted);
 }
 
-
-/* 2. BRAND (small, on purpose) ---------------------------------------- */
-
-/* Wordmark follows the text color, so dark mode does not need a second logo. */
+/* 2. BRAND */
 .site-logo,
 .site-logo:hover { color: var(--ink); text-decoration: none; }
 .wordmark {
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 400;
   font-size: 22px;
   letter-spacing: -0.04em;
@@ -51,11 +34,9 @@
   text-decoration-thickness: 1.5px;
 }
 
-/* Primary action = the one green thing you can press. Ink stays for selection. */
-.btn.primary { --bg: var(--accent); --bd: var(--accent); --fg: var(--on-solid); }
+.btn.primary { --bg: var(--accent); --bd: var(--accent-strong); --fg: var(--on-solid); }
 .btn.primary:hover:not(:disabled) { --bg: var(--accent-strong); --bd: var(--accent-strong); }
 
-/* Make every solid fill use the same readable text colour (matters in dark mode) */
 .pill.strong,
 .dot.on,
 .tag,
@@ -63,43 +44,27 @@
 .opt.correct .letter,
 .opt.wrong .letter { color: var(--on-solid); }
 
-/* Settings menu lives in the header on practice pages */
 .settings-wrap .menu { position: relative; }
 .settings-wrap .menu-pop { right: 0; left: auto; }
-
-.bar span { background: linear-gradient(90deg, var(--accent), var(--accent-soft)); }
 
 ::selection { background: var(--accent-bg); color: var(--ink); }
 button { -webkit-tap-highlight-color: transparent; }
 
-/* background-attachment: fixed is ignored on iOS and repaints on scroll elsewhere */
-body { background-attachment: scroll; }
-
-@media (max-width: 700px) {
-  body { background-image: none; }
-}
-
 @media (hover: none) {
-  .btn:hover:not(:disabled) { transform: none; box-shadow: none; }
-  .tile:hover { transform: none; box-shadow: var(--shadow); }
-  .dot:hover { transform: none; border-color: var(--line); color: var(--muted); }
-  .pace:hover { transform: none; box-shadow: none; border-color: var(--line-strong); }
-  .miss-row:hover { transform: none; border-color: var(--line); }
+  .btn:hover:not(:disabled) { transform: none; }
+  .tile:hover { border-color: var(--line); background: var(--card); }
+  .dot:hover { border-color: var(--line); color: var(--muted); background: var(--card); }
+  .pace:hover { border-color: var(--line-strong); background: var(--card-2); }
+  .miss-row:hover { border-color: var(--line); }
 }
 
+/* 3. CALMER EXAM — no decorative motion */
+.btn.primary::after { content: none; }
+.drow:hover .dnum { transform: none; }
+body.in-quiz .opt:hover:not(:disabled) { transform: none; }
+.just-revealed .opt.wrong { animation: none; }
 
-/* 3. CALMER EXAM ------------------------------------------------------- */
-/* Motion that answers a click is fine. Motion that decorates is removed. */
-.btn.primary::after { content: none; }                 /* hover shimmer */
-.drow:hover .dnum { transform: none; }                 /* rotating number tile */
-body.in-quiz .opt:hover:not(:disabled) { transform: none; }  /* options sliding sideways */
-.just-revealed .opt.wrong { animation: none; }         /* shake on a wrong answer */
-
-
-/* 4. HOME -------------------------------------------------------------- */
-
-/* Left column is taller than the Domains card. Stretch the card and spread rows.
-   Assumes the Domains card is a direct child of .home-grid with class .panel. */
+/* 4. HOME layout refinements */
 @media (min-width: 960px) {
   body.has-app .wrap { width: min(1360px, calc(100% - 48px)); }
   body.has-app .seo-landing { padding: 18px 0 20px; }
@@ -121,11 +86,11 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }  /* options sliding 
   display: inline-flex;
   align-items: center;
   padding: 2px 8px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
   background: var(--card-2);
   color: var(--muted);
-  font: 600 11px var(--sans);
+  font: 600 11px var(--mono);
   letter-spacing: 0.02em;
   vertical-align: middle;
 }
@@ -133,11 +98,11 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }  /* options sliding 
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--rust-bg);
-  border: 1px solid color-mix(in srgb, var(--rust) 35%, transparent);
+  border: 1px solid var(--rust);
   color: var(--rust);
-  font: 700 10px var(--sans);
+  font: 700 10px var(--mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -150,6 +115,7 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }  /* options sliding 
 }
 .dacc-label {
   color: var(--muted);
+  font-family: var(--mono);
   font-size: 11px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -157,36 +123,29 @@ body.in-quiz .opt:hover:not(:disabled) { transform: none; }  /* options sliding 
 }
 .dset .dacc-wrap .dacc { width: 88px; }
 
-/* Per-domain accuracy under or beside the question count.
-   Markup:  <div class="track dacc"><i style="width:72%"></i></div>
-   Add .low when accuracy is under ~60%. */
 .dacc { width: 88px; height: 4px; flex: none; }
 .dacc.low i { background: var(--rust); }
 
-/* Row is clickable (wire a click handler on .drow that triggers its button) */
 .drow { cursor: pointer; }
 .drow:hover .dname strong { color: var(--accent); }
 .drow:hover .dname .wt { color: var(--muted); }
 .home .track i { animation: none; }
 body.has-app footer.note { padding: 6px 0 10px; }
 
-
-/* 5. QUIZ -------------------------------------------------------------- */
-
-/* "Select 2" for multiple-response items.
-   Markup:  <p class="pick-hint">Select 2</p>  (above .opts) */
+/* 5. QUIZ */
 .pick-hint {
   display: inline-flex;
   margin: 0 0 10px;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 0;
+  border: 1px solid var(--gold);
   background: var(--gold-bg);
   color: var(--gold);
-  font-size: 12.5px;
+  font-family: var(--mono);
+  font-size: 12px;
   font-weight: 600;
 }
 
-/* iOS home-indicator clearance for the bottom dock */
 .dock { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
 
 body.in-quiz #app { display: flex; flex-direction: column; }
@@ -221,7 +180,8 @@ body.in-quiz .source {
     margin: 0;
     padding: 12px 20px 12px;
     background: var(--card);
-    box-shadow: 0 -10px 14px var(--card);
+    box-shadow: 0 -8px 0 var(--card);
+    border-left-width: 3px;
   }
 }
 
@@ -229,57 +189,63 @@ body.in-quiz .source {
   .clock.urgent { animation: none; }
 }
 
-
-/* 6. DUSK (dark mode, only when chosen) ------------------------------- */
+/* 6. DUSK — carbon dark mode */
 html[data-theme="dark"] {
   color-scheme: dark;
-    --paper:  #14110e;
-    --card:   #1c1915;
-    --card-2: #221e19;
-    --ink:    #f2ede3;
-    --ink-2:  #d8d1c4;
-    --muted:  #a69e91;
-    --line:   #2f2a23;
-    --line-strong: #7a7265;
-    --track:  #2b261f;
+  --paper: #0E0E0D;
+  --card: #161615;
+  --card-2: #1F1F1D;
+  --ink: #F4F4F0;
+  --ink-2: #D4D4CE;
+  --muted: #96968E;
+  --line: #2E2E2B;
+  --line-strong: #8F8F87;
+  --track: #262624;
 
-    --accent:        #4cb99b;
-    --accent-strong: #7fd3ba;
-    --accent-soft:   #2f9f82;
-    --accent-bg:     #14302a;
-    --rust:    #f29469;
-    --rust-bg: #31201a;
-    --gold:    #d6b46d;
-    --gold-bg: #2c2416;
+  --accent: #4D8BFF;
+  --accent-strong: #7AA8FF;
+  --accent-bg: #10203D;
+  --ok: #34C77B;
+  --ok-bg: #0F2A1C;
+  --rust: #FF5C4D;
+  --rust-bg: #331411;
+  --gold: #F0B429;
+  --gold-bg: #2E2209;
 
-    --on-solid: #14110e;   /* ink is light in dark mode, so text on it must be dark */
-
-    --shadow-sm:   0 1px 0 rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.25);
-    --shadow:      0 1px 0 rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
-    --shadow-lift: 0 2px 0 rgba(0,0,0,.3), 0 14px 30px rgba(0,0,0,.5);
-  }
+  --on-solid: #0E0E0D;
+  --shadow-lift: 3px 3px 0 var(--ink);
+}
 
 html[data-theme="dark"] body {
-  background-image:
-    radial-gradient(900px 500px at 100% -10%, rgba(76, 185, 155, 0.08), transparent 60%),
-    radial-gradient(700px 420px at -10% 110%, rgba(214, 180, 109, 0.06), transparent 60%),
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.045) 1px, transparent 0);
+  background-image: none;
+  background-color: var(--paper);
 }
 
 html[data-theme="dark"] .btn.quiet:hover:not(:disabled),
 html[data-theme="dark"] .menu[open] summary { background: rgba(255, 255, 255, 0.07); }
 
-html[data-theme="dark"] .explain.good { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
-html[data-theme="dark"] .explain.bad  { border-color: color-mix(in srgb, var(--rust) 45%, transparent); }
+html[data-theme="dark"] .explain.good { border-color: var(--ok); }
+html[data-theme="dark"] .explain.bad { border-color: var(--rust); }
 
-/* The exam-pressure tile used --ink as its background; in dark mode that token is light. */
 html[data-theme="dark"] .tile.dark {
-  background-color: #0c0a08;
-  border-color: var(--line);
-  color: #f2ede3;
-  background-image: radial-gradient(300px 160px at 100% 0%, rgba(76, 185, 155, 0.35), transparent 70%);
+  background-color: #0a0a09;
+  border-color: #0a0a09;
+  border-left-color: var(--accent);
+  color: #F4F4F0;
+  background-image: none;
 }
-html[data-theme="dark"] .tile.dark .eyebrow { color: #d6b46d; }
+html[data-theme="dark"] .tile.dark .eyebrow { color: var(--gold); }
 html[data-theme="dark"] .tile.dark p:not(.eyebrow) { color: #b4ab9d; }
-html[data-theme="dark"] .tile.dark .btn { --bg: transparent; --fg: #f2ede3; --bd: #f2ede3; }
-html[data-theme="dark"] .tile.dark .btn:hover:not(:disabled) { --bg: rgba(242, 237, 227, 0.1); --fg: #fff; --bd: #fff; }
+html[data-theme="dark"] .tile.dark .btn { --bg: transparent; --fg: #F4F4F0; --bd: #F4F4F0; }
+html[data-theme="dark"] .tile.dark .btn:hover:not(:disabled) { --bg: rgba(244, 244, 240, 0.1); --fg: #fff; --bd: #fff; }
+
+html[data-theme="dark"] .pill.strong,
+html[data-theme="dark"] .dot.on,
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .opt[aria-pressed="true"] .letter,
+html[data-theme="dark"] .opt.correct .letter,
+html[data-theme="dark"] .opt.wrong .letter {
+  color: var(--on-solid);
+}
+
+html[data-theme="dark"] .btn.primary { color: var(--on-solid); }
