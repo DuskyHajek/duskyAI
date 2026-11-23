@@ -55,8 +55,8 @@ test("optimized avatar is reasonably small", () => {
 test("AIB-C01 project card copy matches between index.html and script.js", () => {
     const index = fs.readFileSync(path.join(root, "index.html"), "utf8");
     const script = fs.readFileSync(path.join(root, "assets/js/script.js"), "utf8");
-    const blurb = "Unofficial practice exam, 70-term glossary, and look-alike concepts for AWS AI Business Strategist";
+    const blurb = "Unofficial practice exam, 70-term glossary, and concept comparisons for AWS AI Business Strategist";
     assert.ok(index.includes(blurb));
     assert.ok(script.includes(blurb));
-    assert.match(index, /look-alike concepts/);
+    assert.match(index, /concept comparisons/);
 });

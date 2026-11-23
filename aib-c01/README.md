@@ -48,7 +48,7 @@ The practice page is `https://www.duskyai.com/aib-c01/`. Its title and H1 carry 
 
 The vocabulary page is `https://www.duskyai.com/aib-c01/terms/`. Its title and H1 are **AIB-C01 vocabulary**. The definitions are original wording for this site, not a second copy of the practice set, and the page links back to the practice exam.
 
-The concepts page is `https://www.duskyai.com/aib-c01/concepts/`. Its title is **AIB-C01 Look-Alike Concepts | AWS AI Business Strategist** and its H1 is **AIB-C01 look-alike concepts**. It compares similar ideas with quick checks, study heuristics, and links to the vocabulary page.
+The comparisons page is `https://www.duskyai.com/aib-c01/concepts/`. Its title is **AIB-C01 Concept Comparisons | AWS AI Business Strategist** and its H1 is **AIB-C01 concept comparisons**. It compares similar ideas with quick checks, study heuristics, and links to the vocabulary page.
 
 **Primary terms** (title, H1, first paragraph):
 

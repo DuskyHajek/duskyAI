@@ -25,7 +25,7 @@ const PROJECTS = [
     },
     {
         title: "AIB-C01 practice exam",
-        desc: "Unofficial practice exam, 70-term glossary, and look-alike concepts for AWS AI Business Strategist",
+        desc: "Unofficial practice exam, 70-term glossary, and concept comparisons for AWS AI Business Strategist",
         url: "/aib-c01/",
         tag: "Web"
     },
