@@ -54,7 +54,7 @@ const practice = fs.readFileSync(path.join(__dirname, "../index.html"), "utf8");
 
 test("the glossary page has the study pieces and no competitor link", () => {
   assert.equal(html.toLowerCase().includes("mindmesh"), false);
-  assert.doesNotMatch(html, /id="comparisons"/);
+  assert.doesNotMatch(html, /id="exam-concepts"/);
   assert.match(html, /class="kicker terms-kicker">Vocabulary</);
   assert.match(html, /id="aws-quick"/);
   assert.match(html, /id="amazon-quick"/);
@@ -69,9 +69,10 @@ test("the glossary page has the study pieces and no competitor link", () => {
 });
 
 test("the concepts page is simplified: cards, rules, tiers, print", () => {
-  assert.match(concepts, /id="comparisons"/);
-  assert.match(concepts, /concept comparisons/);
+  assert.match(concepts, /id="exam-concepts"/);
+  assert.match(concepts, /exam concepts/);
   assert.doesNotMatch(concepts, /look-alike/i);
+  assert.doesNotMatch(concepts, /concept comparisons/i);
   assert.doesNotMatch(concepts, /Don.t mix up/i);
   assert.match(concepts, /href="\/aib-c01\/terms\/"/);
   assert.match(concepts, /study heuristics/);
@@ -89,7 +90,7 @@ test("the concepts page is simplified: cards, rules, tiers, print", () => {
   assert.doesNotMatch(quickMix[0], /seat-based|consumption-based|instance-based/i);
   assert.match(quickMix[0], /No engineers → Quick/);
 
-  const section = concepts.match(/id="comparisons"[\s\S]*?<\/section>/);
+  const section = concepts.match(/id="exam-concepts"[\s\S]*?<\/section>/);
   assert.ok(section);
   const mixups = section[0].match(/<article class="mixup" /g) || [];
   assert.equal(mixups.length, 19);

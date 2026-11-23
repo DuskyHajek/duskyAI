@@ -184,7 +184,7 @@
       '<a class="study-link" href="' + href + '"><span class="study-link-title">' + title
       + '</span><span class="study-link-sub">' + sub + '</span><span class="study-link-arrow" aria-hidden="true">→</span></a>';
     return '<nav class="study-strip" aria-label="Study guides">'
-      + link("/aib-c01/concepts/", "Concept comparisons", "19 scenario cues, quick checks &amp; print sheet")
+      + link("/aib-c01/concepts/", "Exam concepts", "19 similar ideas, quick checks &amp; print sheet")
       + link("/aib-c01/terms/", "Vocabulary glossary", "70 AIB-C01 terms with self-test mode")
       + "</nav>";
   }
