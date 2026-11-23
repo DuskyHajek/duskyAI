@@ -3,32 +3,38 @@
     {
       "file": "assets/images/visuals/duskylab/An_artistic_studio_2k_202602181532 (1).jpeg",
       "type": "image",
-      "name": "An_artistic_studio_2k_202602181532 (1)"
+      "name": "Artistic studio",
+      "thumb": "assets/images/visuals/duskylab/thumbs/An_artistic_studio_2k_202602181532 (1).jpeg"
     },
     {
       "file": "assets/images/visuals/duskylab/An_epic_outdoor_2k_202602100956.jpeg",
       "type": "image",
-      "name": "An_epic_outdoor_2k_202602100956"
+      "name": "Epic outdoor",
+      "thumb": "assets/images/visuals/duskylab/thumbs/An_epic_outdoor_2k_202602100956.jpeg"
     },
     {
       "file": "assets/images/visuals/duskylab/A_dynamic_wideangle_2k_202602151954.jpeg",
       "type": "image",
-      "name": "A_dynamic_wideangle_2k_202602151954"
+      "name": "Dynamic wideangle",
+      "thumb": "assets/images/visuals/duskylab/thumbs/A_dynamic_wideangle_2k_202602151954.jpeg"
     },
     {
       "file": "assets/images/visuals/duskylab/A_highend_minimalist_2k_202602051444.jpeg",
       "type": "image",
-      "name": "A_highend_minimalist_2k_202602051444"
+      "name": "Highend minimalist",
+      "thumb": "assets/images/visuals/duskylab/thumbs/A_highend_minimalist_2k_202602051444.jpeg"
     },
     {
       "file": "assets/images/visuals/duskylab/A_luxurious_dynamic_2k_202602190916 (1).jpeg",
       "type": "image",
-      "name": "A_luxurious_dynamic_2k_202602190916 (1)"
+      "name": "Luxurious dynamic",
+      "thumb": "assets/images/visuals/duskylab/thumbs/A_luxurious_dynamic_2k_202602190916 (1).jpeg"
     },
     {
       "file": "assets/images/visuals/duskylab/Type_a_lifestyle_2k_202602041529.jpeg",
       "type": "image",
-      "name": "Type_a_lifestyle_2k_202602041529"
+      "name": "Lifestyle",
+      "thumb": "assets/images/visuals/duskylab/thumbs/Type_a_lifestyle_2k_202602041529.jpeg"
     }
   ]
 }

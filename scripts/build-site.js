@@ -11,11 +11,11 @@ const rootDir = path.join(__dirname, '../');
 const include = [
     'index.html',
     'about.html',
+    '404.html',
     'assets',
     'robots.txt',
     'sitemap.xml',
     'llms.txt',
-    'README.md',
     'aib-c01'
 ];
 

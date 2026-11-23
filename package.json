@@ -4,8 +4,13 @@
     "description": "Minimal, high-impact personal portfolio for Dusan Hajek.",
     "scripts": {
         "build": "node scripts/build-site.js",
+        "optimize": "node scripts/optimize-images.js",
+        "test": "node --test tests/*.test.js aib-c01/tests/*.test.js",
         "dev": "npx -y serve ."
     },
     "author": "Dusan Hajek",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+        "sharp": "^0.35.5"
+    }
 }

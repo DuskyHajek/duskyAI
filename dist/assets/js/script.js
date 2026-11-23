@@ -4,8 +4,8 @@
  * ============================================================
  *
  *  HOW TO ADD VISUALS:
- *    1. Drop images/videos into assets/images/visuals/duskylab/
- *    2. Update manifest.json (or let PHP API handle it on production)
+ *    1. Drop images/videos into assets/images/visuals/{project}/
+ *    2. Run npm run build (regenerates manifest.json + thumbs on optimize)
  *    3. Refresh — they appear in the full-screen gallery
  *
  *  HOW TO ADD A PROJECT:
@@ -20,29 +20,28 @@ const PROJECTS = [
         desc: "CRM for estate agents — deal workflows and document automation",
         url: "https://crm.urbanista.sk/",
         tag: "Web",
-        preview: "assets/images/projects/urbanista.png"
+        preview: "/assets/images/projects/urbanista.png"
     },
     {
         title: "AIB-C01 practice exam",
         desc: "Unofficial practice for the AWS Certified AI Business Strategist exam",
-        url: "https://www.duskyai.com/aib-c01/",
-        tag: "Web"
+        url: "/aib-c01/",
+        tag: "Web",
+        sameTab: true
     },
     {
         title: "aibookdb.com",
         desc: "Curated directory of essential AI literature with editorial summaries",
         url: "https://www.aibookdb.com/",
         tag: "Web",
-        preview: "assets/images/projects/aibookdb.png",
-        isGallery: true,
-        galleryKey: "aibookdb"
+        preview: "/assets/images/projects/aibookdb.png"
     },
     {
         title: "makeaivisible.com",
         desc: "AI recommendation visibility — articles, glossary, resources, and a fetch check for sites",
         url: "https://www.makeaivisible.com/",
         tag: "Web",
-        preview: "assets/images/projects/makeaivisible.png"
+        preview: "/assets/images/projects/makeaivisible.png"
     },
     {
         title: "@duskylab",
@@ -57,56 +56,54 @@ const PROJECTS = [
         desc: "AI-generated poker art & videos",
         url: "https://www.instagram.com/pokerart.ai/",
         tag: "Instagram",
-        preview: "assets/images/projects/pokerartai.png"
+        preview: "/assets/images/projects/pokerartai.png"
     }
 ];
 
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // ── Render Projects ──────────────────────────────────────
 
 function renderProjects() {
-    const el = document.getElementById('project-list');
+    const el = document.getElementById("project-list");
     if (!el) return;
 
     const MAX_THUMBS = window.innerWidth <= 860 ? 2 : 3;
 
-    el.innerHTML = PROJECTS.map(p => {
+    el.innerHTML = PROJECTS.map((p) => {
         const preview = p.preview
             ? `<div class="project-preview" style="background-image:url('${p.preview}')"></div>`
-            : '';
+            : "";
 
-        // Build gallery thumbnail strip for gallery projects
-        let galleryStrip = '';
+        let galleryStrip = "";
         if (p.isGallery && p.galleryKey) {
             const items = visualsData[p.galleryKey] || [];
             if (items.length > 0) {
                 const visible = items.slice(0, MAX_THUMBS);
                 const remaining = items.length - MAX_THUMBS;
 
-                const thumbs = visible.map((item, i) =>
-                    `<img class="gallery-thumb" src="${item.file}" alt="${item.name || ''}" loading="lazy" onclick="openGallery(event,'${p.galleryKey}',${i})">`
-                ).join('');
+                const thumbs = visible.map((item, i) => {
+                    const src = item.thumb || item.file;
+                    const alt = item.name || "Gallery image";
+                    return `<button type="button" class="gallery-thumb-btn" data-gallery="${p.galleryKey}" data-index="${i}" aria-label="Open gallery: ${alt}"><img class="gallery-thumb" src="/${src.replace(/^\//, "")}" alt="" loading="lazy" width="120" height="80"></button>`;
+                }).join("");
 
                 const moreBtn = remaining > 0
-                    ? `<button class="gallery-more" onclick="openGallery(event,'${p.galleryKey}',${MAX_THUMBS})">+${remaining} more</button>`
-                    : '';
+                    ? `<button type="button" class="gallery-more" data-gallery="${p.galleryKey}" data-start="${MAX_THUMBS}">+${remaining} more</button>`
+                    : "";
 
                 galleryStrip = `<div class="gallery-strip">${thumbs}${moreBtn}</div>`;
             }
         }
 
-        // Use a real <a> tag so search engines can crawl project links.
-        // Gallery projects use data-gallery to intercept clicks in JS.
-        // Coming-soon projects stay non-linking until the site is live.
-        const tag = p.comingSoon ? 'div' : 'a';
+        const tag = p.comingSoon ? "div" : "a";
+        const linkTarget = p.sameTab ? "" : ` target="_blank" rel="noopener"`;
         const extraAttr = p.comingSoon
             ? `role="text"`
-            : p.isGallery
-                ? `href="${p.url}" target="_blank" rel="noopener" data-gallery="${p.galleryKey}" onclick="this.dataset.gallery && openGallery(event,this.dataset.gallery,0)"`
-                : `href="${p.url}"${p.sameTab ? "" : ` target="_blank" rel="noopener"`}`;
+            : `href="${p.url}"${linkTarget}`;
 
-        const arrow = p.comingSoon ? '' : `
-                <span class="project-arrow">
+        const arrow = p.comingSoon ? "" : `
+                <span class="project-arrow" aria-hidden="true">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="7" y1="17" x2="17" y2="7"/>
                         <polyline points="7 7 17 7 17 17"/>
@@ -114,7 +111,7 @@ function renderProjects() {
                 </span>`;
 
         return `
-        <li class="project reveal${p.preview ? ' has-preview' : ''}${p.isGallery ? ' has-gallery' : ''}${p.comingSoon ? ' is-soon' : ''}">
+        <li class="project reveal${p.preview ? " has-preview" : ""}${p.isGallery ? " has-gallery" : ""}${p.comingSoon ? " is-soon" : ""}">
             <${tag} class="project-link" ${extraAttr} aria-label="${p.title} — ${p.desc}">
             ${preview}
             <div class="project-body">
@@ -122,13 +119,34 @@ function renderProjects() {
                 <div class="project-desc">${p.desc}</div>
             </div>
             <div class="project-actions">
-                <span class="project-tag${p.comingSoon ? ' project-tag--soon' : ''}">${p.tag}</span>
+                <span class="project-tag${p.comingSoon ? " project-tag--soon" : ""}">${p.tag}</span>
                 ${arrow}
             </div>
             </${tag}>
             ${galleryStrip}
         </li>`;
-    }).join('');
+    }).join("");
+}
+
+function initProjectListDelegation() {
+    const el = document.getElementById("project-list");
+    if (!el) return;
+
+    el.addEventListener("click", (e) => {
+        const thumbBtn = e.target.closest(".gallery-thumb-btn");
+        if (thumbBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            openGallery(e, thumbBtn.dataset.gallery, Number(thumbBtn.dataset.index));
+            return;
+        }
+        const moreBtn = e.target.closest(".gallery-more");
+        if (moreBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            openGallery(e, moreBtn.dataset.gallery, Number(moreBtn.dataset.start));
+        }
+    });
 }
 
 
@@ -138,16 +156,11 @@ let visualsData = {};
 
 async function loadVisuals() {
     try {
-        const r = await fetch('api/visuals.php');
-        if (r.ok && r.headers.get('content-type')?.includes('json')) {
-            visualsData = await r.json(); return;
-        }
-    } catch { }
-
-    try {
-        const r = await fetch('assets/images/visuals/manifest.json');
+        const r = await fetch("/assets/images/visuals/manifest.json");
         if (r.ok) visualsData = await r.json();
-    } catch { }
+    } catch {
+        /* gallery optional */
+    }
 }
 
 
@@ -155,121 +168,194 @@ async function loadVisuals() {
 
 let lbItems = [];
 let lbIndex = 0;
+let lbLastFocus = null;
 
-const lb = document.getElementById('lightbox');
-const lbStage = document.getElementById('lb-stage');
-const lbCount = document.getElementById('lb-counter');
-const lbPrev = document.getElementById('lb-prev');
-const lbNext = document.getElementById('lb-next');
-const lbClose = document.getElementById('lb-close');
+const lb = document.getElementById("lightbox");
+const lbStage = document.getElementById("lb-stage");
+const lbCount = document.getElementById("lb-counter");
+const lbPrev = document.getElementById("lb-prev");
+const lbNext = document.getElementById("lb-next");
+const lbClose = document.getElementById("lb-close");
+
+const lbFocusables = () => {
+    if (!lb) return [];
+    return [...lb.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])')]
+        .filter((node) => !node.hasAttribute("disabled") && node.offsetParent !== null);
+};
+
+function setLightboxOpen(open) {
+    if (!lb) return;
+    if (open) {
+        lb.removeAttribute("aria-hidden");
+        lb.removeAttribute("inert");
+        lbLastFocus = document.activeElement;
+        lbClose?.focus();
+    } else {
+        lb.setAttribute("aria-hidden", "true");
+        lb.setAttribute("inert", "");
+        if (lbLastFocus && typeof lbLastFocus.focus === "function") {
+            lbLastFocus.focus();
+        }
+        lbLastFocus = null;
+    }
+}
+
+function mediaSrc(file) {
+    return file.startsWith("/") ? file : `/${file}`;
+}
 
 function showSlide(idx) {
     lbIndex = idx;
     const item = lbItems[idx];
     lbCount.textContent = `${idx + 1} / ${lbItems.length}`;
 
-    // Create media element
     let media;
-    if (item.type === 'video') {
-        media = document.createElement('video');
-        media.src = item.file;
+    if (item.type === "video") {
+        media = document.createElement("video");
+        media.src = mediaSrc(item.file);
         media.autoplay = true;
         media.loop = true;
         media.muted = true;
         media.playsInline = true;
     } else {
-        media = document.createElement('img');
-        media.src = item.file;
-        media.alt = item.name || '';
+        media = document.createElement("img");
+        media.src = mediaSrc(item.file);
+        media.alt = item.name || "";
     }
 
-    // Swap with transition
-    lbStage.innerHTML = '';
+    lbStage.innerHTML = "";
     lbStage.appendChild(media);
-    requestAnimationFrame(() => requestAnimationFrame(() => media.classList.add('visible')));
+    if (!prefersReducedMotion) {
+        requestAnimationFrame(() => requestAnimationFrame(() => media.classList.add("visible")));
+    } else {
+        media.classList.add("visible");
+    }
 }
 
 function openGallery(e, key, startIndex = 0) {
-    e.stopPropagation();
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
     lbItems = visualsData[key] || [];
     if (!lbItems.length) return;
 
     lbIndex = startIndex;
-    lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+    setLightboxOpen(true);
     showSlide(startIndex);
 }
 
 function closeGallery() {
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
-    lbStage.innerHTML = '';
+    if (!lb) return;
+    lb.classList.remove("open");
+    document.body.style.overflow = "";
+    lbStage.innerHTML = "";
+    setLightboxOpen(false);
 }
 
-// Controls
-lbClose.addEventListener('click', closeGallery);
-lbPrev.addEventListener('click', () => {
-    if (lbItems.length) showSlide((lbIndex - 1 + lbItems.length) % lbItems.length);
-});
-lbNext.addEventListener('click', () => {
-    if (lbItems.length) showSlide((lbIndex + 1) % lbItems.length);
-});
+if (lbClose) lbClose.addEventListener("click", closeGallery);
+if (lbPrev) {
+    lbPrev.addEventListener("click", () => {
+        if (lbItems.length) showSlide((lbIndex - 1 + lbItems.length) % lbItems.length);
+    });
+}
+if (lbNext) {
+    lbNext.addEventListener("click", () => {
+        if (lbItems.length) showSlide((lbIndex + 1) % lbItems.length);
+    });
+}
+if (lb) {
+    lb.addEventListener("click", (e) => {
+        if (e.target === lb || e.target === lbStage) closeGallery();
+    });
+}
 
-// Click backdrop to close
-lb.addEventListener('click', (e) => {
-    if (e.target === lb || e.target === lbStage) closeGallery();
-});
+document.addEventListener("keydown", (e) => {
+    if (!lb?.classList.contains("open")) return;
 
-// Keyboard: arrows + escape
-document.addEventListener('keydown', (e) => {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape') closeGallery();
-    if (e.key === 'ArrowLeft') lbPrev.click();
-    if (e.key === 'ArrowRight') lbNext.click();
+    if (e.key === "Escape") {
+        closeGallery();
+        return;
+    }
+    if (e.key === "ArrowLeft") {
+        lbPrev?.click();
+        return;
+    }
+    if (e.key === "ArrowRight") {
+        lbNext?.click();
+        return;
+    }
+    if (e.key === "Tab") {
+        const nodes = lbFocusables();
+        if (!nodes.length) return;
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
 });
 
 
 // ── UI Enhancements ──────────────────────────────────────
 
 function initMagneticCTA() {
-    const cta = document.querySelector('.cta-btn');
-    // Only apply hover effects on non-touch devices
+    if (prefersReducedMotion) return;
+    const cta = document.querySelector(".cta-btn");
     if (!cta || !window.matchMedia("(hover: hover)").matches) return;
 
-    cta.addEventListener('mousemove', (e) => {
+    cta.addEventListener("mousemove", (e) => {
         const rect = cta.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-
-        // Subtle magnetic pull
         cta.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
     });
 
-    cta.addEventListener('mouseleave', () => {
-        cta.style.transform = '';
+    cta.addEventListener("mouseleave", () => {
+        cta.style.transform = "";
+    });
+}
+
+function revealElements(elements, { stagger = true, baseDelay = 50, step = 60 } = {}) {
+    const list = [...elements];
+    if (!list.length) return;
+    if (prefersReducedMotion) {
+        list.forEach((el) => el.classList.add("revealed"));
+        return;
+    }
+    list.forEach((el, i) => {
+        setTimeout(() => {
+            el.classList.add("revealed");
+        }, stagger ? baseDelay + i * step : 0);
     });
 }
 
 function initStaggeredReveal() {
-    const elements = document.querySelectorAll('.reveal');
-    elements.forEach((el, i) => {
-        setTimeout(() => {
-            el.classList.add('revealed');
-        }, 50 + (i * 60)); // 50ms initial delay, 60ms stagger per element
-    });
+    revealElements(document.querySelectorAll(".reveal:not(.revealed)"));
 }
 
 // ── Init ─────────────────────────────────────────────────
 
-document.addEventListener('DOMContentLoaded', async () => {
-    // Load visuals first so thumbnail paths are available during render
-    await loadVisuals();
-    renderProjects();
+document.addEventListener("DOMContentLoaded", () => {
+    const page = document.querySelector(".page");
+    if (page) page.classList.add("ready");
 
     initMagneticCTA();
+    initProjectListDelegation();
+    renderProjects();
+    initStaggeredReveal();
 
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-        document.querySelector('.page').classList.add('ready');
-        initStaggeredReveal();
-    }));
+    loadVisuals().then(() => {
+        renderProjects();
+        revealElements(document.querySelectorAll("#project-list .reveal:not(.revealed)"), {
+            baseDelay: 0,
+            step: 40
+        });
+    });
 });

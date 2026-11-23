@@ -7,7 +7,7 @@
     --bg: #FAFAF8;
     --black: #0F0F0E;
     --g1: #555553;
-    --g2: #999997;
+    --g2: #6E6E6B;
     --g3: #D8D8D4;
     --g4: #F0F0EC;
     --sans: 'Inter', -apple-system, sans-serif;
@@ -459,9 +459,11 @@ li {
     z-index: 30;
 }
 
-.project.has-preview:hover .project-preview {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+@media (hover: hover) {
+    .project.has-preview:hover .project-preview {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .project-body {
@@ -498,20 +500,39 @@ li {
     padding-top: .5rem;
 }
 
+.gallery-thumb-btn {
+    display: block;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.gallery-thumb-btn:focus-visible,
+.gallery-more:focus-visible,
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--black);
+    outline-offset: 2px;
+}
+
 .gallery-thumb {
     width: 120px;
     height: 80px;
     object-fit: cover;
     border-radius: 6px;
-    cursor: pointer;
+    display: block;
     transition: transform .25s var(--ease), filter .25s var(--ease), box-shadow .25s var(--ease);
     border: 1px solid var(--g3);
 }
 
-.gallery-thumb:hover {
-    transform: scale(1.04);
-    filter: brightness(1.1);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+@media (hover: hover) {
+    .gallery-thumb-btn:hover .gallery-thumb {
+        transform: scale(1.04);
+        filter: brightness(1.1);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+    }
 }
 
 .gallery-more {
@@ -691,12 +712,7 @@ li {
 
 /* ── Entry animation ── */
 .page {
-    opacity: 0;
-    transition: opacity .55s var(--ease)
-}
-
-.page.ready {
-    opacity: 1
+    opacity: 1;
 }
 
 /* ── UI Enhancements ── */
@@ -712,6 +728,25 @@ li {
     transform: translateY(0);
 }
 
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal,
+    .reveal.revealed {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .page,
+    .project-preview,
+    .cta-btn,
+    .cta-arrow,
+    .lb-stage img,
+    .lb-stage video,
+    .lightbox {
+        transition: none;
+    }
+}
 
 /* ── Responsive ── */
 @media (max-width:860px) {
@@ -806,6 +841,7 @@ li {
     grid-template-columns: 1fr;
     max-width: 640px;
     align-items: start;
+    padding: 3rem 0;
 }
 
 .about-content {
@@ -819,4 +855,16 @@ li {
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -.02em;
+}
+
+.about-content a {
+    text-decoration: underline;
+    text-decoration-color: var(--g3);
+    text-underline-offset: 3px;
+    transition: color .2s, text-decoration-color .2s;
+}
+
+.about-content a:hover {
+    color: var(--black);
+    text-decoration-color: var(--black);
 }
