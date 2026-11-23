@@ -31,6 +31,21 @@ test("main site assets and SEO hygiene", () => {
     assert.doesNotMatch(first.name, /_2k_/);
 });
 
+test("every project link opens in a new tab (HTML and JS stay in sync)", () => {
+    const index = fs.readFileSync(path.join(root, "index.html"), "utf8");
+    const script = fs.readFileSync(path.join(root, "assets/js/script.js"), "utf8");
+
+    const links = [...index.matchAll(/<a class="project-link"[^>]*>/g)];
+    assert.ok(links.length >= 6, "expected static project links in index.html");
+    for (const m of links) {
+        assert.match(m[0], /target="_blank"/, `missing target="_blank": ${m[0]}`);
+        assert.match(m[0], /rel="noopener"/, `missing rel="noopener": ${m[0]}`);
+    }
+
+    assert.doesNotMatch(script, /sameTab/);
+    assert.match(script, /target="_blank" rel="noopener"/);
+});
+
 test("optimized avatar is reasonably small", () => {
     const photo = path.join(root, "assets/images/photo.jpg");
     const size = fs.statSync(photo).size;
