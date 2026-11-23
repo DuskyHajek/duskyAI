@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { filterTerms, filterMixups, visibleGroups } = require("../js/terms.js");
+const { filterTerms, visibleGroups } = require("../js/terms.js");
 
 const items = [
   { term: "Bias", text: "A systematic difference in how the system treats similar people." },
@@ -46,16 +46,6 @@ test("a letter is hidden when its domain does not match", () => {
   assert.deepEqual(visibleGroups(groups, "", "2").map((group) => group.letter), ["R"]);
 });
 
-test("mixup filter matches domain and search", () => {
-  const mixups = [
-    { domain: "1", search: "rag fine-tuning", text: "Retrieval augmented generation fetches current company content." },
-    { domain: "2", search: "kpi roi", text: "A KPI is the metric the initiative exists to move." },
-  ];
-  assert.equal(filterMixups(mixups, "", "1").length, 1);
-  assert.equal(filterMixups(mixups, "kpi", "all").length, 1);
-  assert.equal(filterMixups(mixups, "kpi", "1").length, 0);
-});
-
 const fs = require("node:fs");
 const path = require("node:path");
 const html = fs.readFileSync(path.join(__dirname, "../terms/index.html"), "utf8");
@@ -78,33 +68,36 @@ test("the glossary page has the study pieces and no competitor link", () => {
   assert.match(practice, /href="\/aib-c01\/concepts\/"/);
 });
 
-test("the concepts page holds the comparisons, quick checks, risk ladder, and rules", () => {
+test("the concepts page is simplified: cards, rules, tiers, print", () => {
   assert.match(concepts, /id="dont-mix-up"/);
-  assert.match(concepts, /two or three similar ideas/);
   assert.match(concepts, /class="kicker">Concepts</);
   assert.match(concepts, /href="\/aib-c01\/terms\/"/);
-  assert.match(concepts, /Last reviewed November 2026/);
   assert.match(concepts, /study heuristics/);
   assert.match(concepts, /id="print-sheet"/);
+  assert.match(concepts, /concepts-landing/);
+  assert.doesNotMatch(concepts, /id="term-search"/);
+  assert.doesNotMatch(concepts, /term-domains/);
+  assert.doesNotMatch(concepts, /terms\.js/);
+  assert.doesNotMatch(concepts, /terms\.css/);
   assert.match(concepts, /href="\/aib-c01\/terms\/#phased-rollout">pilot<\/a>/);
   assert.match(concepts, /"@id": "https:\/\/www\.duskyai\.com\/#person"/);
 
-  const quickMix = concepts.match(/id="quick-bedrock-sagemaker"[\s\S]*?<\/details>\s*<\/div>/);
+  const quickMix = concepts.match(/id="quick-bedrock-sagemaker"[\s\S]*?<\/article>/);
   assert.ok(quickMix);
   assert.doesNotMatch(quickMix[0], /seat-based|consumption-based|instance-based/i);
-  assert.match(concepts, /business users with no builders point to Quick/);
+  assert.match(quickMix[0], /No engineers → Quick/);
 
   const section = concepts.match(/id="dont-mix-up"[\s\S]*?<\/section>/);
   assert.ok(section);
-  const mixups = section[0].match(/<div class="mixup" /g) || [];
+  const mixups = section[0].match(/<article class="mixup" /g) || [];
   assert.equal(mixups.length, 19);
-  assert.match(concepts, /19 comparisons/);
-  assert.equal((section[0].match(/data-domain="[1-4]"/g) || []).length, 19);
-  assert.equal((section[0].match(/class="term-exam"/g) || []).length, 19);
+  assert.equal((section[0].match(/class="exam-rule"/g) || []).length, 19);
   assert.equal((section[0].match(/<details class="quick-check">/g) || []).length, 19);
-  assert.equal((section[0].match(/class="trio-table"/g) || []).length, 11);
+  assert.equal((section[0].match(/class="cmp-grid /g) || []).length, 19);
+  assert.doesNotMatch(section[0], /trio-table/);
+  assert.doesNotMatch(section[0], /data-domain=/);
 
-  const mixupIds = [...section[0].matchAll(/<div class="mixup" id="([^"]+)"/g)].map((m) => m[1]);
+  const mixupIds = [...section[0].matchAll(/<article class="mixup" id="([^"]+)"/g)].map((m) => m[1]);
   assert.equal(new Set(mixupIds).size, 19);
 
   const tiers = concepts.match(/id="eu-ai-act-tiers"[\s\S]*?<\/section>/);
@@ -116,21 +109,11 @@ test("the concepts page holds the comparisons, quick checks, risk ladder, and ru
   assert.equal((rules[0].match(/class="rule-card"/g) || []).length, 6);
 });
 
-test("every glossary link on the concepts page resolves and search placeholders match", () => {
+test("every glossary link on the concepts page resolves", () => {
   const anchors = [...concepts.matchAll(/href="\/aib-c01\/terms\/#([^"]+)"/g)].map((m) => m[1]);
   assert.ok(anchors.length >= 30);
   for (const anchor of anchors) {
     assert.ok(html.includes('id="' + anchor + '"'), "Missing glossary anchor: #" + anchor);
-  }
-
-  const parsedMixups = [...concepts.matchAll(/<div class="mixup"[^>]*data-domain="([^"]+)"[^>]*data-search="([^"]+)"[^>]*>([\s\S]*?)<\/details>\s*<\/div>/g)].map((m) => ({
-    domain: m[1],
-    search: m[2],
-    text: m[3].replace(/<[^>]+>/g, " "),
-  }));
-  assert.equal(parsedMixups.length, 19);
-  for (const sample of ["drift", "token", "kpi"]) {
-    assert.ok(filterMixups(parsedMixups, sample, "all").length >= 1, "Expected match for: " + sample);
   }
 });
 

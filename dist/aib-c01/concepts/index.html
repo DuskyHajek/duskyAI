@@ -39,7 +39,6 @@ try {
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/seo.css">
 <link rel="stylesheet" href="../css/polish.css">
-<link rel="stylesheet" href="../css/terms.css">
 <link rel="stylesheet" href="../css/concepts.css">
 <script type="application/ld+json">
 {
@@ -107,427 +106,312 @@ try {
     </nav>
   </div>
   <div class="wrap">
-    <header class="seo-landing">
-      <h1><span class="exam-code">AIB-<em>C01</em></span> look-alike concepts</h1>
-      <p class="seo-tagline">Similar ideas the AWS Certified AI Business Strategist exam asks you to tell apart. Not an AWS product.</p>
-      <p class="seo-meta">Each term links to the <a href="/aib-c01/terms/">glossary</a>. Cues and decision rules below are unofficial study heuristics, not AWS wording. <a href="https://docs.aws.amazon.com/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html" target="_blank" rel="noopener">AWS exam guide</a> · Last reviewed November 2026.</p>
-      <p class="print-only">Unofficial AIB-C01 study heuristics — not AWS wording and not an exam question sheet · duskyai.com/aib-c01/concepts/</p>
+    <header class="seo-landing concepts-landing">
+      <div class="concepts-landing-text">
+        <h1><span class="exam-code">AIB-<em>C01</em></span> look-alike concepts</h1>
+        <p class="seo-tagline">Tell similar exam ideas apart — terms link to the <a href="/aib-c01/terms/">glossary</a>. <a href="https://docs.aws.amazon.com/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html" target="_blank" rel="noopener">AWS exam guide</a> · Nov 2026.</p>
+        <p class="print-only">Unofficial AIB-C01 study sheet · duskyai.com/aib-c01/concepts/</p>
+      </div>
+      <button type="button" class="btn sm print-btn" id="print-sheet">Print sheet</button>
     </header>
     <main>
-      <div class="term-tools">
-        <label class="visually-hidden" for="term-search">Search concepts</label>
-        <input class="term-search" id="term-search" type="search" placeholder="Search, for example drift, token, or KPI" autocomplete="off" enterkeyhint="search">
-        <div class="term-actions">
-          <p class="term-count" id="term-count" aria-live="polite">19 comparisons</p>
-          <button type="button" class="print-btn" id="print-sheet">Print sheet</button>
-        </div>
-        <div class="term-domains" role="group" aria-label="Exam domain">
-          <button type="button" class="term-chip" data-domain="all" aria-pressed="true">All</button>
-          <button type="button" class="term-chip" data-domain="1" aria-pressed="false">Fundamentals <span>24%</span></button>
-          <button type="button" class="term-chip" data-domain="2" aria-pressed="false">Strategy <span>28%</span></button>
-          <button type="button" class="term-chip" data-domain="3" aria-pressed="false">Governance <span>24%</span></button>
-          <button type="button" class="term-chip" data-domain="4" aria-pressed="false">Readiness <span>24%</span></button>
-        </div>
-      </div>
-
-      <section class="concepts-block mixups" id="dont-mix-up" aria-labelledby="mixups-heading">
+      <section class="concepts-section" id="dont-mix-up" aria-labelledby="mixups-heading">
         <p class="kicker">Concepts</p>
         <h2 id="mixups-heading">Don’t mix up</h2>
-        <p class="mixups-lead">The exam often asks which of two or three similar ideas fits a scenario. Cues below are study heuristics, not official AWS definitions.</p>
+        <div class="mixup-list">
 
-        <div class="mixup" id="prompt-rag-finetuning" data-domain="1" data-search="prompt engineering retrieval augmented generation fine-tuning rag">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#prompt-engineering">Prompt engineering</a> vs <a href="/aib-c01/terms/#retrieval-augmented-generation">retrieval augmented generation</a> vs <a href="/aib-c01/terms/#fine-tuning">fine-tuning</a></h3>
-            <span class="mixup-domain">D1 · Fundamentals</span>
+        <article class="mixup" id="prompt-rag-finetuning">
+          <h3><a href="/aib-c01/terms/#prompt-engineering">Prompt engineering</a> vs <a href="/aib-c01/terms/#retrieval-augmented-generation">RAG</a> vs <a href="/aib-c01/terms/#fine-tuning">fine-tuning</a></h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#prompt-engineering">Prompt engineering</a></p><p class="cmp-cue">Fix format, tone, or constraints in the instructions — no new data or training.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#retrieval-augmented-generation">RAG</a></p><p class="cmp-cue">Private or changing facts: fetch live docs at question time with citations.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#fine-tuning">Fine-tuning</a></p><p class="cmp-cue">Consistent style or task behavior that prompts alone cannot reach.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">Prompt engineering</th><th scope="col">RAG</th><th scope="col">Fine-tuning</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>Improves instructions, context, and examples sent to the model.</td><td>Fetches current company content at question time and adds it to the prompt.</td><td>Further trains the model on your examples so its behavior shifts.</td></tr>
-                <tr><th scope="row">Pick it when</th><td>Output format, tone, or constraints are underspecified.</td><td>Facts are private, change often, or need source citations.</td><td>You need a consistent style or task behavior prompts cannot reach.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, start with the cheapest change that fixes the problem. Unclear output points to the prompt, missing or weekly-changing facts point to retrieval, and a consistent style or behavior the prompt cannot reach points to fine-tuning.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Cheapest fix first: prompt → RAG → fine-tuning.</p>
           <details class="quick-check">
             <summary><span class="qc-tag">Quick check</span> An internal FAQ bot quotes last month’s travel policy. What do you try first?</summary>
-            <p class="quick-check-answer">Use retrieval augmented generation (RAG) over the live policy library so answers pull current passages with citations, rather than fine-tuning on documents that keep changing.</p>
+            <p class="quick-check-answer">RAG over the live policy library — facts change often; fine-tuning on stale docs does not fix freshness.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="ai-ml-genai" data-domain="1" data-search="artificial intelligence machine learning generative ai predictive">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#artificial-intelligence">Artificial intelligence</a> vs <a href="/aib-c01/terms/#machine-learning">machine learning</a> vs <a href="/aib-c01/terms/#generative-ai">generative AI</a></h3>
-            <span class="mixup-domain">D1 · Fundamentals</span>
+        <article class="mixup" id="ai-ml-genai">
+          <h3><a href="/aib-c01/terms/#artificial-intelligence">AI</a> vs <a href="/aib-c01/terms/#machine-learning">ML</a> vs <a href="/aib-c01/terms/#generative-ai">generative AI</a></h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#artificial-intelligence">AI</a></p><p class="cmp-cue">Umbrella term for intelligent systems — not a specific technique.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#machine-learning">ML</a></p><p class="cmp-cue">Predict, score, or classify from historical labeled data.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#generative-ai">Generative AI</a></p><p class="cmp-cue">Create new text, images, audio, or code from a prompt.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">Artificial intelligence</th><th scope="col">Machine learning</th><th scope="col">Generative AI</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>The broad umbrella for machines performing tasks that normally need human intelligence.</td><td>Models that learn patterns from historical data to predict, score, or classify.</td><td>Models that create new text, images, audio, or code from a prompt.</td></tr>
-                <tr><th scope="row">Pick it when</th><td>Referring to the overall field or portfolio.</td><td>Scoring churn, forecasting demand, or routing tickets from labeled history.</td><td>Drafting copy, summarizing calls, or synthesizing unstructured text.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, scoring or predicting from past data is machine learning, creating new content is generative AI, and fixed if-then logic is neither.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Predict from history = ML · create content = generative AI · fixed if-then = neither.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> A retailer wants to predict which subscribers will cancel next quarter from billing history. Which category fits?</summary>
-            <p class="quick-check-answer">Machine learning (predictive AI), because the goal is scoring a structured outcome from historical patterns, not generating new content.</p>
+            <summary><span class="qc-tag">Quick check</span> Predict which subscribers cancel next quarter from billing history?</summary>
+            <p class="quick-check-answer">Machine learning — scoring from patterns, not generating new content.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="rules-vs-ai" data-domain="1" data-search="rule-based automation artificial intelligence ai deterministic">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#rule-based-automation">Rule-based automation</a> vs <a href="/aib-c01/terms/#artificial-intelligence">AI</a></h3>
-            <span class="mixup-domain">D1 · Fundamentals</span>
+        <article class="mixup" id="rules-vs-ai">
+          <h3><a href="/aib-c01/terms/#rule-based-automation">Rule-based automation</a> vs <a href="/aib-c01/terms/#artificial-intelligence">AI</a></h3>
+          <div class="cmp-grid cmp-cols-2">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#rule-based-automation">Rules</a></p><p class="cmp-cue">Fixed human-written logic — deterministic and auditable, never learns.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#artificial-intelligence">AI</a></p><p class="cmp-cue">Messy inputs or shifting patterns that no stable rule set can cover.</p></div>
           </div>
-          <p>Rule-based automation follows fixed logic written by people and never learns. AI handles cases too varied or unstructured to write rules for.</p>
-          <p class="term-exam">On the exam, if the logic is simple, stable, and must be auditable, rules beat AI. If the inputs are messy or the patterns change, AI earns its cost.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Simple, stable, must reproduce exactly → rules. Varied or unstructured → AI.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> A regulator publishes exact numeric thresholds for flagging loans, and auditors require 100% reproducible outcomes. AI or rules?</summary>
-            <p class="quick-check-answer">Rule-based automation. The criteria are explicit, structured, stable, and must be deterministic.</p>
+            <summary><span class="qc-tag">Quick check</span> Regulator sets exact numeric loan thresholds; auditors need 100% reproducible flags?</summary>
+            <p class="quick-check-answer">Rule-based automation — explicit thresholds and deterministic outcomes.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="quick-bedrock-sagemaker" data-domain="1" data-search="aws quick amazon bedrock sagemaker ai">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#aws-quick">AWS Quick</a> vs <a href="/aib-c01/terms/#amazon-bedrock">Bedrock</a> vs <a href="/aib-c01/terms/#amazon-sagemaker-ai">SageMaker AI</a></h3>
-            <span class="mixup-domain">D1 · Fundamentals</span>
+        <article class="mixup" id="quick-bedrock-sagemaker">
+          <h3><a href="/aib-c01/terms/#aws-quick">AWS Quick</a> vs <a href="/aib-c01/terms/#amazon-bedrock">Bedrock</a> vs <a href="/aib-c01/terms/#amazon-sagemaker-ai">SageMaker AI</a></h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#aws-quick">AWS Quick</a></p><p class="cmp-cue">Business users with no builders — ready-made AI workspace (exam guide: Amazon Quick).</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#amazon-bedrock">Bedrock</a></p><p class="cmp-cue">Developers shipping a generative app on foundation models, RAG, guardrails.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#amazon-sagemaker-ai">SageMaker AI</a></p><p class="cmp-cue">Custom train/deploy when off-the-shelf models will not fit.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">AWS Quick</th><th scope="col">Amazon Bedrock</th><th scope="col">Amazon SageMaker AI</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>Ready-made AI workspace for business users (the exam guide still calls it Amazon Quick).</td><td>Managed platform for building generative AI apps on foundation models, with retrieval and guardrails.</td><td>End-to-end platform where a team builds, trains, and runs its own custom models.</td></tr>
-                <tr><th scope="row">Pick it when</th><td>Non-technical staff need analysis, research, or workflow automation with no builders.</td><td>Developers are integrating foundation models into a company app.</td><td>Off-the-shelf foundation models will not fit and custom ML training is required.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, business users with no builders point to Quick. A developer building a generative AI app points to Bedrock. A team that needs its own model points to SageMaker AI.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> No engineers → Quick · dev building GenAI app → Bedrock · own model → SageMaker AI.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> A finance team with no engineers wants an assistant over internal spreadsheets and docs this month. Where do you point them?</summary>
-            <p class="quick-check-answer">AWS Quick (Amazon Quick), because business users without engineering builders need a ready-made workspace.</p>
+            <summary><span class="qc-tag">Quick check</span> Finance team, no engineers, wants an assistant over spreadsheets this month?</summary>
+            <p class="quick-check-answer">AWS Quick — business users need a ready-made workspace, not a dev platform.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="agent-vs-chatbot" data-domain="1" data-search="ai agent chatbot assistant tools autonomy">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#ai-agent">AI agent</a> vs <a href="/aib-c01/terms/#ai-agent">chatbot</a></h3>
-            <span class="mixup-domain">D1 · Fundamentals</span>
+        <article class="mixup" id="agent-vs-chatbot">
+          <h3><a href="/aib-c01/terms/#ai-agent">AI agent</a> vs chatbot</h3>
+          <div class="cmp-grid cmp-cols-2">
+            <div class="cmp-cell"><p class="cmp-name">Chatbot</p><p class="cmp-cue">Answers questions — no multi-step tool use.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#ai-agent">AI agent</a></p><p class="cmp-cue">Plans steps, calls tools, checks results, acts or escalates.</p></div>
           </div>
-          <p>A chatbot replies. An AI agent plans steps, uses business tools, checks the result, and acts or escalates.</p>
-          <p class="term-exam">On the exam, a system that must take actions across tools is an agent. One that only answers questions is an assistant.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Actions across systems → agent · Q&amp;A only → chatbot/assistant.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> A travel tool must look up flight rules, rebook a ticket, file an expense claim, and email the manager. Chatbot or agent?</summary>
-            <p class="quick-check-answer">AI agent, because it plans multi-step work and executes actions across external systems rather than only answering questions.</p>
+            <summary><span class="qc-tag">Quick check</span> Tool must rebook a flight, file expenses, and email the manager?</summary>
+            <p class="quick-check-answer">AI agent — multi-step execution across systems, not just replies.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="augmentation-vs-automation" data-domain="1" data-search="augmentation automation human-in-the-loop">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#augmentation">Augmentation</a> vs <a href="/aib-c01/terms/#automation">automation</a></h3>
-            <span class="mixup-domain">D1 · Fundamentals</span>
+        <article class="mixup" id="augmentation-vs-automation">
+          <h3><a href="/aib-c01/terms/#augmentation">Augmentation</a> vs <a href="/aib-c01/terms/#automation">automation</a></h3>
+          <div class="cmp-grid cmp-cols-2">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#augmentation">Augmentation</a></p><p class="cmp-cue">Human still delivers the outcome; AI drafts or recommends.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#automation">Automation</a></p><p class="cmp-cue">The system carries out the work end to end.</p></div>
           </div>
-          <p>Augmentation keeps a person doing the job, with AI as the draft or recommendation. Automation lets the system carry out the job.</p>
-          <p class="term-exam">On the exam, a person still producing the outcome is augmentation. Whether each case must be approved is a separate <a href="/aib-c01/terms/#human-in-the-loop">human-in-the-loop</a> question.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Person still produces the result → augmentation. Per-case approval is <a href="/aib-c01/terms/#human-in-the-loop">HITL</a>, not the same question.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> AI drafts customer replies that support reps edit and send themselves. Augmentation or automation?</summary>
-            <p class="quick-check-answer">Augmentation, because the person remains responsible for producing and sending the final outcome.</p>
+            <summary><span class="qc-tag">Quick check</span> AI drafts replies; reps edit and send themselves?</summary>
+            <p class="quick-check-answer">Augmentation — the human still sends the final message.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="token-vs-context-window" data-domain="1" data-search="token context window long prompt truncation rag cost">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#token">Token</a> vs <a href="/aib-c01/terms/#context-window">context window</a></h3>
-            <span class="mixup-domain">D1 · Fundamentals</span>
+        <article class="mixup" id="token-vs-context-window">
+          <h3><a href="/aib-c01/terms/#token">Token</a> vs <a href="/aib-c01/terms/#context-window">context window</a></h3>
+          <div class="cmp-grid cmp-cols-2">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#token">Token</a></p><p class="cmp-cue">Billing unit for text in/out — cost rises with volume.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#context-window">Context window</a></p><p class="cmp-cue">Cap on text considered in one request — tail content gets dropped.</p></div>
           </div>
-          <p>A token is the unit of text a model reads and writes, and usage is typically priced by it. A context window is how much text the model can consider in one request.</p>
-          <p class="term-exam">On the exam, cost that climbs with long prompts is a token problem. Details lost from very long inputs or long chats point to context limits — the fix is to send only relevant passages, such as with <a href="/aib-c01/terms/#retrieval-augmented-generation">retrieval</a>, not the whole library.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Bill shock → tokens · missing end of huge paste → context limit; fix with <a href="/aib-c01/terms/#retrieval-augmented-generation">RAG</a> chunks, not stuffing everything in.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> Short leases summarize accurately, but 120-page leases silently drop clauses from the end with no error logged. What is the cause?</summary>
-            <p class="quick-check-answer">The input exceeded the context window. Retrieve and pass only relevant sections instead of stuffing the entire document into one prompt.</p>
+            <summary><span class="qc-tag">Quick check</span> 120-page lease drops clauses at the end with no error?</summary>
+            <p class="quick-check-answer">Context window exceeded — retrieve relevant sections instead of one giant prompt.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="kpi-roi-baseline" data-domain="2" data-search="kpi roi baseline total cost of ownership tco">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#kpi">KPI</a> vs <a href="/aib-c01/terms/#roi">ROI</a> vs <a href="/aib-c01/terms/#baseline">baseline</a></h3>
-            <span class="mixup-domain">D2 · Strategy</span>
+        <article class="mixup" id="kpi-roi-baseline">
+          <h3><a href="/aib-c01/terms/#kpi">KPI</a> vs <a href="/aib-c01/terms/#roi">ROI</a> vs <a href="/aib-c01/terms/#baseline">baseline</a></h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#kpi">KPI</a></p><p class="cmp-cue">The metric the initiative exists to move.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#roi">ROI</a></p><p class="cmp-cue">(Benefits − <a href="/aib-c01/terms/#total-cost-of-ownership">TCO</a>) ÷ cost — needs realized dollars, not minutes saved alone.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#baseline">Baseline</a></p><p class="cmp-cue">Before measurement so you can credit AI for the delta.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">KPI</th><th scope="col">ROI</th><th scope="col">Baseline</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>The metric the initiative exists to move.</td><td>Realized benefits minus full costs, divided by costs.</td><td>The measurement taken before AI so later change can be credited to it.</td></tr>
-                <tr><th scope="row">Pick it when</th><td>Defining what operational or customer success looks like.</td><td>Justifying spend against <a href="/aib-c01/terms/#total-cost-of-ownership">total cost of ownership</a>.</td><td>Proving a before-and-after lift rather than guessing from memory.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, a number with no before-measurement is not yet a result, and saved minutes are not ROI until converted into realized cost, capacity, or revenue.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> No before measure → no proven lift. Saved time ≠ ROI until tied to cost, capacity, or revenue.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> Six months after launch, a team reports 4-minute average handling time and asks to declare success, but nobody recorded pre-AI times. What is missing?</summary>
-            <p class="quick-check-answer">A baseline. Without a before-measurement (or controlled comparison), the 4-minute figure cannot prove AI caused an improvement.</p>
+            <summary><span class="qc-tag">Quick check</span> 4-minute handle time after launch, but no pre-AI times recorded?</summary>
+            <p class="quick-check-answer">Missing baseline — cannot prove AI caused improvement.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="impact-vs-feasibility" data-domain="2" data-search="impact feasibility use-case prioritization data readiness">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#use-case-prioritization">Impact</a> vs <a href="/aib-c01/terms/#use-case-prioritization">feasibility</a></h3>
-            <span class="mixup-domain">D2 · Strategy</span>
+        <article class="mixup" id="impact-vs-feasibility">
+          <h3><a href="/aib-c01/terms/#use-case-prioritization">Impact</a> vs feasibility</h3>
+          <div class="cmp-grid cmp-cols-2">
+            <div class="cmp-cell"><p class="cmp-name">Impact</p><p class="cmp-cue">Upside if the use case succeeds.</p></div>
+            <div class="cmp-cell"><p class="cmp-name">Feasibility</p><p class="cmp-cue">Data, skills, risk, and time to actually make it work.</p></div>
           </div>
-          <p>Business impact is the value if the use case works. Feasibility is whether the data, skills, risk, and time allow it to work.</p>
-          <p class="term-exam">On the exam, the first use case scores high on both. High impact with weak data is a data project first, not a pilot.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Pilot the case that wins on both. Huge impact + bad data → fix data first.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> Use case A promises $5M upside but lacks clean historical records; use case B promises $1M upside with ready data and a clear owner. Which runs first?</summary>
-            <p class="quick-check-answer">Use case B. High impact with weak feasibility stalls; pair A with a data-readiness track before piloting it.</p>
+            <summary><span class="qc-tag">Quick check</span> A: $5M upside, dirty data. B: $1M upside, ready data and owner?</summary>
+            <p class="quick-check-answer">B first — weak feasibility stalls A; run data readiness for A in parallel.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="build-buy-partner" data-domain="2" data-search="build buy partner aws marketplace sourcing vendor">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#build-buy-partner">Build</a> vs <a href="/aib-c01/terms/#build-buy-partner">buy</a> vs <a href="/aib-c01/terms/#aws-marketplace">partner</a></h3>
-            <span class="mixup-domain">D2 · Strategy</span>
+        <article class="mixup" id="build-buy-partner">
+          <h3><a href="/aib-c01/terms/#build-buy-partner">Build</a> vs buy vs <a href="/aib-c01/terms/#aws-marketplace">partner</a></h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name">Build</p><p class="cmp-cue">AI is the differentiator and you have in-house skills.</p></div>
+            <div class="cmp-cell"><p class="cmp-name">Buy</p><p class="cmp-cue">Common need, speed over customization.</p></div>
+            <div class="cmp-cell"><p class="cmp-name">Partner</p><p class="cmp-cue">Missing skills or deadline — vendor, integrator, or Marketplace.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">Build</th><th scope="col">Buy</th><th scope="col">Partner</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>Creating a custom solution with your own team.</td><td>Adopting a ready-made product as-is.</td><td>Working with a vendor, integrator, or <a href="/aib-c01/terms/#aws-marketplace">AWS Marketplace</a> offering to supply skills or a tailored solution.</td></tr>
-                <tr><th scope="row">Pick it when</th><td>AI is your differentiator, constraints are strict, and you have the skills.</td><td>The need is common and speed matters more than customization.</td><td>You need delivery speed or specialized capability your team lacks.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, if AI is your differentiator and you have the skills, build. For common needs, buy. When you lack skills or time, partner — and always check hard legal or accuracy constraints first.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Differentiator + skills → build · commodity + deadline → buy/partner.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> A mid-sized firm needs standard invoice extraction in 60 days and has no ML engineers. Build, buy, or partner?</summary>
-            <p class="quick-check-answer">Buy (or partner for integration). Invoice extraction is a common need and the short deadline plus lack of ML staff rules out building from scratch.</p>
+            <summary><span class="qc-tag">Quick check</span> Standard invoice extraction in 60 days, no ML engineers?</summary>
+            <p class="quick-check-answer">Buy or partner — common capability and no team to build.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="pricing-models" data-domain="2" data-search="consumption-based seat-based instance-based pricing models savings plans cost">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#pricing-models">Consumption-based</a> vs <a href="/aib-c01/terms/#pricing-models">seat-based</a> vs <a href="/aib-c01/terms/#pricing-models">instance-based pricing</a></h3>
-            <span class="mixup-domain">D2 · Strategy</span>
+        <article class="mixup" id="pricing-models">
+          <h3><a href="/aib-c01/terms/#pricing-models">Consumption</a> vs seat vs instance pricing</h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name">Consumption</p><p class="cmp-cue">Pay per token/API — pilots and spiky demand.</p></div>
+            <div class="cmp-cell"><p class="cmp-name">Seat-based</p><p class="cmp-cue">Predictable per-user fee for regular workspace use.</p></div>
+            <div class="cmp-cell"><p class="cmp-name">Instance / reserved</p><p class="cmp-cue">Steady high volume — <a href="/aib-c01/terms/#savings-plans">Savings Plans</a> when usage is proven.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">Consumption-based</th><th scope="col">Seat-based</th><th scope="col">Instance-based</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>Pay per unit used, such as tokens or API calls.</td><td>Pay a recurring fee per named user.</td><td>Pay for dedicated compute or reserved capacity while it runs.</td></tr>
-                <tr><th scope="row">Pick it when</th><td>Demand is variable, spiky, or still being tested.</td><td>Employees use a packaged workspace regularly and budgets need predictability.</td><td>Workloads run at high, steady volume where reserved capacity or <a href="/aib-c01/terms/#savings-plans">Savings Plans</a> lower unit cost.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, pay-per-use fits variable or experimental demand, while seats or reserved capacity fit steady, predictable use — avoid long commitments before usage stabilizes.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Unknown or variable usage → consumption. Do not reserve capacity before demand is stable.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> A marketing team plans a 6-week pilot with unpredictable traffic and asks whether to commit to reserved capacity upfront. What should you advise?</summary>
-            <p class="quick-check-answer">Start with consumption-based pricing. Reserve capacity or Savings Plans only after demand proves steady and ongoing.</p>
+            <summary><span class="qc-tag">Quick check</span> 6-week pilot, unpredictable traffic — reserve capacity upfront?</summary>
+            <p class="quick-check-answer">No — start consumption-based; commit only when volume is steady.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="hallucination-bias-degradation" data-domain="3" data-search="hallucination bias data-quality degradation drift reliability">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#hallucination">Hallucination</a> vs <a href="/aib-c01/terms/#bias">bias</a> vs <a href="/aib-c01/terms/#data-quality">data-quality degradation</a></h3>
-            <span class="mixup-domain">D3 · Governance</span>
+        <article class="mixup" id="hallucination-bias-degradation">
+          <h3><a href="/aib-c01/terms/#hallucination">Hallucination</a> vs <a href="/aib-c01/terms/#bias">bias</a> vs <a href="/aib-c01/terms/#data-quality">data-quality degradation</a></h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#hallucination">Hallucination</a></p><p class="cmp-cue">Confident facts or citations with no source.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#bias">Bias</a></p><p class="cmp-cue">Systematically worse outcomes for a group or segment.</p></div>
+            <div class="cmp-cell"><p class="cmp-name">Data-quality / <a href="/aib-c01/terms/#drift">drift</a></p><p class="cmp-cue">Worked at launch, accuracy decays as inputs shift.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">Hallucination</th><th scope="col">Bias</th><th scope="col">Data-quality degradation</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>Fluent output that is false or unsupported by any source.</td><td>Results that are systematically worse for certain groups or cases.</td><td>Inputs become stale, incomplete, or inconsistent, causing performance to decay (<a href="/aib-c01/terms/#drift">drift</a>).</td></tr>
-                <tr><th scope="row">Pick it when</th><td>The model invents citations, numbers, or policy details.</td><td>Historical labels or proxies skew outcomes against a demographic or segment.</td><td>A system worked well at launch and gradually grew less accurate as inputs shifted.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, confident wrong facts point to hallucination. Consistently worse outcomes for one group point to bias. A system that worked at launch and slowly got worse points to data-quality degradation or drift.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Invented detail → hallucination · one group always loses → bias · slow decay after go-live → drift.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> A demand model launched with strong accuracy, but six months later forecasts miss after two new product lines and missing warehouse feeds. Which issue is this?</summary>
-            <p class="quick-check-answer">Data-quality degradation and drift — the model code did not change, but the inputs and underlying distribution shifted over time.</p>
+            <summary><span class="qc-tag">Quick check</span> Forecasts miss after new product lines and broken warehouse feeds?</summary>
+            <p class="quick-check-answer">Data-quality degradation / drift — distribution shifted, model code did not.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="guardrails-oversight-governance" data-domain="3" data-search="guardrails human oversight governance responsible ai policy controls">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#guardrails">Guardrails</a> vs <a href="/aib-c01/terms/#human-in-the-loop">human oversight</a> vs <a href="/aib-c01/terms/#responsible-ai">governance</a></h3>
-            <span class="mixup-domain">D3 · Governance</span>
+        <article class="mixup" id="guardrails-oversight-governance">
+          <h3><a href="/aib-c01/terms/#guardrails">Guardrails</a> vs oversight vs <a href="/aib-c01/terms/#responsible-ai">governance</a></h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#guardrails">Guardrails</a></p><p class="cmp-cue">Automated block/filter on unsafe I/O in real time.</p></div>
+            <div class="cmp-cell"><p class="cmp-name">Oversight</p><p class="cmp-cue">People approve (<a href="/aib-c01/terms/#human-in-the-loop">HITL</a>) or monitor/override (<a href="/aib-c01/terms/#human-on-the-loop">HOTL</a>).</p></div>
+            <div class="cmp-cell"><p class="cmp-name">Governance</p><p class="cmp-cue">Policies, inventory, approval gates, <a href="/aib-c01/terms/#accountable-owner">owners</a>.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">Guardrails</th><th scope="col">Human oversight</th><th scope="col">Governance</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>Automated runtime controls that block or filter unsafe inputs and outputs.</td><td>A person reviewing, approving (<a href="/aib-c01/terms/#human-in-the-loop">HITL</a>), or overriding (<a href="/aib-c01/terms/#human-on-the-loop">HOTL</a>) decisions.</td><td>Policies, roles, and <a href="/aib-c01/terms/#accountable-owner">accountability</a> that decide which controls apply.</td></tr>
-                <tr><th scope="row">Pick it when</th><td>Preventing blocked topics, PII leaks, or ungrounded replies in real time.</td><td>Errors carry meaningful harm or low-confidence cases need judgment.</td><td>Setting standards, approval gates, inventory, and risk ownership across teams.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, an automatic block on a harmful answer is a guardrail. A person approving or stopping a decision is oversight. Deciding who owns the risk and which controls apply is governance.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Auto block → guardrail · person signs off → oversight · who owns risk org-wide → governance.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> Three departments deploy chatbots with different privacy rules and no central review. Adding a prompt filter is not enough — what layer is missing?</summary>
-            <p class="quick-check-answer">Governance: shared policy, an AI inventory, approval gates, and named owners deciding which controls each use case requires.</p>
+            <summary><span class="qc-tag">Quick check</span> Three chatbots, three privacy rules, one prompt filter added — still broken?</summary>
+            <p class="quick-check-answer">Governance layer — shared policy, inventory, owners per use case.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="hitl-vs-hotl" data-domain="3" data-search="human-in-the-loop human-on-the-loop escalation hitl hotl">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#human-in-the-loop">Human-in-the-loop</a> vs <a href="/aib-c01/terms/#human-on-the-loop">human-on-the-loop</a></h3>
-            <span class="mixup-domain">D3 · Governance</span>
+        <article class="mixup" id="hitl-vs-hotl">
+          <h3><a href="/aib-c01/terms/#human-in-the-loop">HITL</a> vs <a href="/aib-c01/terms/#human-on-the-loop">HOTL</a></h3>
+          <div class="cmp-grid cmp-cols-2">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#human-in-the-loop">HITL</a></p><p class="cmp-cue">Human approves before each decision ships.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#human-on-the-loop">HOTL</a></p><p class="cmp-cue">System acts; humans monitor and can reverse.</p></div>
           </div>
-          <p>Human-in-the-loop means a person approves each decision before it counts. Human-on-the-loop means the system acts and a person monitors and can override it.</p>
-          <p class="term-exam">On the exam, a high-harm or low-confidence case is escalated to a person. A high-harm decision that must not go out unreviewed is human-in-the-loop. A system that acts, with someone able to stop it, is human-on-the-loop.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Must not act without sign-off → HITL · auto-block with analyst override → HOTL.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> An AI flags suspicious card transactions and blocks them automatically while fraud analysts monitor alerts and reverse false positives. Which model is this?</summary>
-            <p class="quick-check-answer">Human-on-the-loop, because the system executes actions without waiting for per-case sign-off, while people watch and can intervene.</p>
+            <summary><span class="qc-tag">Quick check</span> Fraud AI blocks cards; analysts reverse false positives?</summary>
+            <p class="quick-check-answer">Human-on-the-loop — automated action, human monitoring.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="explainability-vs-transparency" data-domain="3" data-search="explainability transparency disclosure reason codes">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#explainability">Explainability</a> vs <a href="/aib-c01/terms/#transparency">transparency</a></h3>
-            <span class="mixup-domain">D3 · Governance</span>
+        <article class="mixup" id="explainability-vs-transparency">
+          <h3><a href="/aib-c01/terms/#explainability">Explainability</a> vs <a href="/aib-c01/terms/#transparency">transparency</a></h3>
+          <div class="cmp-grid cmp-cols-2">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#explainability">Explainability</a></p><p class="cmp-cue">Why this specific output or decision happened.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#transparency">Transparency</a></p><p class="cmp-cue">Disclose that AI is involved and its limits.</p></div>
           </div>
-          <p>Explainability is being able to say why the system produced an output. Transparency is telling people that AI is involved and what it can and cannot do.</p>
-          <p class="term-exam">On the exam, a regulator asking why a decision was made is explainability. A customer who should know they are talking to AI is transparency.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> “Why was I declined?” → explainability · “You’re chatting with AI” → transparency.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> A bank must tell declined credit applicants which factors drove their rejection. Explainability or transparency?</summary>
-            <p class="quick-check-answer">Explainability, because the bank must account for why that specific decision happened.</p>
+            <summary><span class="qc-tag">Quick check</span> Bank must list factors behind a credit rejection?</summary>
+            <p class="quick-check-answer">Explainability — reason for that decision.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="iso-22989-23053-42001" data-domain="3" data-search="iso iec 22989 23053 42001 certification standards">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#iso-iec-22989">ISO/IEC 22989</a> vs <a href="/aib-c01/terms/#iso-iec-23053">23053</a> vs <a href="/aib-c01/terms/#iso-iec-42001">42001</a></h3>
-            <span class="mixup-domain">D3 · Governance</span>
+        <article class="mixup" id="iso-22989-23053-42001">
+          <h3><a href="/aib-c01/terms/#iso-iec-22989">ISO 22989</a> vs <a href="/aib-c01/terms/#iso-iec-23053">23053</a> vs <a href="/aib-c01/terms/#iso-iec-42001">42001</a></h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#iso-iec-22989">22989</a></p><p class="cmp-cue">AI vocabulary — not a cert.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#iso-iec-23053">23053</a></p><p class="cmp-cue">ML system framework — not a cert.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#iso-iec-42001">42001</a></p><p class="cmp-cue">Certifiable org AI management system — vendor cert ≠ your workflows certified.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">ISO/IEC 22989</th><th scope="col">ISO/IEC 23053</th><th scope="col">ISO/IEC 42001</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>Shared AI concepts and terminology dictionary.</td><td>Framework describing the parts of a machine-learning system.</td><td>Certifiable AI management system standard for an organization.</td></tr>
-                <tr><th scope="row">Pick it when</th><td>Teams and vendors need one common vocabulary.</td><td>Mapping ML system components (not for company certification).</td><td>Auditing or certifying how an organization manages AI risk and controls.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, a vendor’s 42001 certificate does not certify its customers, and 23053 is not a certificate at all.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Vendor 42001 certifies the vendor’s management system, not your deployment.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> A vendor claims its ISO/IEC 42001 certificate means your deployed AI workflow is already certified. True or false?</summary>
-            <p class="quick-check-answer">False. A vendor’s ISO/IEC 42001 certificate covers the vendor’s management system, not how your organization governs its own AI use cases.</p>
+            <summary><span class="qc-tag">Quick check</span> Vendor says their 42001 means your workflow is certified?</summary>
+            <p class="quick-check-answer">False — your org still owns governance of how you use AI.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="poc-pilot-scale" data-domain="4" data-search="proof of concept pilot scale phased rollout pilot purgatory">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#proof-of-concept">Proof of concept</a> vs <a href="/aib-c01/terms/#phased-rollout">pilot</a> vs <a href="/aib-c01/terms/#phased-rollout">scale</a></h3>
-            <span class="mixup-domain">D4 · Readiness</span>
+        <article class="mixup" id="poc-pilot-scale">
+          <h3><a href="/aib-c01/terms/#proof-of-concept">PoC</a> vs <a href="/aib-c01/terms/#phased-rollout">pilot</a> vs <a href="/aib-c01/terms/#phased-rollout">scale</a></h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#proof-of-concept">PoC</a></p><p class="cmp-cue">Time-boxed feasibility — can it work at all?</p></div>
+            <div class="cmp-cell"><p class="cmp-name">Pilot</p><p class="cmp-cue">Real users/data with measured outcomes.</p></div>
+            <div class="cmp-cell"><p class="cmp-name">Scale</p><p class="cmp-cue">Production owner, monitoring, support, routines.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">Proof of concept</th><th scope="col">Pilot</th><th scope="col">Scale</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>Small, time-boxed test of whether an approach can work at all.</td><td>Controlled trial with real users, real data, and measured outcomes.</td><td>Enterprise rollout with ownership, monitoring, support, and operating routines.</td></tr>
-                <tr><th scope="row">Pick it when</th><td>Validating technical feasibility before spending on workflow rollout.</td><td>Proving real-world value and adoption before full investment.</td><td>Moving a proven pilot into repeatable production across teams.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, a successful demo is not production readiness. Many pilots with no owner or operating plan is <a href="/aib-c01/terms/#pilot-purgatory">pilot purgatory</a>.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Demo ≠ production. Many stuck pilots = <a href="/aib-c01/terms/#pilot-purgatory">pilot purgatory</a> — missing owner and ops.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> Five teams ran impressive AI demos last year, yet none reached daily operations because no one owns monitoring or support. What stage failed?</summary>
-            <p class="quick-check-answer">Scaling (pilot purgatory). Demos and pilots succeeded, but run-state ownership, support, and operational governance were never built.</p>
+            <summary><span class="qc-tag">Quick check</span> Five great demos last year, none in daily ops, no monitoring owner?</summary>
+            <p class="quick-check-answer">Failed at scale — run-state ownership never built.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="owner-vs-coe" data-domain="4" data-search="accountable owner center of excellence coe">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#accountable-owner">Accountable owner</a> vs <a href="/aib-c01/terms/#ai-center-of-excellence">center of excellence</a></h3>
-            <span class="mixup-domain">D4 · Readiness</span>
+        <article class="mixup" id="owner-vs-coe">
+          <h3><a href="/aib-c01/terms/#accountable-owner">Owner</a> vs <a href="/aib-c01/terms/#ai-center-of-excellence">CoE</a></h3>
+          <div class="cmp-grid cmp-cols-2">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#accountable-owner">Accountable owner</a></p><p class="cmp-cue">Answers for one system’s outcomes and risks.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#ai-center-of-excellence">AI CoE</a></p><p class="cmp-cue">Standards, patterns, enablement — not owning every delivery.</p></div>
           </div>
-          <p>The accountable owner answers for one AI system’s outcomes and risks. The AI center of excellence provides standards, reusable assets, and enablement across the company.</p>
-          <p class="term-exam">On the exam, who answers for a failure is the owner. Who helps every team do it well is the center of excellence.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Who is blamed for failure → owner. Who helps all teams → CoE (must not become the only build shop).</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> A central AI team insists on building and owning every business unit’s models, creating a 9-month backlog. What is wrong with that operating model?</summary>
-            <p class="quick-check-answer">The center of excellence became a delivery bottleneck. It should enable teams with standards and reusable patterns while business owners stay accountable for outcomes.</p>
+            <summary><span class="qc-tag">Quick check</span> Central team builds every BU model — 9-month backlog?</summary>
+            <p class="quick-check-answer">CoE as bottleneck — enable BUs; owners stay accountable.</p>
           </details>
-        </div>
+        </article>
 
-        <div class="mixup" id="literacy-upskilling-change" data-domain="4" data-search="ai literacy upskilling change management adoption training incentives">
-          <div class="mixup-head">
-            <h3><a href="/aib-c01/terms/#ai-literacy">AI literacy</a> vs <a href="/aib-c01/terms/#upskilling">upskilling</a> vs <a href="/aib-c01/terms/#change-management">change management</a></h3>
-            <span class="mixup-domain">D4 · Readiness</span>
+        <article class="mixup" id="literacy-upskilling-change">
+          <h3><a href="/aib-c01/terms/#ai-literacy">Literacy</a> vs <a href="/aib-c01/terms/#upskilling">upskilling</a> vs <a href="/aib-c01/terms/#change-management">change</a></h3>
+          <div class="cmp-grid cmp-cols-3">
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#ai-literacy">AI literacy</a></p><p class="cmp-cue">Baseline skill to use and question AI in role.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#upskilling">Upskilling</a></p><p class="cmp-cue">Training programs to close skill gaps.</p></div>
+            <div class="cmp-cell"><p class="cmp-name"><a href="/aib-c01/terms/#change-management">Change management</a></p><p class="cmp-cue">Incentives, workflows, leadership so behavior shifts.</p></div>
           </div>
-          <div class="trio-wrap">
-            <table class="trio-table">
-              <thead>
-                <tr><th scope="col">Dimension</th><th scope="col">AI literacy</th><th scope="col">Upskilling</th><th scope="col">Change management</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">What it is</th><td>The practical skill to use, question, and govern AI in one’s role.</td><td>Role-based training programs that build those skills across staff.</td><td>Aligning communication, workflows, incentives, and leadership so people adopt new ways of working.</td></tr>
-                <tr><th scope="row">Pick it when</th><td>Defining the baseline capability every role needs.</td><td>Closing a knowledge or tool-usage gap through targeted training.</td><td>Staff understand the tool yet keep using the old process because of habits, fear, or misaligned incentives.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="term-exam">On the exam, a working tool that few people use points to change management, not a better model.</p>
+          <p class="exam-rule"><span class="rule-tag">Rule</span> Trained but still old process → change management, not more courses.</p>
           <details class="quick-check">
-            <summary><span class="qc-tag">Quick check</span> Dispatchers completed AI training on a route optimizer but still plan routes manually because bonuses reward manual overrides. What is needed?</summary>
-            <p class="quick-check-answer">Change management — specifically realigning incentives, manager signals, and workflow expectations rather than adding more technical training.</p>
+            <summary><span class="qc-tag">Quick check</span> Dispatchers trained on optimizer; bonuses reward manual routes?</summary>
+            <p class="quick-check-answer">Change management — fix incentives and workflow, not training alone.</p>
           </details>
+        </article>
+
         </div>
       </section>
 
-      <section class="concepts-block risk-ladder" id="eu-ai-act-tiers" data-domain="3" data-search="eu ai act risk tiers classification prohibited high limited minimal regulation" aria-labelledby="tiers-heading">
-        <p class="kicker">D3 · Risk classification</p>
-        <h2 id="tiers-heading"><a href="/aib-c01/terms/#eu-ai-act">EU AI Act</a> four <a href="/aib-c01/terms/#risk-classification">risk tiers</a></h2>
-        <p class="mixups-lead">Obligations scale with potential harm rather than applying one blanket rule to every AI use case.</p>
+      <section class="concepts-section risk-ladder" id="eu-ai-act-tiers" aria-labelledby="tiers-heading">
+        <p class="kicker">Risk classification</p>
+        <h2 id="tiers-heading"><a href="/aib-c01/terms/#eu-ai-act">EU AI Act</a> <a href="/aib-c01/terms/#risk-classification">tiers</a></h2>
         <ol class="tier-list">
           <li class="tier-item tier-prohibited">
-            <span class="tier-step">Tier 1 · Highest</span>
-            <h3>Prohibited</h3>
-            <p>Unacceptable risk — banned outright (for example, social scoring or manipulative exploitation).</p>
+            <span class="tier-step">1 · Prohibited</span>
+            <h3>Banned</h3>
+            <p>Social scoring, manipulative exploitation.</p>
           </li>
           <li class="tier-item tier-high">
-            <span class="tier-step">Tier 2</span>
+            <span class="tier-step">2 · High</span>
             <h3>High risk</h3>
-            <p>Strict lifecycle duties: risk management, data quality, documentation, human oversight, and conformity checks (for example, hiring or credit).</p>
+            <p>Hiring, credit — documentation, oversight, conformity.</p>
           </li>
           <li class="tier-item tier-limited">
-            <span class="tier-step">Tier 3</span>
-            <h3>Limited risk</h3>
-            <p>Transparency duties: disclose when people interact with AI or view synthetic content (for example, customer chatbots).</p>
+            <span class="tier-step">3 · Limited</span>
+            <h3>Limited</h3>
+            <p>Disclose AI chatbots and synthetic content.</p>
           </li>
           <li class="tier-item tier-minimal">
-            <span class="tier-step">Tier 4 · Lowest</span>
-            <h3>Minimal risk</h3>
-            <p>No extra AI Act obligations beyond existing general law (for example, spam filters or basic recommendations).</p>
+            <span class="tier-step">4 · Minimal</span>
+            <h3>Minimal</h3>
+            <p>Spam filters, basic recommendations — no extra AI Act duties.</p>
           </li>
         </ol>
-        <p class="term-exam">On the exam, classify the use case first and match controls to its tier — and reclassify whenever the purpose, audience, or data changes.</p>
+        <p class="exam-rule"><span class="rule-tag">Rule</span> Classify the use case first; reclassify if purpose, audience, or data changes.</p>
       </section>
 
-      <p class="mixups-empty" id="mixups-empty" hidden>No matching comparison.</p>
-
-      <section class="concepts-block rules-block" id="decision-rules" aria-labelledby="rules-heading">
-        <p class="kicker">Study heuristics</p>
+      <section class="concepts-section rules-block" id="decision-rules" aria-labelledby="rules-heading">
+        <p class="kicker">Heuristics</p>
         <h2 id="rules-heading">Six decision rules</h2>
-        <p class="mixups-lead">Unofficial study heuristics distilled for quick scenario triage — not official AWS wording.</p>
         <ol class="rules-grid">
           <li class="rule-card">
             <span class="rule-num">01</span>
@@ -574,21 +458,20 @@ try {
         </ol>
       </section>
 
-      <div class="concepts-next">
-        <p>Unofficial study notes for AIB-C01 — not an AWS exam question sheet.</p>
+      <nav class="concepts-next" aria-label="Study next">
         <div class="concepts-next-links">
           <a class="btn primary sm" href="/aib-c01/">Practice exam</a>
-          <a class="btn sm" href="/aib-c01/terms/">70-term glossary</a>
+          <a class="btn sm" href="/aib-c01/terms/">Glossary</a>
         </div>
-      </div>
+      </nav>
     </main>
     <footer class="note">
       Side project by <a href="https://www.duskyai.com/" target="_blank" rel="noopener noreferrer">Dusan Hajek</a>.
-      Unofficial notes for the AWS Certified AI Business Strategist (AIB-C01) exam. Not endorsed by AWS.
+      Unofficial AIB-C01 study notes — not AWS wording or an exam question sheet. Not endorsed by AWS.
     </footer>
   </div>
-  <script src="../js/terms.js" defer></script>
   <script src="../js/share.js" defer></script>
   <script src="../js/theme.js" defer></script>
+  <script>document.getElementById("print-sheet")?.addEventListener("click", function () { print(); });</script>
 </body>
 </html>
