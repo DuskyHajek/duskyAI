@@ -179,10 +179,21 @@
       + "</div></details>";
   }
 
+  function studyStripHtml() {
+  const link = (href, title, sub) =>
+      '<a class="study-link" href="' + href + '"><span class="study-link-title">' + title
+      + '</span><span class="study-link-sub">' + sub + '</span><span class="study-link-arrow" aria-hidden="true">→</span></a>';
+    return '<nav class="study-strip" aria-label="Study guides">'
+      + link("/aib-c01/concepts/", "Look-alike concepts", "19 exam comparisons, quick checks &amp; print sheet")
+      + link("/aib-c01/terms/", "Vocabulary glossary", "70 AIB-C01 terms with self-test mode")
+      + "</nav>";
+  }
+
   function html() {
     const state = A.ctx.state;
     return '<div class="home">' + passRulerHtml(state)
-      + '<div class="home-grid">' + tilesHtml(state) + domainsHtml(state) + "</div></div>";
+      + '<div class="home-grid">' + tilesHtml(state) + domainsHtml(state) + "</div>"
+      + studyStripHtml() + "</div>";
   }
 
   function introHtml() {

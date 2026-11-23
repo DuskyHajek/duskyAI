@@ -72,6 +72,10 @@ test("home, hero CTA, quiz, exam, and results modules render across states", () 
   assert.match(freshHome, /Saved questions/);
   assert.match(freshHome, /Timed mock/);
   assert.match(freshHome, /Domains/);
+  assert.match(freshHome, /class="study-strip"/);
+  assert.match(freshHome, /href="\/aib-c01\/concepts\/"/);
+  assert.match(freshHome, /href="\/aib-c01\/terms\/"/);
+  assert.match(freshHome, /Look-alike concepts/);
   assert.doesNotMatch(freshHero || "", /Start full set/);
 
   // Active progress + saved questions state
