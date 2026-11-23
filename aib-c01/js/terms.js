@@ -20,7 +20,7 @@
     return items.filter((item) => {
       const hay = (item.search + " " + item.text).toLowerCase();
       if (q && !hay.includes(q)) return false;
-      if (d && d !== "all" && item.domain !== d) return false;
+      if (d && d !== "all" && domainsOf(item).indexOf(d) === -1) return false;
       return true;
     });
   }
@@ -67,9 +67,21 @@
     if (index) addRelated(doc);
     const domains = doc.querySelector(".term-domains");
     const selfBtn = doc.getElementById("term-selftest");
+    const printBtn = doc.getElementById("print-sheet");
     const mixEmpty = doc.getElementById("mixups-empty");
+    const riskLadder = doc.getElementById("eu-ai-act-tiers");
+    const rulesBlock = doc.getElementById("decision-rules");
     const hint = doc.getElementById("term-hint");
     const list = doc.getElementById("term-list");
+
+    const riskItem = riskLadder
+      ? [{
+          el: riskLadder,
+          domain: riskLadder.getAttribute("data-domain") || "",
+          search: riskLadder.getAttribute("data-search") || "",
+          text: riskLadder.textContent || "",
+        }]
+      : [];
 
     const mixups = mixSection
       ? Array.prototype.slice.call(mixSection.querySelectorAll(".mixup")).map((el) => ({
@@ -137,8 +149,11 @@
         const mixSet = new Set(visibleMix.map((item) => item.el));
         mixups.forEach((item) => { item.el.hidden = !mixSet.has(item.el); });
         const anyMix = visibleMix.length > 0;
+        const showRisk = riskLadder ? filterMixups(riskItem, q, d).length > 0 : false;
         mixSection.hidden = !anyMix;
-        if (mixEmpty) mixEmpty.hidden = anyMix;
+        if (riskLadder) riskLadder.hidden = !showRisk;
+        if (rulesBlock) rulesBlock.hidden = Boolean(String(q || "").trim()) || d !== "all";
+        if (mixEmpty) mixEmpty.hidden = anyMix || showRisk;
         if (count && !index) {
           count.textContent = visibleMix.length === mixups.length
             ? mixups.length + " comparisons"
@@ -146,6 +161,8 @@
         }
       } else if (mixSection) {
         mixSection.hidden = true;
+        if (riskLadder) riskLadder.hidden = true;
+        if (rulesBlock) rulesBlock.hidden = true;
         if (mixEmpty) mixEmpty.hidden = true;
       }
 
@@ -162,6 +179,9 @@
         });
         apply();
       });
+    }
+    if (printBtn && typeof root.print === "function") {
+      printBtn.addEventListener("click", () => { root.print(); });
     }
     if (selfBtn) {
       selfBtn.addEventListener("click", () => {

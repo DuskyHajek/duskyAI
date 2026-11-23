@@ -78,21 +78,60 @@ test("the glossary page has the study pieces and no competitor link", () => {
   assert.match(practice, /href="\/aib-c01\/concepts\/"/);
 });
 
-test("the concepts page holds the comparisons", () => {
+test("the concepts page holds the comparisons, quick checks, risk ladder, and rules", () => {
   assert.match(concepts, /id="dont-mix-up"/);
   assert.match(concepts, /two or three similar ideas/);
   assert.match(concepts, /class="kicker">Concepts</);
   assert.match(concepts, /href="\/aib-c01\/terms\/"/);
-  const quickMix = concepts.match(/data-search="aws quick[\s\S]*?<\/div>\s*<div class="mixup"/);
+  assert.match(concepts, /Last reviewed November 2026/);
+  assert.match(concepts, /study heuristics/);
+  assert.match(concepts, /id="print-sheet"/);
+  assert.match(concepts, /href="\/aib-c01\/terms\/#phased-rollout">pilot<\/a>/);
+  assert.match(concepts, /"@id": "https:\/\/www\.duskyai\.com\/#person"/);
+
+  const quickMix = concepts.match(/id="quick-bedrock-sagemaker"[\s\S]*?<\/details>\s*<\/div>/);
   assert.ok(quickMix);
   assert.doesNotMatch(quickMix[0], /seat-based|consumption-based|instance-based/i);
   assert.match(concepts, /business users with no builders point to Quick/);
-  const mixups = concepts.match(/<div class="mixup" /g) || [];
-  assert.equal(mixups.length, 13);
+
   const section = concepts.match(/id="dont-mix-up"[\s\S]*?<\/section>/);
   assert.ok(section);
-  assert.equal((section[0].match(/data-domain="[1-4]"/g) || []).length, 13);
-  assert.equal((section[0].match(/class="term-exam"/g) || []).length, 13);
+  const mixups = section[0].match(/<div class="mixup" /g) || [];
+  assert.equal(mixups.length, 19);
+  assert.match(concepts, /19 comparisons/);
+  assert.equal((section[0].match(/data-domain="[1-4]"/g) || []).length, 19);
+  assert.equal((section[0].match(/class="term-exam"/g) || []).length, 19);
+  assert.equal((section[0].match(/<details class="quick-check">/g) || []).length, 19);
+  assert.equal((section[0].match(/class="trio-table"/g) || []).length, 11);
+
+  const mixupIds = [...section[0].matchAll(/<div class="mixup" id="([^"]+)"/g)].map((m) => m[1]);
+  assert.equal(new Set(mixupIds).size, 19);
+
+  const tiers = concepts.match(/id="eu-ai-act-tiers"[\s\S]*?<\/section>/);
+  assert.ok(tiers);
+  assert.equal((tiers[0].match(/class="tier-item /g) || []).length, 4);
+
+  const rules = concepts.match(/id="decision-rules"[\s\S]*?<\/section>/);
+  assert.ok(rules);
+  assert.equal((rules[0].match(/class="rule-card"/g) || []).length, 6);
+});
+
+test("every glossary link on the concepts page resolves and search placeholders match", () => {
+  const anchors = [...concepts.matchAll(/href="\/aib-c01\/terms\/#([^"]+)"/g)].map((m) => m[1]);
+  assert.ok(anchors.length >= 30);
+  for (const anchor of anchors) {
+    assert.ok(html.includes('id="' + anchor + '"'), "Missing glossary anchor: #" + anchor);
+  }
+
+  const parsedMixups = [...concepts.matchAll(/<div class="mixup"[^>]*data-domain="([^"]+)"[^>]*data-search="([^"]+)"[^>]*>([\s\S]*?)<\/details>\s*<\/div>/g)].map((m) => ({
+    domain: m[1],
+    search: m[2],
+    text: m[3].replace(/<[^>]+>/g, " "),
+  }));
+  assert.equal(parsedMixups.length, 19);
+  for (const sample of ["drift", "token", "kpi"]) {
+    assert.ok(filterMixups(parsedMixups, sample, "all").length >= 1, "Expected match for: " + sample);
+  }
 });
 
 test("every term is a sentence tagged with a domain, and related ids exist", () => {
