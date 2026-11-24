@@ -196,12 +196,10 @@
   .tiles, .pace-grid { grid-template-columns: 1fr; }
   .dset { flex-wrap: wrap; row-gap: 8px; }
   .dacc-wrap { align-items: flex-start; }
+  .panel { padding: 14px 16px; }
+  .tile { padding: 14px 16px; }
+  .pass-panel { padding: 14px 16px; }
 }
-@media (max-width: 560px) {
-  .site-tools .settings-btn .btn-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-  .site-tools .settings-btn { width: 34px; padding: 0; justify-content: center; }
-}
-
 .pass-panel { margin: 0 0 14px; padding: 16px 20px; }
 .pass-ruler { margin: 4px 0 0; }
 .pass-track {

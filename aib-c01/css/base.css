@@ -115,15 +115,73 @@ h3 { font-size: 16px; letter-spacing: 0; }
 }
 .site-tools { grid-area: tools; display: flex; align-items: stretch; justify-self: end; gap: 0; flex-wrap: wrap; justify-content: flex-end; }
 .settings-wrap { display: flex; align-items: center; }
-@media (max-width: 560px) {
+/* Mobile: single-row top bar + fixed bottom section tabs (desktop unchanged above 640px) */
+@media (max-width: 640px) {
+  body:not(.in-quiz) {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+  }
+  .wrap { width: min(var(--wrap-w), calc(100% - 32px)); }
+  .site-bar {
+    padding-top: env(safe-area-inset-top, 0px);
+    border-bottom: 1px solid var(--line);
+  }
   .site-nav {
     grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "logo tools"
-      "sections sections";
+    grid-template-areas: "logo tools";
+    width: min(var(--wrap-w), calc(100% - 32px));
+    min-height: 48px;
+    padding: 4px 0;
   }
-  .site-sections { justify-self: stretch; }
-  .site-sections a { flex: 1; text-align: center; }
+  .site-logo { align-self: center; }
+  .wordmark { font-size: 20px; }
+  .site-tools > .btn,
+  .site-tools > .share-wrap > .btn,
+  .site-tools .settings-wrap > .menu > summary.settings-btn {
+    width: 40px;
+    min-width: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+  .site-tools .btn-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .site-sections {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    justify-self: stretch;
+    min-height: 50px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    border-top: 2px solid var(--ink);
+    background: var(--paper);
+    box-shadow: 0 -2px 0 var(--line);
+  }
+  .site-sections a {
+    flex: none;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    padding: 0 10px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .site-sections a[aria-current="page"] {
+    background: var(--card-2);
+    color: var(--ink);
+  }
 }
 .share-wrap { position: relative; }
 .share-pop {

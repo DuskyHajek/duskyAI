@@ -116,6 +116,20 @@
     }
   }
 
+  function isMobileShare() {
+    return typeof window.matchMedia === "function"
+      && window.matchMedia("(max-width: 640px)").matches
+      && typeof navigator.share === "function";
+  }
+
+  function nativeShare() {
+    var url = canonicalUrl();
+    var title = pageTitle();
+    return navigator.share({ url: url, title: title }).catch(function (err) {
+      if (err && err.name === "AbortError") return;
+    });
+  }
+
   function init() {
     trigger = document.getElementById("share-page");
     var wrap = document.getElementById("share-wrap");
@@ -128,6 +142,10 @@
 
     trigger.addEventListener("click", function (ev) {
       ev.stopPropagation();
+      if (isMobileShare()) {
+        nativeShare();
+        return;
+      }
       setOpen(!open);
     });
 

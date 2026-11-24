@@ -216,6 +216,17 @@ body.in-quiz #app > .quiz-body { flex: 1 1 auto; min-height: 0; }
   .dock .collapse { width: 40px; padding: 0; }
   .dock .btn.primary { flex: 1; min-width: 0; }
   .dot { min-width: 28px; height: 28px; font-size: 11px; }
+  .qbar-shell {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .q-terms {
+    padding: 0 8px;
+    min-height: 34px;
+    font-size: 12.5px;
+    gap: 4px;
+  }
+  .q-terms .ic { display: none; }
+  .q-terms .btn-label { margin: 0; }
 }
 
 @media (max-width: 700px) {

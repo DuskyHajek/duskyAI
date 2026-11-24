@@ -172,6 +172,29 @@ main.is-testing .term:not(.is-open) dd { display: none; }
 }
 @media (max-width: 640px) {
   .term { grid-template-columns: 1fr; gap: 4px; }
+  .term-tools {
+    position: static;
+    top: auto;
+    z-index: auto;
+    padding: 4px 0 10px;
+  }
+  .term-domains {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+  .term-chip {
+    flex: none;
+    min-height: 36px;
+  }
+  .letter,
+  .term { scroll-margin-top: 64px; }
+  .term-index a {
+    min-width: 34px;
+    height: 34px;
+  }
 }
 @media (min-width: 960px) {
   .glossary {
