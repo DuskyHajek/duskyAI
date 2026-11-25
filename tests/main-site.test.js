@@ -17,7 +17,16 @@ test("main site assets and SEO hygiene", () => {
     assert.match(index, /AI Solutions, Web Dev, Generative Media, Automation/);
     assert.match(index, /aria-label="Image gallery"/);
     assert.match(vercel, /font-src 'self' https:\/\/fonts\.gstatic\.com/);
+    assert.match(vercel, /script-src 'self' 'unsafe-inline' https:\/\/cdn\.credly\.com/);
+    assert.match(vercel, /frame-src https:\/\/www\.credly\.com/);
     assert.match(vercel, /Strict-Transport-Security/);
+
+    const about = fs.readFileSync(path.join(root, "about.html"), "utf8");
+    assert.match(about, /data-share-badge-id="1cbd3b83-bca0-4f8e-8571-17a2cd109661"/);
+    assert.match(about, /https:\/\/cdn\.credly\.com\/assets\/utilities\/embed\.js/);
+    assert.match(index, /aws-aibs-badge\.png/);
+    assert.match(index, /https:\/\/www\.credly\.com\/badges\/1cbd3b83-bca0-4f8e-8571-17a2cd109661/);
+    assert.ok(fs.existsSync(path.join(root, "assets/images/aws-aibs-badge.png")));
 
     assert.ok(!fs.existsSync(path.join(root, "assets/favicon/favicon.svg")));
     assert.ok(fs.existsSync(path.join(root, "404.html")));
